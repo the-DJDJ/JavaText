@@ -35,7 +35,7 @@ public class Village extends World {
         setPlayerHealth(100);
         
         // Add items
-        l01.addItem(Item.newspaper);
+        l01.addItem(Item.newspaper, 2);
         
         // Attach exits to locations
         l01.addExit(e01);
