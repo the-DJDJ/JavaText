@@ -12,6 +12,9 @@ nbproject/
 build/
 dist/
 
+# Netbeans Stuff #
+build.xml
+
 # JavaText Things #
 gamedata.dat
 
