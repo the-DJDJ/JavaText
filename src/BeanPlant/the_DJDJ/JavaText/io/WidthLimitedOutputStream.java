@@ -109,15 +109,15 @@ public class WidthLimitedOutputStream {
      */
     public void printAcross(String character){
         
-        m_out.println();
+        String sequence = "";
         
-        for (int i = 0; i < this.width; i++) {
+        do {
             
-            m_out.print(character);
+            sequence += character;
             
-        }
+        } while (sequence.length() < this.width);
         
-        m_out.println();
+        println(sequence.substring(0, this.width));
         
     }
     
