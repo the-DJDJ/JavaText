@@ -506,8 +506,9 @@ public class CommandParser {
      */
     private void load(){
         
-        world = GameData.load();
-        world.showLocation(false);
+        world = GameData.load(world);
+        
+        if(world != null) world.showLocation(false);
         
     }
     

@@ -73,9 +73,12 @@ public class GameData {
      * The method that loads the game state. This reads the gamedata file, and
      * recreates all needed objects in the specified world variable.
      * 
+     * @param world the world to get an output stream to print to if something
+     *              goes wrong.
+     * 
      * @return The loaded world
      */
-    public static World load(){
+    public static World load(World world){
         
         try {
             
@@ -90,7 +93,10 @@ public class GameData {
         
         } catch (IOException | ClassNotFoundException ex) {
             
-            System.out.println("Could not load your game");
+            world.getOutputStream().println();
+            world.getOutputStream().println("Could not load your game");
+            world.getOutputStream().println("");
+            
             return null;
         
         }
