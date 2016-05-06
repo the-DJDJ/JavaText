@@ -21,7 +21,7 @@ public class Demo extends World {
     // Create room objects
     private final Location l1 = new Location ("Bottom of the well", "You have reached the bottom of a deep and rather smelly well. Less than a foot of water remains, and it looks undrinkable.");
     private final Location l2 = new Location ("Courtyard", "At the centre of the courtyard is an old stone well. A strong and sturdy rope is attached to the well, and descends into the darkness. The only other items of interest is the farmhouse to the north, and a path to the east.");
-    private final Location l3 = new Location ("Farmhouse entrance", "The door to the farmhouse hangs crooked, and is slightly ajar. Obviously no-one has lived here for some time, and you can only guess at what lies within.");
+    private final Location l3 = new Location ("Farmhouse entrance", "The door to the farmhouse hangs crooked, and is slightly ajar. Obviously no one has lived here for some time, and you can only guess at what lies within.");
     private final Location l4 = new Location ("Blood-stained room", "Dried blood stains can be seen on the walls and stone floor of the farmhouse. Whatever massacre occured here long ago, you can only guess. With the abscence of bodies, however, you may never know.");
     private final Location l5 = new Location ("Long windy path", "You are standing on a long, windy path, leading from the mountains in the far east, to a small farm that lies to the west.");
     private final Location l6 = new Location ("Base of the mountain", "At the base of the mountain is a path that leads westward beyond a large boulder. Climbing such a mountain would be difficult - if not impossible.");
