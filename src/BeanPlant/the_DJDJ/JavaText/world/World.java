@@ -85,7 +85,7 @@ public class World implements Serializable {
         this.currentLocation = null;
 
         // By default, use standard output
-        this.setOutputStream(System.out, 64);
+        this.setOutputStream(System.out, 72);
     
     }
     
