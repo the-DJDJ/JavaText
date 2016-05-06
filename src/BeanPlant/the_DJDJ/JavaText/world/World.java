@@ -275,7 +275,7 @@ public class World implements Serializable {
         
         if(!this.getTitle().isEmpty() || !this.getDescription().isEmpty()){
             
-            this.getOutputStream().printAccross("=");
+            this.getOutputStream().printAcross("=");
             
         }
         

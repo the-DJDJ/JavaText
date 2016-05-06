@@ -107,7 +107,7 @@ public class WidthLimitedOutputStream {
      * 
      * @param character The character to print
      */
-    public void printAccross(String character){
+    public void printAcross(String character){
         
         m_out.println();
         

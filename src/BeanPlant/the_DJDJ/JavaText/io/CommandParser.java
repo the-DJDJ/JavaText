@@ -468,7 +468,7 @@ public class CommandParser {
         if(world != null){
             
             world.getOutputStream().printSpaced("Your game has been loaded!", WidthLimitedOutputStream.ABOVE);
-            world.getOutputStream().printAccross("=");
+            world.getOutputStream().printAcross("=");
             
             world.showLocation(false);
         
