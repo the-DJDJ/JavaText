@@ -56,4 +56,15 @@ public class JavaText {
         
     }
     
+    /**
+     * Returns the CommandParser used throughout the engine
+     * 
+     * @return the CommandParser
+     */
+    public static CommandParser getCommandParser(){
+        
+        return commandParser;
+        
+    }
+    
 }

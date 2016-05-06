@@ -1,6 +1,8 @@
 package BeanPlant.the_DJDJ.JavaText.io;
 
+import BeanPlant.the_DJDJ.JavaText.JavaText;
 import BeanPlant.the_DJDJ.JavaText.world.World;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -16,7 +18,7 @@ import java.io.ObjectOutputStream;
  *
  * @author the_DJDJ
  */
-public class GameData {
+public class GameData implements CommandLockHandler{
     
     /** The filename for the game's savedata. */
     private static final String filename = "gamedata.dat";
@@ -32,6 +34,9 @@ public class GameData {
     
     /** The stream to read the object input. */
     private static ObjectInputStream inputObject;
+    
+    /** The place to temporarily store the world to save while we wait for confirmation. */
+    private static World temporaryWorld;
 
     /**
      * The method that saves the game state. This saves all objects associated
@@ -40,7 +45,31 @@ public class GameData {
      * @param world The world to write to disk.
      */
     public static void save(World world){
+        
+        temporaryWorld = world;
           
+        if(new File(filename).exists()) {
+                
+            world.getOutputStream().printSpaced("You already have a saved game... Do you want to overwrite it?", WidthLimitedOutputStream.BOTH);
+
+            JavaText.getCommandParser().addLockHandler(new GameData());
+                
+        } else {
+            
+            continueSave(world);
+            
+        }
+            
+    }
+    
+    /**
+     * The method to continue saving the world if the file does not exist, or
+     * the user stupidly types yes
+     * 
+     * @param world the world to save
+     */
+    private static void continueSave(World world){
+        
         try {
             
             // Create a file to write game system
@@ -93,6 +122,22 @@ public class GameData {
             
             return null;
         
+        }
+        
+    }
+
+    /**
+     * @{inheritDoc}
+     */
+    @Override
+    public void handleCommand(String command) {
+    
+        switch(command){
+            
+            case "YES":
+                continueSave(temporaryWorld);
+                break;
+            
         }
         
     }

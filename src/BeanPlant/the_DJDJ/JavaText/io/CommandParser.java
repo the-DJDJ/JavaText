@@ -4,6 +4,8 @@ import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 import BeanPlant.the_DJDJ.JavaText.world.World;
 import BeanPlant.the_DJDJ.JavaText.user.Item;
 import BeanPlant.the_DJDJ.JavaText.user.ItemStack;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Parses the commands, and executes activities performed in the game.
@@ -20,6 +22,8 @@ public class CommandParser {
     
     /** The String that stores the arguments for the user-entered command. */
     private String arguments = new String();
+    
+    private List<CommandLockHandler> handlers = new ArrayList<>();
     
     /**
      * The default constructor. This creates the environment in which to
@@ -43,7 +47,7 @@ public class CommandParser {
      */
     public void parse(String input){
         
-        if(input.length() <= 2){
+        if(input.length() <= 2 && !input.equals("NO")){
         
             go(input);
         
@@ -57,7 +61,7 @@ public class CommandParser {
 
                 command = input;        
 
-            } finally{
+            } finally {
 
                 try {
 
@@ -66,6 +70,8 @@ public class CommandParser {
                 } catch (StringIndexOutOfBoundsException ex){}
 
             }
+            
+            if(!command.equals("YES") && !command.equals("NO")) this.removeAllLockHandlers();
 
             switch(command){
 
@@ -120,7 +126,15 @@ public class CommandParser {
                 case "QUIT":
                     this.quit();
                     break;
-
+                    
+                case "YES":
+                    this.confirm();
+                    break;
+                    
+                case "NO":
+                    this.deny();
+                    break;
+                    
                 default:
                     this.unknown();
                     break;
@@ -128,6 +142,54 @@ public class CommandParser {
             }
         
         }
+        
+    }
+    
+    /**
+     * The yes command. This is usually used when a command has been locked, for
+     * instance if the player needs to confirm something.
+     */
+    private void confirm(){
+        
+        if(this.handlers.isEmpty()) {
+            
+            world.getOutputStream().printSpaced("No.", WidthLimitedOutputStream.BOTH);
+            
+        } else {
+            
+            for (int i = 0; i < this.handlers.size(); i++) {
+                
+                this.handlers.get(i).handleCommand("YES");
+                
+            }
+            
+        }
+        
+        this.removeAllLockHandlers();
+        
+    }
+    
+    /**
+     * The no command. This is usually used when a command has been locked, for
+     * instance if the player needs to deny something.
+     */
+    private void deny(){
+        
+        if(this.handlers.isEmpty()) {
+            
+            world.getOutputStream().printSpaced("Yes.", WidthLimitedOutputStream.BOTH);
+            
+        } else {
+            
+            for (int i = 0; i < this.handlers.size(); i++) {
+                
+                this.handlers.get(i).handleCommand("NO");
+                
+            }
+            
+        }
+        
+        this.removeAllLockHandlers();
         
     }
     
@@ -454,6 +516,32 @@ public class CommandParser {
     private void save(){
         
         GameData.save(world);
+        
+    }
+    
+    /**
+     * The method that adds a lock handler to the CommandParser, so that locked
+     * commands do something
+     * 
+     * @param handler the handler to add
+     */
+    public void addLockHandler(CommandLockHandler handler){
+        
+        this.handlers.add(handler);
+        
+    }
+    
+    /**
+     * The method that removes all lock handlers, essentially removing all locks
+     * on commands
+     */
+    public void removeAllLockHandlers(){
+        
+        for (int i = 0; i < this.handlers.size(); i++) {
+            
+            this.handlers.remove(0);
+            
+        }
         
     }
     
