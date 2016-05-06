@@ -55,15 +55,11 @@ public class GameData {
             // Close object output stream
             outputObject.close();
             
-            world.getOutputStream().println();
-            world.getOutputStream().println("Your game has been saved!");
-            world.getOutputStream().println();
+            world.getOutputStream().printSpaced("Your game has been saved!", WidthLimitedOutputStream.BOTH);
         
         } catch (IOException ex) {
             
-            world.getOutputStream().println();
-            world.getOutputStream().println("Hmm, for some reason your game couldn't be saved...");
-            world.getOutputStream().println();
+            world.getOutputStream().printSpaced("Hmm, for some reason your game couldn't be saved...", WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -93,9 +89,7 @@ public class GameData {
         
         } catch (IOException | ClassNotFoundException ex) {
             
-            world.getOutputStream().println();
-            world.getOutputStream().println("Could not load your game");
-            world.getOutputStream().println("");
+            world.getOutputStream().printSpaced("Could not load your game", WidthLimitedOutputStream.BOTH);
             
             return null;
         

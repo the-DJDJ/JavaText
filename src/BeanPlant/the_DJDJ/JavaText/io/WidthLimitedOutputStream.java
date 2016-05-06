@@ -16,6 +16,13 @@ public class WidthLimitedOutputStream {
     private final PrintStream m_out;
     /** The width of the output stream. */
     private final int width;
+    
+    /** The constant for spaced printing above the line. */
+    public final static int ABOVE = 0;
+    /** The constant for spaced printing below the line. */
+    public final static int BELOW = 1;
+    /** The constant for spaced printing above and below the line. */
+    public final static int BOTH = -1;
 
     /**
      * The default constructor. Gets an output stream, and the width with 
@@ -111,6 +118,22 @@ public class WidthLimitedOutputStream {
         }
         
         m_out.println();
+        
+    }
+    
+    /**
+     * Prints a string, but with an open line above and below it.
+     * 
+     * @param string the string to print.
+     * @param type where to put spaces
+     */
+    public void printSpaced(String string, int type){
+        
+        if((type == ABOVE) || (type == BOTH)) println();
+        
+        println(string);
+        
+        if((type == BELOW) || (type == BOTH)) println();
         
     }
 

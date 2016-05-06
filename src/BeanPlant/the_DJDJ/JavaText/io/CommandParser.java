@@ -159,28 +159,22 @@ public class CommandParser {
 
                     } else {
 
-                        world.getOutputStream().println();
-                        world.getOutputStream().println(exit.getType().getLockedMessage());
-                        world.getOutputStream().println();
+                        world.getOutputStream().printSpaced(exit.getType().getLockedMessage(), WidthLimitedOutputStream.BOTH);
 
                     }
                 
                 } else {
                     
-                    world.getOutputStream().println();
-                    
                     if(world.getCurrentLocation().getBoss().getName().contains(" ")){
                         
-                        world.getOutputStream().println("The " + world.getCurrentLocation().getBoss().getName().toLowerCase().substring(world.getCurrentLocation().getBoss().getName().lastIndexOf(" ")) + " attacks you! You lose " + world.getCurrentLocation().getBoss().getDamage() + "HP!");
+                        world.getOutputStream().printSpaced("The " + world.getCurrentLocation().getBoss().getName().toLowerCase().substring(world.getCurrentLocation().getBoss().getName().lastIndexOf(" ")) + " attacks you! You lose " + world.getCurrentLocation().getBoss().getDamage() + "HP!", WidthLimitedOutputStream.BOTH);
                     
                         
                     } else {
                         
-                        world.getOutputStream().println("The " + world.getCurrentLocation().getBoss().getName().toLowerCase() + " attacks you! You lose " + world.getCurrentLocation().getBoss().getDamage() + "HP!");
+                        world.getOutputStream().printSpaced("The " + world.getCurrentLocation().getBoss().getName().toLowerCase() + " attacks you! You lose " + world.getCurrentLocation().getBoss().getDamage() + "HP!", WidthLimitedOutputStream.BOTH);
                         
                     }
-                    
-                    world.getOutputStream().println();
                     
                     world.setPlayerHealth(world.getPlayerHealth() - world.getCurrentLocation().getBoss().getDamage());
                     
@@ -194,9 +188,7 @@ public class CommandParser {
         
         if(!valid){
             
-            world.getOutputStream().println();
-            world.getOutputStream().println("You cannot go that way.");
-            world.getOutputStream().println();
+            world.getOutputStream().printSpaced("You cannot go that way.", WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -245,23 +237,17 @@ public class CommandParser {
                     
                 }
             
-                world.getOutputStream().println();
-                world.getOutputStream().println("You picked up the " + item.getName().toLowerCase());
-                world.getOutputStream().println();
+                world.getOutputStream().printSpaced("You picked up the " + item.getName().toLowerCase(), WidthLimitedOutputStream.BOTH);
                 
             } else {
                 
-                world.getOutputStream().println();
-                world.getOutputStream().println("You don't have enough space left in your inventory to pick up the " + item.getName().toLowerCase());
-                world.getOutputStream().println();
+                world.getOutputStream().printSpaced("You don't have enough space left in your inventory to pick up the " + item.getName().toLowerCase(), WidthLimitedOutputStream.BOTH);
                 
             }
             
         } else {
             
-            world.getOutputStream().println();
-            world.getOutputStream().println("I don't see a " + arguments.toLowerCase() + " here...");
-            world.getOutputStream().println();
+            world.getOutputStream().printSpaced("I don't see a " + arguments.toLowerCase() + " here...", WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -314,21 +300,15 @@ public class CommandParser {
                 
             }
             
-            world.getOutputStream().println();
-            world.getOutputStream().println("You dropped the " + item.getName().toLowerCase());
-            world.getOutputStream().println();
+            world.getOutputStream().printSpaced("You dropped the " + item.getName().toLowerCase(), WidthLimitedOutputStream.BOTH);
             
         } else if (item != null) {
             
-            world.getOutputStream().println();
-            world.getOutputStream().println("You don't own " + item.getSingleName());
-            world.getOutputStream().println();
+            world.getOutputStream().printSpaced("You don't own " + item.getSingleName(), WidthLimitedOutputStream.BOTH);
             
         } else {
             
-            world.getOutputStream().println();
-            world.getOutputStream().println("I don't know what a " + arguments.toLowerCase() + " is.");
-            world.getOutputStream().println();
+            world.getOutputStream().printSpaced("I don't know what a " + arguments.toLowerCase() + " is.", WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -340,9 +320,7 @@ public class CommandParser {
      */
     private void inventory(){
         
-        world.getOutputStream().println();
-        world.getOutputStream().println(world.getInventory().toString());
-        world.getOutputStream().println();
+        world.getOutputStream().printSpaced(world.getInventory().toString(), WidthLimitedOutputStream.BOTH);
         
     }
     
@@ -361,9 +339,7 @@ public class CommandParser {
 
                 if(world.getInventory().contains(item) || world.getCurrentLocation().getItems().contains(item)) {
 
-                    world.getOutputStream().println();
-                    world.getOutputStream().println(item.getDescription());
-                    world.getOutputStream().println();
+                    world.getOutputStream().printSpaced(item.getDescription(), WidthLimitedOutputStream.BOTH);
 
                 } else {
                     
@@ -373,9 +349,7 @@ public class CommandParser {
                         
                         if(world.getCurrentLocation().getItems().get(i).getName().equals(item.getName())){
                             
-                            world.getOutputStream().println();
-                            world.getOutputStream().println(item.getDescription());
-                            world.getOutputStream().println();
+                            world.getOutputStream().printSpaced(item.getDescription(), WidthLimitedOutputStream.BOTH);
                             
                             present = true;
                             
@@ -385,9 +359,7 @@ public class CommandParser {
                     
                     if(!present){
 
-                        world.getOutputStream().println();
-                        world.getOutputStream().println("I don't see " + item.getSingleName() + " here.");
-                        world.getOutputStream().println();
+                        world.getOutputStream().printSpaced("I don't see " + item.getSingleName() + " here.", WidthLimitedOutputStream.BOTH);
                     
                     }
 
@@ -395,17 +367,13 @@ public class CommandParser {
             
             } else {
                 
-                world.getOutputStream().println();
-                world.getOutputStream().println("What is a " + arguments.toLowerCase() + "?");
-                world.getOutputStream().println();
+                world.getOutputStream().printSpaced("What is a " + arguments.toLowerCase() + "?", WidthLimitedOutputStream.BOTH);
                 
             }
             
         } else {
             
-            world.getOutputStream().println();
-            world.getOutputStream().println("Inspect what?");
-            world.getOutputStream().println();
+            world.getOutputStream().printSpaced("Inspect what?", WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -441,32 +409,23 @@ public class CommandParser {
                         if(world.getInventory().contains(world.getCurrentLocation().getExits().get(i).getType().getKey())){
 
                             world.getCurrentLocation().getExits().get(i).setLocked(false);
-
-                            world.getOutputStream().println();
-                            world.getOutputStream().println(world.getCurrentLocation().getExits().get(i).getType().getUnlockMessage());
-                            world.getOutputStream().println();
+                            world.getOutputStream().printSpaced(world.getCurrentLocation().getExits().get(i).getType().getUnlockMessage(), WidthLimitedOutputStream.BOTH);
 
                         } else {
 
-                            world.getOutputStream().println();
-                            world.getOutputStream().println("You'll need " + world.getCurrentLocation().getExits().get(i).getType().getKey().get(0).getSingleName() + " to do that");
-                            world.getOutputStream().println();
+                            world.getOutputStream().printSpaced("You'll need " + world.getCurrentLocation().getExits().get(i).getType().getKey().get(0).getSingleName() + " to do that", WidthLimitedOutputStream.BOTH);
 
                         }
                     
                     } else {
                         
-                        world.getOutputStream().println();
-                        world.getOutputStream().println(world.getCurrentLocation().getExits().get(i).getType().getLockedMessage());
-                        world.getOutputStream().println();
+                        world.getOutputStream().printSpaced(world.getCurrentLocation().getExits().get(i).getType().getLockedMessage(), WidthLimitedOutputStream.BOTH);
                         
                     }
                     
                 } else {
                     
-                    world.getOutputStream().println();
-                    world.getOutputStream().println(world.getCurrentLocation().getExits().get(i).getType().getUnlockedMessage());
-                    world.getOutputStream().println();
+                    world.getOutputStream().printSpaced(world.getCurrentLocation().getExits().get(i).getType().getUnlockedMessage(), WidthLimitedOutputStream.BOTH);
                     
                 }
                 
@@ -484,9 +443,7 @@ public class CommandParser {
      */
     private void health(){
         
-        world.getOutputStream().println();
-        world.getOutputStream().println("You currently have " + world.getPlayerHealth() + "HP.");
-        world.getOutputStream().println();
+        world.getOutputStream().printSpaced("You currently have " + world.getPlayerHealth() + "HP.", WidthLimitedOutputStream.BOTH);
         
     }
     
@@ -517,9 +474,7 @@ public class CommandParser {
      */
     private void help(){
         
-        world.getOutputStream().println();
-        world.getOutputStream().println("Ummm, no.");
-        world.getOutputStream().println();  
+        world.getOutputStream().printSpaced("Ummm, no.", WidthLimitedOutputStream.BOTH);
         
     }
     
@@ -529,9 +484,7 @@ public class CommandParser {
      */
     private void quit(){
         
-        world.getOutputStream().println();
-        world.getOutputStream().println("Hmmmph, good riddance.");
-        world.getOutputStream().println();  
+        world.getOutputStream().printSpaced("Hmmmph, good riddance.", WidthLimitedOutputStream.BOTH);
         
         System.exit(0);
         
@@ -543,9 +496,7 @@ public class CommandParser {
      */
     private void unknown(){
         
-        world.getOutputStream().println();
-        world.getOutputStream().println("Hmm, I expect to see a verb as the first word...");
-        world.getOutputStream().println();    
+        world.getOutputStream().printSpaced("Hmm, I expect to see a verb as the first word...", WidthLimitedOutputStream.BOTH); 
     
     }
     

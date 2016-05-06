@@ -263,15 +263,13 @@ public class World implements Serializable {
         
         if(!this.getTitle().isEmpty()){
             
-            this.getOutputStream().println();
-            this.getOutputStream().println(this.getTitle());
+            this.getOutputStream().printSpaced(this.getTitle(), WidthLimitedOutputStream.ABOVE);
             
         }
         
         if(!this.getDescription().isEmpty()){
             
-            this.getOutputStream().println();
-            this.getOutputStream().println(this.getDescription());
+            this.getOutputStream().printSpaced(this.getDescription(), WidthLimitedOutputStream.ABOVE);
             
         }
         
@@ -292,14 +290,12 @@ public class World implements Serializable {
     public void showLocation(boolean fullVisibility){
         
         // Show room title
-        output.println();
-	output.println(this.getCurrentLocation().getTitle());
+	output.printSpaced(this.getCurrentLocation().getTitle(), WidthLimitedOutputStream.ABOVE);
 		
 	// Show room description 
         if(!this.getCurrentLocation().hasBeenVisited() || fullVisibility){
 	
-            output.println();
-            output.println(this.getCurrentLocation().getDescription());
+            output.printSpaced(this.getCurrentLocation().getDescription(), WidthLimitedOutputStream.ABOVE);
             this.getCurrentLocation().visit();
             
         }
@@ -320,16 +316,12 @@ public class World implements Serializable {
             
             }
             
-            output.println();
-            output.print(prefix);
-            output.println(this.getCurrentLocation().getBoss().getName().toLowerCase() + " (" + this.getCurrentLocation().getBoss().getHealth() + " HP) lurks menacingly...");
+            output.printSpaced(prefix + this.getCurrentLocation().getBoss().getName().toLowerCase() + " (" + this.getCurrentLocation().getBoss().getHealth() + " HP) lurks menacingly...", WidthLimitedOutputStream.ABOVE);
             
         }
         
         // Show items
         if(!this.getCurrentLocation().getItems().isEmpty()){
-            
-            output.println();
             
             String items = "You can see ";
             
@@ -361,13 +353,11 @@ public class World implements Serializable {
 
             }
             
-            output.println(items + ".");
+            output.printSpaced(items + ".", WidthLimitedOutputStream.ABOVE);
             
         }
         
-        // Show available exits
-        output.println();
-        
+        // Show available exits        
         String exits = "You can go ";
         
 	switch(this.getCurrentLocation().getExits().size()){
@@ -403,8 +393,7 @@ public class World implements Serializable {
             
         }
         
-        output.println(exits + " from here.");
-        output.println();
+        output.printSpaced(exits + " from here.", WidthLimitedOutputStream.BOTH);
         
     }
 
