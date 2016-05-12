@@ -1,5 +1,6 @@
 package BeanPlant.the_DJDJ.JavaText.levels;
 
+import BeanPlant.the_DJDJ.JavaText.io.WidthLimitedOutputStream;
 import BeanPlant.the_DJDJ.JavaText.world.World;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,14 +36,30 @@ public class LevelSelector {
     /** An array of all the world classes so that a random one can be loaded. */
     private final Object[] classes;
     
+    /** The output stream width of the world to choose. */
+    private final int outputWidth;
+    
+    /**
+     * The default constructor. This sets the output width to -1, meaning that
+     * the program must use the default specified elsewhere
+     */
+    public LevelSelector(){
+        
+        this(-1);
+        
+    }
+    
     /**
      * Creates a new LevelSelector object. This loads all of the external level
      * classes and instantiates a new Random object so that a random class can
      * be loaded
+     * 
+     * @param outputWidth The output stream width of the world to choose
      */
-    public LevelSelector(){
+    public LevelSelector(int outputWidth){
         
-        random = new Random();
+        this.random = new Random();
+        this.outputWidth = outputWidth;
         
         classLoadersList = new LinkedList<>();
         
@@ -73,13 +90,55 @@ public class LevelSelector {
         
         try {
             
-            return (World) ((Class) this.classes[this.random.nextInt(this.classes.length)]).newInstance();
+            return ((World) ((Class) this.classes[this.random.nextInt(this.classes.length)]).newInstance()).setOutputStreamWidth(outputWidth);
         
         } catch (IllegalArgumentException ex){
             
             return new Demo();
             
         }
+        
+    }
+    
+    /**
+     * The method that returns a specific world requested by the user. This
+     * method loops through all of the available worlds, and compares their
+     * titles to what was specified, and if a match is found, returns that
+     * world. If no match is found, a random world is returned instead.
+     * 
+     * @param world The world to load
+     * 
+     * @return the specified world, or a random one if it cannot be found
+     * 
+     * @throws InstantiationException
+     * @throws IllegalAccessException 
+     */
+    public World getSpecificWorld(String world) throws InstantiationException, IllegalAccessException {
+        
+        // Loop through all the worlds and see if the specified one exists
+        for (int i = 0; i < this.classes.length; i++) {
+            
+            // Keep searching even if a level is invalid
+            try {
+            
+                if(((World) ((Class) this.classes[i]).newInstance()).getTitle().equalsIgnoreCase(world.replaceAll("\"", ""))) {
+
+                    return ((World) ((Class) this.classes[i]).newInstance()).setOutputStreamWidth(outputWidth);
+
+                }
+            
+            } catch (InstantiationException | IllegalAccessException ex) {}
+            
+        }
+        
+        // If it doesn't, load a random world
+        World randomWorld = getNewWorld();
+        
+        // Inform the user that their world does not exist
+        randomWorld.getOutputStream().println("Your world could not be found. Loading a random one instead.");
+        
+        // And return the random world
+        return randomWorld;
         
     }
     

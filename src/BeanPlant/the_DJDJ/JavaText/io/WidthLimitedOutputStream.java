@@ -15,7 +15,7 @@ public class WidthLimitedOutputStream {
     /** The output stream. */
     private final PrintStream m_out;
     /** The width of the output stream. */
-    private final int width;
+    private int width;
     
     /** The constant for spaced printing above the line. */
     public final static int ABOVE = 0;
@@ -134,6 +134,17 @@ public class WidthLimitedOutputStream {
         println(string);
         
         if((type == BELOW) || (type == BOTH)) println();
+        
+    }
+    
+    /**
+     * Sets the width of the output stream to the specified amount
+     * 
+     * @param width the new width
+     */
+    public void setWidth(int width){
+        
+        this.width = width;
         
     }
 

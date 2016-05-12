@@ -396,5 +396,24 @@ public class World implements Serializable {
         output.printSpaced(exits + " from here.", WidthLimitedOutputStream.BOTH);
         
     }
+    
+    
+    /**
+     * A simple method that sets the width of the output stream of the world,
+     * whilst returning the world object for code streamlining
+     * 
+     * @param width the new width to use in the output stream
+     * 
+     * @return this World object
+     */
+    public World setOutputStreamWidth(int width){
+        
+        // Update our output width
+        if(width != -1) this.getOutputStream().setWidth(width);
+        
+        // And return our World object
+        return this;
+        
+    }
 
 }
