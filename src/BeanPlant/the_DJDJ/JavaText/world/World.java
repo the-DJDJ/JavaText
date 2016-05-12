@@ -316,7 +316,7 @@ public class World implements Serializable {
             
             }
             
-            output.printSpaced(prefix + this.getCurrentLocation().getBoss().getName().toLowerCase() + " (" + this.getCurrentLocation().getBoss().getHealth() + " HP) lurks menacingly...", WidthLimitedOutputStream.ABOVE);
+            output.printSpaced(prefix + " " + this.getCurrentLocation().getBoss().getName().toLowerCase() + " (" + this.getCurrentLocation().getBoss().getHealth() + " HP) lurks menacingly...", WidthLimitedOutputStream.ABOVE);
             
         }
         
