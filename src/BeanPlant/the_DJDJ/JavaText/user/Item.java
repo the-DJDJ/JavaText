@@ -32,7 +32,7 @@ public class Item implements Serializable {
     public final static Item newspaper = new Item("Newspaper", "an old newspaper", "some old newspapers", "An old newspaper! From, like, 2000 years ago... I think something is growing on it");
     
     /** A list of all items so that they can be searched. */
-    public List<Item> items = Arrays.asList(Item.crowbar, 
+    public static List<Item> items = Arrays.asList(Item.crowbar, 
                                             Item.key, 
                                             Item.rock, 
                                             Item.rope, 
@@ -206,6 +206,22 @@ public class Item implements Serializable {
         }
         
         return null;
+        
+    }
+    
+    /**
+     * A method that adds custom items to the item list. This allows games to
+     * have custom items
+     * 
+     * @param item the item to add
+     */
+    public static void addItem(Item item){
+        
+        if(!items.contains(item)){
+            
+            items.add(item);
+            
+        }
         
     }
     
