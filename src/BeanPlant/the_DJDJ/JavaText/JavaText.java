@@ -6,6 +6,8 @@ import BeanPlant.the_DJDJ.JavaText.levels.LevelSelector;
 import java.util.Scanner;
 
 /**
+ * The main class of JavaText. This manages command line arguments, collects and
+ * parses input, and starts the game
  *
  * @author the_DJDJ
  */
@@ -17,6 +19,9 @@ public class JavaText {
     private static CommandParser commandParser;
 
     /**
+     * The main method. This parses the command line arguments, and creates the
+     * new world.
+     * 
      * @param args the command line arguments
      * 
      * @throws java.lang.InstantiationException
@@ -72,6 +77,10 @@ public class JavaText {
                 
     }
     
+    /**
+     * The method to collect the input from the input stream, and parse it in
+     * the command parser
+     */
     private static void getInput(){
         
         while(true){

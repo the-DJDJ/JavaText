@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * The class that represents an item that can be found and interacted with in
+ * the game
  *
  * @author the_DJDJ
  */

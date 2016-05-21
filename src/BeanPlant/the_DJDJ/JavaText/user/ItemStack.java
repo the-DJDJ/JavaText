@@ -1,6 +1,8 @@
 package BeanPlant.the_DJDJ.JavaText.user;
 
 /**
+ * A simple class that stores a 'stack' of items. This only contains an Item,
+ * and the amount of the item
  *
  * @author the_djdj
  */
