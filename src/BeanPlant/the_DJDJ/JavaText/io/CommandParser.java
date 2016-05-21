@@ -23,6 +23,7 @@ public class CommandParser {
     /** The String that stores the arguments for the user-entered command. */
     private String arguments = new String();
     
+    /** A list of all of the lock handlers currently active. */
     private List<CommandLockHandler> handlers = new ArrayList<>();
     
     /**
