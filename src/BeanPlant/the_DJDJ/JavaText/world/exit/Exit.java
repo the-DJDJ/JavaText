@@ -1,6 +1,7 @@
 package BeanPlant.the_DJDJ.JavaText.world.exit;
 
 import BeanPlant.the_DJDJ.JavaText.world.Location;
+
 import java.io.Serializable;
 
 /**

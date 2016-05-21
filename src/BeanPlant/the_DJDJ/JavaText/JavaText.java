@@ -3,6 +3,7 @@ package BeanPlant.the_DJDJ.JavaText;
 import BeanPlant.the_DJDJ.JavaText.world.World;
 import BeanPlant.the_DJDJ.JavaText.io.CommandParser;
 import BeanPlant.the_DJDJ.JavaText.levels.LevelSelector;
+
 import java.util.Scanner;
 
 /**
