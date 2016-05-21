@@ -14,7 +14,7 @@ import BeanPlant.the_DJDJ.JavaText.user.Item;
  * world that players can play in! If you have any problems, feel free to
  * contact me for help!
  *
- * @author the_djdj
+ * @author the_DJDJ
  */
 public class Demo extends World {
     

@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Parses the commands, and executes activities performed in the game.
  *
- * @author the_djdj
+ * @author the_DJDJ
  */
 public class CommandParser {
     

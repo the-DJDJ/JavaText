@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * The enum type for what kind of exit it is.
  *
- * @author the_djdj
+ * @author the_DJDJ
  */
 public enum Type {
     

@@ -6,7 +6,7 @@ import java.io.Serializable;
  * A boss object. A boss is an NPC that a player must either kill or escape in
  * order to progress.
  *
- * @author the_djdj
+ * @author the_DJDJ
  */
 public class Boss implements Serializable {
     
