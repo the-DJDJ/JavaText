@@ -195,11 +195,11 @@ public class Item implements Serializable {
      */
     public Item getItem(String name){
         
-        for (int i = 0; i < this.items.size(); i++) {
+        for (int i = 0; i < items.size(); i++) {
             
-            if(this.items.get(i).getName().equalsIgnoreCase(name)){
+            if(items.get(i).getName().equalsIgnoreCase(name)){
                 
-                return this.items.get(i);
+                return items.get(i);
                 
             }
             
@@ -234,9 +234,9 @@ public class Item implements Serializable {
      */
     public boolean isValidItem(String name){
         
-        for (int i = 0; i < this.items.size(); i++) {
+        for (int i = 0; i < items.size(); i++) {
             
-            if(this.items.get(i).getName().equalsIgnoreCase(name)){
+            if(items.get(i).getName().equalsIgnoreCase(name)){
                 
                 return true;
                 
