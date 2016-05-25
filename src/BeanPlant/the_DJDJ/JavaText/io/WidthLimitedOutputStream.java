@@ -59,7 +59,7 @@ public class WidthLimitedOutputStream {
             String token = tokeniser.nextToken() + " ";
 
             // If word would exceed width limit
-            if (currentWidth + token.length() >= width || token.equals("<token:newline>")){
+            if (currentWidth + token.length() >= width || token.trim().equals("<token:newline>")){
 
                 // Print a newline
                 m_out.println ();
@@ -68,7 +68,7 @@ public class WidthLimitedOutputStream {
             }
 
             // Print token
-            if(!token.equals("<token:newline>")) m_out.print(token);
+            if(!token.trim().equals("<token:newline>")) m_out.print(token);
 
             currentWidth += token.length();
 
