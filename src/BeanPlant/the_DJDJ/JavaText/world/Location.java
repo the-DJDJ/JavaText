@@ -391,6 +391,18 @@ public class Location implements Serializable {
     }
     
     /**
+     * Returns whether or not there are any entities in this location, by
+     * checking whether or not the entities list is empty.
+     * 
+     * @return if there are entities in this location
+     */
+    public boolean hasEntities(){
+        
+        return !this.getEntities().isEmpty();
+        
+    }
+    
+    /**
      * Returns the boss of this location, as is.
      * 
      * @return the boss of this location
