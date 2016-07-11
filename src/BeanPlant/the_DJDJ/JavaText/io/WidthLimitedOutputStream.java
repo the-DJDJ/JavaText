@@ -147,5 +147,36 @@ public class WidthLimitedOutputStream {
         this.width = width;
         
     }
+    
+    /**
+     * A simple method that prints a bit of help on how to use JavaText to the
+     * command line
+     */
+    public static void printHelp(){
+        
+        System.out.println("");
+        System.out.println("JavaText, a simple, text based game engine written entirely in Java!");
+        System.out.println("");
+        System.out.println("Usage: java -jar JavaText.jar [help] [world] [output width]");
+        System.out.println("");
+        System.out.println("If you want to load a random level and start the game with the default configuration, use:");
+        System.out.println("\tjava -jar JavaText.jar");
+        System.out.println("If you want to load a specific level, but still start the game with the default configuration, use:");
+        System.out.println("\tjava -jar JavaText.jar <\"World Name\">\t\tWhere \"World Name\" is the name of the level you wish to load");
+        System.out.println("Alternatively, to use a custom output width, but load a random level, use:");
+        System.out.println("\tjava -jar JavaText.jar <output width>\t\tWith the output width being maximum number of characters per line.");
+        System.out.println("");
+        System.out.println("Of course, these commands can be used in conjunction with one another! To load a specific level and use a custom output width, use:");
+        System.out.println("\tjava JavaText.jar <\"World Name\"> <output width>");
+        System.out.println("");
+        System.out.println("If you're at any time stuck, simply use:");
+        System.out.println("\tjava JavaText.jar help\t\t\t\tto show this help message (:");
+        System.out.println("");
+        System.out.println("");
+        System.out.println("Still confused? Head over to https://github.com/the-DJDJ/JavaText and give me a shout!");
+        System.out.println("\t- the_DJDJ");
+        System.out.println("");
+        
+    }
 
 }

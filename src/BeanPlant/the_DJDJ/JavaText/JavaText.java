@@ -2,6 +2,7 @@ package BeanPlant.the_DJDJ.JavaText;
 
 import BeanPlant.the_DJDJ.JavaText.world.World;
 import BeanPlant.the_DJDJ.JavaText.io.CommandParser;
+import BeanPlant.the_DJDJ.JavaText.io.WidthLimitedOutputStream;
 import BeanPlant.the_DJDJ.JavaText.levels.LevelSelector;
 
 import java.util.Scanner;
@@ -38,17 +39,27 @@ public class JavaText {
                 break;
             
             case 1:
-                // One argument. It can either be a String or an int
-                try {
+                // One argument. It can either be a String or an int, or a
+                // request for help
+                if(args[0].equalsIgnoreCase("help")){
                     
-                    // Assume that the argument is an int
-                    world = new LevelSelector(Integer.parseInt(args[0])).getNewWorld();
+                    // Give the user a little bit of help
+                    WidthLimitedOutputStream.printHelp();
+                    System.exit(0);
                     
-                } catch (NumberFormatException ex){
+                } else {
                     
-                    // Obviously not
-                    world = new LevelSelector().getSpecificWorld(args[0]);
-                    
+                    try {
+
+                        // Assume that the argument is an int
+                        world = new LevelSelector(Integer.parseInt(args[0])).getNewWorld();
+
+                    } catch (NumberFormatException ex){
+
+                        // Obviously not
+                        world = new LevelSelector().getSpecificWorld(args[0]);
+
+                    }
                 }
                 break;
             
@@ -62,7 +73,7 @@ public class JavaText {
                 } catch (NumberFormatException ex) {
                     
                     // They made a mistake
-                    System.out.println("Usage: java JavaText <level> <output width>");
+                    WidthLimitedOutputStream.printHelp();
                     System.exit(0);
                 }
                 break;
