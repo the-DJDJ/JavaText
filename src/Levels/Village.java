@@ -19,7 +19,7 @@ public class Village extends World {
     // Create room objects
     private final Location l01 = new Location ("Derelict Trainstation", "You stand on the platform of an old, empty trainstation. The tracks are rusty and studded with weeds, and it is obvious that no trains have been through here in a while. Turning around, you glance at the clock which has now become a home for the mice. The absence of its ticking creates an eery, spooky silence, and a breeze draws through the abandonded corridors, pulling your attention east, onto a road leading to the nearby village.");
     private final Location l02 = new Location ("Village Road", "After walking for a few minutes, you come across a log blocking the road between the village and the train station. On closer inspection, you find that the log appears to have been placed across the road intentionally, acting as a block on the road and halting vehicle access to the village. Is it there to keep something in, or out? The log isn't particularly big and shouldn't be very hard to climb over, but there is also a path that goes around it that seems to lead up a rough dirt track through the trees.");
-    private final Location l03 = new Location ("", "");
+    private final Location l03 = new Location ("Forest Pathway", "The breeze dies down as the trees grow thicker here. It's hard to tell if you're imagining it or not, but something seems to be moving slowly through the thicket, and the dusty rays of sunlight are now so scarce that you can barely see your hands. You have no choice but to turn back.");
     private final Location l04 = new Location ("", "");
 
     // Create exit objects
@@ -27,6 +27,7 @@ public class Village extends World {
     private final Exit e02 = new Exit (Exit.NORTHEAST, l03, Type.PATHWAY);
     private final Exit e03 = new Exit (Exit.EAST, l04);
     private final Exit e04 = new Exit (Exit.WEST, l01);
+    private final Exit e05 = new Exit (Exit.SOUTHWEST, l02, Type.PATHWAY);
     
     public Village(){
         
@@ -43,6 +44,7 @@ public class Village extends World {
         l02.addExit(e02);
         l02.addExit(e03);
         l02.addExit(e04);
+        l03.addExit(e05);
         
         // Add bosses
         l02.setBoss(Boss.wombat);
