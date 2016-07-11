@@ -301,6 +301,44 @@ public class World implements Serializable {
             
         }
         
+        // Show any information on entities
+        if(this.getCurrentLocation().hasEntities()){
+            
+            String entities = "There is ";
+            
+            for (int i = this.getCurrentLocation().getEntities().size() - 1; i >= 0; i--) {
+                        
+                if(i != this.getCurrentLocation().getEntities().size() - 1){
+
+                    if(i == 0){
+
+                        entities += " and ";
+
+                    } else {
+
+                        entities += ", ";
+
+                    }
+
+                }
+
+                if(this.getCurrentLocation().getEntities().get(i).isCollection()){
+
+                    entities += this.getCurrentLocation().getEntities().get(i).getPluralName();
+
+                } else {
+
+                    entities += this.getCurrentLocation().getEntities().get(i).getSingleName();
+
+                }
+
+            }
+            
+            output.printSpaced(entities + " lingering about.", WidthLimitedOutputStream.ABOVE);
+            
+        }
+        
+        // Display information on bosses
         if(this.getCurrentLocation().hasBoss()){
             
             String prefix = "A";            
