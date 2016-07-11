@@ -1,6 +1,8 @@
 package BeanPlant.the_DJDJ.JavaText.world;
 
 import BeanPlant.the_DJDJ.JavaText.npc.Boss;
+import BeanPlant.the_DJDJ.JavaText.npc.Entity;
+import BeanPlant.the_DJDJ.JavaText.npc.EntityCollection;
 import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 import BeanPlant.the_DJDJ.JavaText.user.Item;
 import BeanPlant.the_DJDJ.JavaText.user.ItemStack;
@@ -31,6 +33,9 @@ public class Location implements Serializable {
     
     /** The exits associated with the location. */
     private final List<Exit> m_exits;
+    
+    /** The entities in this location. */
+    private List<Entity> entities;
     
     /** The boss in this location. */
     private Boss boss = null;
@@ -71,6 +76,8 @@ public class Location implements Serializable {
 
         this.m_items = new ArrayList<>();
         this.m_exits = new ArrayList();
+        
+        this.entities = new ArrayList<>();
     
     }
 
@@ -282,6 +289,105 @@ public class Location implements Serializable {
         
         this.m_visited = true;
         
+    }
+    
+    /**
+     * Adds new entity(ies) to the room
+     * 
+     * @param entity The entity(ies) to add.
+     */
+    public void addEntity(Entity entity) {
+        
+        this.entities.add(entity);
+    
+    }
+    
+    /**
+     * Adds a specific number of new entities to the room
+     * 
+     * @param entity The entity to add.
+     * @param amount The number of the entity to add
+     */
+    public void addEntity(Entity entity, int amount){
+        
+        boolean present = false;
+        int index = 0;
+        
+        for (int i = 0; i < this.entities.size(); i++) {
+            
+            if(this.entities.get(i).getName().equals(entity.getName())) {
+                
+                present = true;
+                index = i;
+            
+            }
+            
+        }
+        
+        if(present){
+            
+            if(this.entities.get(index).isCollection()){
+                
+                this.entities.set(index, new EntityCollection(entity, ((EntityCollection) this.entities.get(index)).getAmount() + amount));
+                
+            } else {
+                
+                this.entities.set(index, new EntityCollection(entity, amount + 1));
+                
+            }
+            
+        } else {
+            
+            this.entities.add(new EntityCollection(entity, amount));
+            
+        }
+        
+    }
+
+    /**
+     * Removes entities from the room
+     * 
+     * @param entity The entities(s) to remove
+     */
+    public void removeEntity(Entity... entity) {
+        
+        for (int i = 0; i < entity.length; i++) {
+            
+            if (this.entities.contains(entity[i])) {
+                    
+                this.entities.remove(entity[i]);
+            
+            }
+            
+        }
+    
+    }
+    
+    /**
+     * Removes a specific number of an entity from the room
+     * 
+     * @param entity The entity to remove
+     * @param amount The amount of entities to remove
+     */
+    public void removeEntity(Entity entity, int amount){
+        
+        for (int i = 0; i < amount; i++) {
+            
+            this.removeEntity(entity);
+            
+        }
+        
+    }
+
+    /**
+     * Returns a List representation of the entities.
+     * 
+     * @return The entities that this room has
+     */
+    public List<Entity> getEntities() {
+        
+        return this.entities;
+    
     }
     
     /**
