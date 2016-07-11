@@ -15,6 +15,12 @@ public class Entity implements Serializable {
     /** The name of the entity. */
     private String name;
     
+    /** The name of a single on of this entity. */
+    private String single;
+    
+    /** The name given to many of this entity. */
+    private String plural;
+    
     /** How much health the entity has. */
     private int health;
     
@@ -31,6 +37,26 @@ public class Entity implements Serializable {
     public Entity(String name, int health){
         
         this.name = name;
+        this.health = health;
+        
+        this.avoidable = true;
+        
+    }
+    
+    /**
+     * A slightly more detailed constructor. This assigns all of the names, as
+     * well as the amount of health to the entity.
+     * 
+     * @param name The name of the entity
+     * @param single The name given to a single unit of this entity
+     * @param plural The name given to multiple units of this entity
+     * @param health The amount of health the entity has.
+     */
+    public Entity(String name, String single, String plural, int health){
+        
+        this.name = name;
+        this.single = single;
+        this.plural = plural;
         this.health = health;
         
         this.avoidable = true;
@@ -55,6 +81,40 @@ public class Entity implements Serializable {
     }
     
     /**
+     * Another slightly more detailed constructor. This assigns the name, as
+     * well as the single and plural names of the entity, the amount of health
+     * the entity has, as well as whether or not the entity is avoidable.
+     * 
+     * @param name The name of the entity
+     * @param single The name given to a single unit of this entity
+     * @param plural The name given to multiple units of this entity
+     * @param health The amount of health the entity has.
+     * @param avoidable Whether or not the entity is avoidable.
+     */
+    public Entity(String name, String single, String plural, int health, boolean avoidable){
+        
+        this.name = name;
+        this.single = single;
+        this.plural = plural;
+        this.health = health;
+        
+        this.avoidable = avoidable;
+        
+    }
+    
+    /**
+     * An empty constructor. This creates a new entity, only as a placeholder
+     * variable for use in entity collections
+     */
+    public Entity(){
+        
+        this.name = new String();
+        this.health = -1;
+        this.avoidable = true;
+        
+    }
+    
+    /**
      * Returns the name of the entity.
      * 
      * @return the name of the entity
@@ -73,6 +133,50 @@ public class Entity implements Serializable {
     public void setName(String name){
         
         this.name = name;
+        
+    }
+    
+    /**
+     * Returns the name of one unit of this entity.
+     * 
+     * @return the name of one unit of this entity
+     */
+    public String getSingleName(){
+        
+        return this.single;
+        
+    }
+    
+    /**
+     * Sets the name of one unit of this entity
+     * 
+     * @param single the new name of one unit of this entity
+     */
+    public void setSingleName(String single){
+        
+        this.single = single;
+        
+    }
+    
+    /**
+     * Returns the name of many units of this entity.
+     * 
+     * @return the name of many units of this entity
+     */
+    public String getPluralName(){
+        
+        return this.plural;
+        
+    }
+    
+    /**
+     * Sets the name of many units of this entity
+     * 
+     * @param name the new name of many units of this entity
+     */
+    public void setPluralName(String plural){
+        
+        this.plural = plural;
         
     }
     
@@ -117,6 +221,18 @@ public class Entity implements Serializable {
     public void setAvoidable(boolean avoidable){
         
         this.avoidable = avoidable;
+        
+    }
+    
+    /**
+     * Returns whether or not this Entity is a collection or a single NPC.
+     * 
+     * @see EntityStack
+     * @return if this is a collection or a single entity.
+     */
+    public boolean isCollection(){
+        
+        return false;
         
     }
     
