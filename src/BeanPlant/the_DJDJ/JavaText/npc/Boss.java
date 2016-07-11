@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class Boss extends Entity implements Serializable {
     
-    public static final Boss wombat = new Boss("Verocious Wombat", 250, 5, false);
+    public static final Boss wombat = new Boss("Verocious Wombat", 250, 5, true);
     
     /** How much damage the boss does everytime they hurt you. */
     private int damage;
