@@ -138,6 +138,10 @@ public class GameData implements CommandLockHandler{
             case "YES":
                 continueSave(temporaryWorld);
                 break;
+                
+            case "NO":
+                temporaryWorld.getOutputStream().printSpaced("Well, okay then.", WidthLimitedOutputStream.BOTH);
+                break;
             
         }
         
