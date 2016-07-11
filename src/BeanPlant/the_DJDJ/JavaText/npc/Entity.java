@@ -10,6 +10,8 @@ import java.io.Serializable;
  */
 public class Entity implements Serializable {
     
+    public static final Entity sheep = new Entity("Harmless Sheep", 10);
+    
     /** The name of the entity. */
     private String name;
     
