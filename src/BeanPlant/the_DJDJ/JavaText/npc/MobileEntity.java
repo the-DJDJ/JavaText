@@ -11,6 +11,8 @@ import java.io.Serializable;
  */
 public class MobileEntity extends Entity implements Serializable {
     
+    public static final MobileEntity sheep = new MobileEntity("sheep", "a harmless sheep", "a flock of relatively harmless sheep", 10, 10);
+    
     /** What percentage chance the entity has of moving every time a command is entered. */
     private double movingChance;
 
