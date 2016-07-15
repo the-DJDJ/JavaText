@@ -1,7 +1,7 @@
 package Levels;
 
 import BeanPlant.the_DJDJ.JavaText.npc.Boss;
-import BeanPlant.the_DJDJ.JavaText.npc.Entity;
+import BeanPlant.the_DJDJ.JavaText.npc.MobileEntity;
 import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 import BeanPlant.the_DJDJ.JavaText.world.Location;
 import BeanPlant.the_DJDJ.JavaText.world.World;
@@ -50,7 +50,7 @@ public class Village extends World {
         l02.setBoss(Boss.wombat);
         
         // Add an entity or two
-        l02.addEntity(Entity.sheep, 2);
+        l02.addEntity(MobileEntity.sheep, 2);
         
         // Add locations to our game lists
         addLocation (l01);
