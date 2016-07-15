@@ -22,13 +22,15 @@ public class MobileEntity extends Entity implements Serializable {
      * the change of moving that the entity has.
      * 
      * @param name The name of the entity
+     * @param single The name given to a single unit of this entity
+     * @param plural The name given to multiple units of this entity
      * @param health The amount of health the entity has
      * @param movingChance the chance of moving to a random location that the
      *                     entity has.
      */
-    public MobileEntity(String name, int health, int movingChance){
+    public MobileEntity(String name, String single, String plural, int health, int movingChance){
         
-        super(name, health);
+        super(name, single, plural, health);
         
         this.movingChance = movingChance;
         
@@ -40,14 +42,16 @@ public class MobileEntity extends Entity implements Serializable {
      * avoidable.
      * 
      * @param name The name of the entity
+     * @param single The name given to a single unit of this entity
+     * @param plural The name given to multiple units of this entity
      * @param health The amount of health the entity has
      * @param movingChance the chance of moving to a random location that the
      *                     entity has.
      * @param avoidable Whether or not the player can run away from the entity
      */
-    public MobileEntity(String name, int health, int movingChance, boolean avoidable){
+    public MobileEntity(String name, String single, String plural, int health, int movingChance, boolean avoidable){
         
-        super(name, health, avoidable);
+        super(name, single, plural, health, avoidable);
         
         this.movingChance = movingChance;
         
