@@ -167,10 +167,10 @@ public class WidthLimitedOutputStream {
         System.out.println("\tjava -jar JavaText.jar <output width>\t\tWith the output width being maximum number of characters per line.");
         System.out.println("");
         System.out.println("Of course, these commands can be used in conjunction with one another! To load a specific level and use a custom output width, use:");
-        System.out.println("\tjava JavaText.jar <\"World Name\"> <output width>");
+        System.out.println("\tjava -jar JavaText.jar <\"World Name\"> <output width>");
         System.out.println("");
         System.out.println("If you're at any time stuck, simply use:");
-        System.out.println("\tjava JavaText.jar help\t\t\t\tto show this help message (:");
+        System.out.println("\tjava -jar JavaText.jar help\t\t\t\tto show this help message (:");
         System.out.println("");
         System.out.println("");
         System.out.println("Still confused? Head over to https://github.com/the-DJDJ/JavaText and give me a shout!");
