@@ -1,6 +1,8 @@
 package BeanPlant.the_DJDJ.JavaText.npc;
 
 import BeanPlant.the_DJDJ.JavaText.handlers.EventHandler;
+import BeanPlant.the_DJDJ.JavaText.world.Location;
+
 import java.io.Serializable;
 
 /**
@@ -20,6 +22,9 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
     /** Whether or not the entity can use the up/down directions, ie climbing. */
     private boolean canClimb;
     
+    /** The current location of this MobileEntity. */
+    private Location location;
+    
     /**
      * The default constructor. This assigns the name, the amount of health, and
      * the change of moving that the entity has.
@@ -36,6 +41,27 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
         super(name, single, plural, health);
         
         this.movingChance = movingChance;
+        
+    }
+    
+    /**
+     * The default constructor. This assigns the name, the amount of health, and
+     * the change of moving that the entity has.
+     * 
+     * @param name The name of the entity
+     * @param single The name given to a single unit of this entity
+     * @param plural The name given to multiple units of this entity
+     * @param health The amount of health the entity has
+     * @param movingChance the chance of moving to a random location that the
+     *                     entity has.
+     * @param location Where this MobileEntity currently is
+     */
+    public MobileEntity(String name, String single, String plural, int health, float movingChance, Location location){
+        
+        super(name, single, plural, health);
+        
+        this.movingChance = movingChance;
+        this.location = location;
         
     }
     
@@ -61,6 +87,29 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
     }
     
     /**
+     * The second constructor. This assigns the name, the amount of health, the
+     * chance of moving that the entity has, and whether or not the entity is
+     * avoidable.
+     * 
+     * @param name The name of the entity
+     * @param single The name given to a single unit of this entity
+     * @param plural The name given to multiple units of this entity
+     * @param health The amount of health the entity has
+     * @param movingChance the chance of moving to a random location that the
+     *                     entity has.
+     * @param location Where this MobileEntity currently is
+     * @param avoidable Whether or not the player can run away from the entity
+     */
+    public MobileEntity(String name, String single, String plural, int health, float movingChance, Location location, boolean avoidable){
+        
+        super(name, single, plural, health, avoidable);
+        
+        this.movingChance = movingChance;
+        this.location = location;
+        
+    }
+    
+    /**
      * Returns the chance that the entity has of moving to a random location
      * after each entered command
      * 
@@ -81,6 +130,28 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
     public void setMovingChance(float movingChance){
         
         this.movingChance = movingChance;
+        
+    }
+    
+    /**
+     * Returns the current location of the entity.
+     * 
+     * @return Where the entity is at the moment
+     */
+    public Location getLocation(){
+        
+        return this.location;
+        
+    }
+    
+    /**
+     * Sets the current location of the entity.
+     * 
+     * @param location Where the entity is at the moment
+     */
+    public void setLocation(Location location){
+        
+        this.location = location;
         
     }
     
