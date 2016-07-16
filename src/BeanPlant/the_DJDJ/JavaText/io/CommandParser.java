@@ -1,5 +1,6 @@
 package BeanPlant.the_DJDJ.JavaText.io;
 
+import BeanPlant.the_DJDJ.JavaText.handlers.EventHandler;
 import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 import BeanPlant.the_DJDJ.JavaText.world.World;
 import BeanPlant.the_DJDJ.JavaText.user.Item;
@@ -26,6 +27,9 @@ public class CommandParser {
     
     /** A list of all of the lock handlers currently active. */
     private List<CommandLockHandler> handlers = new ArrayList<>();
+    
+    /** A list of all the EventHandlers currently active. */
+    private static List<EventHandler> eventHandlers = new ArrayList<>();
     
     /**
      * The default constructor. This creates the environment in which to
@@ -542,6 +546,61 @@ public class CommandParser {
         for (int i = 0; i < this.handlers.size(); i++) {
             
             this.handlers.remove(0);
+            
+        }
+        
+    }
+    
+    /**
+     * The method that adds an event handler to the CommandParser, so that
+     * events can be triggered
+     * 
+     * @param handler the handler to add
+     */
+    public static void addEventHandler(EventHandler handler){
+        
+        eventHandlers.add(handler);
+        
+    }
+    
+    /**
+     * The method that removes an event handler from the CommandParser, so that
+     * events relying on that handler are no longer triggered.
+     * 
+     * @param handler the handler to remove
+     * @return whether or not the remove was successful
+     */
+    public static boolean removeEventHandler(EventHandler handler){
+        
+        return eventHandlers.remove(handler);
+        
+    }
+    
+    /**
+     * The method that removes all event handlers from the CommandParser, so
+     * that no new events will be trigger
+     */
+    public static void removeAllEventHandlers(){
+        
+        for (int i = 0; i < eventHandlers.size(); i++) {
+            
+            eventHandlers.remove(0);
+            
+        }
+        
+    }
+    
+    /**
+     * The method used when an event is to be triggered. This goes through all
+     * of the event handlers and fires the event to each one in turn.
+     * 
+     * @param event the event to fire
+     */
+    private void triggerEvent(String event){
+        
+        for(int i = 0; i < eventHandlers.size(); i++){
+            
+            eventHandlers.get(i).fireEvent(event);
             
         }
         
