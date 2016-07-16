@@ -1,5 +1,6 @@
 package BeanPlant.the_DJDJ.JavaText.npc;
 
+import BeanPlant.the_DJDJ.JavaText.handlers.EventHandler;
 import java.io.Serializable;
 
 /**
@@ -9,7 +10,7 @@ import java.io.Serializable;
  *
  * @author the_DJDJ
  */
-public class MobileEntity extends Entity implements Serializable {
+public class MobileEntity extends Entity implements Serializable, EventHandler {
     
     public static final MobileEntity sheep = new MobileEntity("sheep", "a harmless sheep", "a flock of relatively harmless sheep", 10, 10);
     
@@ -102,6 +103,32 @@ public class MobileEntity extends Entity implements Serializable {
     public void setCanClimb(boolean canClimb){
         
         this.canClimb = canClimb;
+        
+    }
+    
+    /**
+     * The method that calculates whether or not the mobile entity will be
+     * moving, and, if so, in which direction.
+     */
+    private void move(){
+        
+        
+        
+    }
+
+    /**
+     * @{inheritDoc}
+     */
+    @Override
+    public void fireEvent(String event) {
+        
+        switch(event){
+            
+            case "GO":
+                this.move();
+                break;
+            
+        }
         
     }
     
