@@ -12,10 +12,10 @@ import java.io.Serializable;
  */
 public class MobileEntity extends Entity implements Serializable, EventHandler {
     
-    public static final MobileEntity sheep = new MobileEntity("sheep", "a harmless sheep", "a flock of relatively harmless sheep", 10, 10);
+    public static final MobileEntity sheep = new MobileEntity("sheep", "a harmless sheep", "a flock of relatively harmless sheep", 10, 0.1f);
     
     /** What percentage chance the entity has of moving every time a command is entered. */
-    private double movingChance;
+    private float movingChance;
 
     /** Whether or not the entity can use the up/down directions, ie climbing. */
     private boolean canClimb;
@@ -31,7 +31,7 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
      * @param movingChance the chance of moving to a random location that the
      *                     entity has.
      */
-    public MobileEntity(String name, String single, String plural, int health, int movingChance){
+    public MobileEntity(String name, String single, String plural, int health, float movingChance){
         
         super(name, single, plural, health);
         
@@ -52,7 +52,7 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
      *                     entity has.
      * @param avoidable Whether or not the player can run away from the entity
      */
-    public MobileEntity(String name, String single, String plural, int health, int movingChance, boolean avoidable){
+    public MobileEntity(String name, String single, String plural, int health, float movingChance, boolean avoidable){
         
         super(name, single, plural, health, avoidable);
         
@@ -78,7 +78,7 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
      * 
      * @param movingChance the chance that the entity has of being of mobile
      */
-    public void setMovingChance(double movingChance){
+    public void setMovingChance(float movingChance){
         
         this.movingChance = movingChance;
         
