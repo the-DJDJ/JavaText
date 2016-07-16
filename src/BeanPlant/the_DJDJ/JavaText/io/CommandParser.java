@@ -56,6 +56,7 @@ public class CommandParser {
         if(input.length() <= 2 && !input.equals("NO")){
         
             go(input);
+            triggerEvent("GO");
         
         } else {
         
@@ -146,6 +147,9 @@ public class CommandParser {
                     break;
 
             }
+            
+            // Notify event listeners
+            triggerEvent(command);
         
         }
         
