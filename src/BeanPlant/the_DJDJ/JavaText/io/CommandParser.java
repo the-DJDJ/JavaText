@@ -26,7 +26,7 @@ public class CommandParser {
     private String arguments = new String();
     
     /** A list of all of the lock handlers currently active. */
-    private List<CommandLockHandler> handlers = new ArrayList<>();
+    private List<CommandLockHandler> commandHandlers = new ArrayList<>();
     
     /** A list of all the EventHandlers currently active. */
     private static List<EventHandler> eventHandlers = new ArrayList<>();
@@ -161,15 +161,15 @@ public class CommandParser {
      */
     private void confirm(){
         
-        if(this.handlers.isEmpty()) {
+        if(this.commandHandlers.isEmpty()) {
             
             world.getOutputStream().printSpaced("No.", WidthLimitedOutputStream.BOTH);
             
         } else {
             
-            for (int i = 0; i < this.handlers.size(); i++) {
+            for (int i = 0; i < this.commandHandlers.size(); i++) {
                 
-                this.handlers.get(i).handleCommand("YES");
+                this.commandHandlers.get(i).handleCommand("YES");
                 
             }
             
@@ -185,15 +185,15 @@ public class CommandParser {
      */
     private void deny(){
         
-        if(this.handlers.isEmpty()) {
+        if(this.commandHandlers.isEmpty()) {
             
             world.getOutputStream().printSpaced("Yes.", WidthLimitedOutputStream.BOTH);
             
         } else {
             
-            for (int i = 0; i < this.handlers.size(); i++) {
+            for (int i = 0; i < this.commandHandlers.size(); i++) {
                 
-                this.handlers.get(i).handleCommand("NO");
+                this.commandHandlers.get(i).handleCommand("NO");
                 
             }
             
@@ -537,7 +537,7 @@ public class CommandParser {
      */
     public void addLockHandler(CommandLockHandler handler){
         
-        this.handlers.add(handler);
+        this.commandHandlers.add(handler);
         
     }
     
@@ -547,9 +547,9 @@ public class CommandParser {
      */
     public void removeAllLockHandlers(){
         
-        for (int i = 0; i < this.handlers.size(); i++) {
+        for (int i = 0; i < this.commandHandlers.size(); i++) {
             
-            this.handlers.remove(0);
+            this.commandHandlers.remove(0);
             
         }
         
