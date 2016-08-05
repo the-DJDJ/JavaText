@@ -1,6 +1,7 @@
 package BeanPlant.the_DJDJ.JavaText.npc;
 
 import BeanPlant.the_DJDJ.JavaText.handlers.EventHandler;
+import BeanPlant.the_DJDJ.JavaText.io.CommandParser;
 import BeanPlant.the_DJDJ.JavaText.world.Location;
 import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 
@@ -45,6 +46,9 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
         
         this.movingChance = movingChance;
         
+        // Register this MobileEntity with the CommandParser
+        CommandParser.addEventHandler(this);
+        
     }
     
     /**
@@ -66,6 +70,9 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
         this.movingChance = movingChance;
         this.location = location;
         
+        // Register this MobileEntity with the CommandParser
+        CommandParser.addEventHandler(this);
+        
     }
     
     /**
@@ -86,6 +93,9 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
         super(name, single, plural, health, avoidable);
         
         this.movingChance = movingChance;
+        
+        // Register this MobileEntity with the CommandParser
+        CommandParser.addEventHandler(this);
         
     }
     
@@ -109,6 +119,9 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
         
         this.movingChance = movingChance;
         this.location = location;
+        
+        // Register this MobileEntity with the CommandParser
+        CommandParser.addEventHandler(this);
         
     }
     
