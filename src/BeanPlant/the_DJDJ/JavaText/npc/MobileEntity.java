@@ -2,8 +2,11 @@ package BeanPlant.the_DJDJ.JavaText.npc;
 
 import BeanPlant.the_DJDJ.JavaText.handlers.EventHandler;
 import BeanPlant.the_DJDJ.JavaText.world.Location;
+import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A mobile entity object. This is exactly the same as an Entity, with the
@@ -183,7 +186,33 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
      */
     private void move(){
         
-        
+        // First check if our animal will move
+        if(Math.random() <= this.movingChance){
+            
+            // A list of places where we can go
+            List<Exit> possibleExits = new ArrayList<>();
+            
+            for (int i = 0; i < this.location.getExits().size(); i++) {
+                
+                switch(this.location.getExits().get(i).getDirectionName()){
+                    
+                    case "UP":
+                    case "DOWN":
+                        if(canClimb) possibleExits.add(this.location.getExits().get(i));
+                        break;
+                        
+                    default:
+                        possibleExits.add(this.location.getExits().get(i));
+                        break;
+                    
+                }
+                
+            }
+            
+            // Now choose a random location to move to
+            this.setLocation(possibleExits.get((int) (Math.random() * possibleExits.size())).getLeadsTo());
+            
+        }
         
     }
 
