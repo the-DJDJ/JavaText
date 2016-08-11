@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  *
  * @author the_DJDJ
  */
-public class MobileEntity extends Entity implements Serializable, EventHandler, Cloneable {
+public class MobileEntity extends Entity implements Serializable, EventHandler {
     
     public static final MobileEntity sheep = new MobileEntity("sheep", "a harmless sheep", "a flock of relatively harmless sheep", 10, 0.1f);
     
@@ -235,22 +235,16 @@ public class MobileEntity extends Entity implements Serializable, EventHandler, 
     }
     
     /**
-     * @{inheritDoc} 
+     * A method that creates a duplicate copy of this MobileEntity, at a
+     * specified location
+     * 
+     * @param location the location of this new MobileEntity
+     * 
+     * @return a new clone of this object, at a specified location
      */
-    @Override
-    public MobileEntity clone() {
+    public MobileEntity place(Location location){
         
-        try {
-            
-            super.clone();
-        
-        } catch (CloneNotSupportedException ex) {
-            
-            Logger.getLogger(MobileEntity.class.getName()).log(Level.SEVERE, null, ex);
-        
-        }
-        
-        return new MobileEntity(this.getName(), this.getSingleName(), this.getPluralName(), this.getHealth(), this.getMovingChance(), this.getLocation(), this.isAvoidable());
+        return new MobileEntity(this.getName(), this.getSingleName(), this.getPluralName(), this.getHealth(), this.getMovingChance(), location, this.isAvoidable());
         
     }
 

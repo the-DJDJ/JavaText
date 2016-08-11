@@ -49,8 +49,7 @@ public class Village extends World {
         // Add bosses
         l02.setBoss(Boss.wombat);
         
-        MobileEntity s = MobileEntity.sheep.clone();
-        s.setLocation(l02);
+        MobileEntity s = MobileEntity.sheep.place(l02);
         
         // Add an entity or two
         l02.addEntity(s);
