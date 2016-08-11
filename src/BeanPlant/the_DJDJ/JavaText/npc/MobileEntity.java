@@ -8,6 +8,8 @@ import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A mobile entity object. This is exactly the same as an Entity, with the
@@ -16,7 +18,7 @@ import java.util.List;
  *
  * @author the_DJDJ
  */
-public class MobileEntity extends Entity implements Serializable, EventHandler {
+public class MobileEntity extends Entity implements Serializable, EventHandler, Cloneable {
     
     public static final MobileEntity sheep = new MobileEntity("sheep", "a harmless sheep", "a flock of relatively harmless sheep", 10, 0.1f);
     
@@ -131,7 +133,7 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
      * 
      * @return the chance that the entity has of being of mobile
      */
-    public double getMovingChance(){
+    public float getMovingChance(){
         
         return this.movingChance;
         
@@ -223,9 +225,35 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
             }
             
             // Now choose a random location to move to
-            this.setLocation(possibleExits.get((int) (Math.random() * possibleExits.size())).getLeadsTo());
+            Location newLocation = possibleExits.get((int) (Math.random() * possibleExits.size())).getLeadsTo();
+            
+            // And do the move
+            this.getLocation().removeEntity(this);
+            this.setLocation(newLocation);
+            
+            newLocation.addEntity(this);
             
         }
+        
+    }
+    
+    /**
+     * @{inheritDoc} 
+     */
+    @Override
+    public MobileEntity clone() {
+        
+        try {
+            
+            super.clone();
+        
+        } catch (CloneNotSupportedException ex) {
+            
+            Logger.getLogger(MobileEntity.class.getName()).log(Level.SEVERE, null, ex);
+        
+        }
+        
+        return new MobileEntity(this.getName(), this.getSingleName(), this.getPluralName(), this.getHealth(), this.getMovingChance(), this.getLocation(), this.isAvoidable());
         
     }
 
