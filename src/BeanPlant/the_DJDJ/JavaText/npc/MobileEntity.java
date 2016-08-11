@@ -43,13 +43,8 @@ public class MobileEntity extends Entity implements Serializable, EventHandler, 
      *                     entity has.
      */
     public MobileEntity(String name, String single, String plural, int health, float movingChance){
-        
-        super(name, single, plural, health);
-        
-        this.movingChance = movingChance;
-        
-        // Register this MobileEntity with the CommandParser
-        CommandParser.addEventHandler(this);
+                
+        this(name, single, plural, health, movingChance, null, true);
         
     }
     
@@ -67,13 +62,19 @@ public class MobileEntity extends Entity implements Serializable, EventHandler, 
      */
     public MobileEntity(String name, String single, String plural, int health, float movingChance, Location location){
         
-        super(name, single, plural, health);
+        this(name, single, plural, health, movingChance, location, true);
         
-        this.movingChance = movingChance;
-        this.location = location;
+    }
+    
+    /**
+     * A slightly random constructor, used so that other objects can register
+     * themselves as MobileEntities
+     * 
+     * @param entity the MobileEntity to register
+     */
+    public MobileEntity(MobileEntity entity){
         
-        // Register this MobileEntity with the CommandParser
-        CommandParser.addEventHandler(this);
+        this(entity.getName(), entity.getSingleName(), entity.getPluralName(), entity.getHealth(), entity.getMovingChance(), entity.getLocation(), entity.isAvoidable());
         
     }
     
@@ -92,12 +93,7 @@ public class MobileEntity extends Entity implements Serializable, EventHandler, 
      */
     public MobileEntity(String name, String single, String plural, int health, float movingChance, boolean avoidable){
         
-        super(name, single, plural, health, avoidable);
-        
-        this.movingChance = movingChance;
-        
-        // Register this MobileEntity with the CommandParser
-        CommandParser.addEventHandler(this);
+        this(name, single, plural, health, movingChance, null, avoidable);
         
     }
     
