@@ -3,6 +3,7 @@ package BeanPlant.the_DJDJ.JavaText.world;
 import BeanPlant.the_DJDJ.JavaText.npc.Boss;
 import BeanPlant.the_DJDJ.JavaText.npc.Entity;
 import BeanPlant.the_DJDJ.JavaText.npc.EntityCollection;
+import BeanPlant.the_DJDJ.JavaText.npc.EntityShadow;
 import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 import BeanPlant.the_DJDJ.JavaText.user.Item;
 import BeanPlant.the_DJDJ.JavaText.user.ItemStack;
@@ -36,6 +37,9 @@ public class Location implements Serializable {
     
     /** The entities in this location. */
     private List<Entity> entities;
+    
+    /** The EntityShadows in this location. */
+    private List<EntityShadow> entityShadows;
     
     /** The boss in this location. */
     private Boss boss = null;
@@ -78,6 +82,7 @@ public class Location implements Serializable {
         this.m_exits = new ArrayList();
         
         this.entities = new ArrayList<>();
+        this.entityShadows = new ArrayList<>();
     
     }
 
@@ -378,6 +383,26 @@ public class Location implements Serializable {
         }
         
     }
+    
+    /**
+     * Adds an EntityShadow to the room
+     * 
+     * @param shadow The EntityShadow to add
+     */
+    public void addEntityShadow(EntityShadow shadow){
+        
+        this.entityShadows.add(shadow);
+        
+    }
+    
+    /**
+     * A method to clear all remaining EntityShadows from the room
+     */
+    public void removeEntityShadows(){
+        
+        this.entityShadows.clear();
+        
+    }
 
     /**
      * Returns a List representation of the entities.
@@ -399,6 +424,29 @@ public class Location implements Serializable {
     public boolean hasEntities(){
         
         return !this.getEntities().isEmpty();
+        
+    }
+    
+    /**
+     * Returns a list of all of the EntityShadows in this room.
+     * 
+     * @return a list of all the EntityShadows in this location.
+     */
+    public List<EntityShadow> getEntityShadows(){
+        
+        return this.entityShadows;
+        
+    }
+    
+    /**
+     * Returns whether or not there are any EntityShadows in this location, by
+     * checking whether or not the entityShadows list is empty.
+     * 
+     * @return if there are EntityShadows in this location
+     */
+    public boolean hasEntityShadows(){
+        
+        return !this.getEntityShadows().isEmpty();
         
     }
     
