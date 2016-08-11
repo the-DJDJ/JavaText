@@ -338,6 +338,50 @@ public class World implements Serializable {
             
         }
         
+        // Show information on entities that have moved away
+        if(this.getCurrentLocation().hasEntityShadows()){
+            
+            String entities = "The ";
+            
+            for (int i = this.getCurrentLocation().getEntityShadows().size() - 1; i >= 0; i--) {
+                        
+                if(i != this.getCurrentLocation().getEntityShadows().size() - 1){
+
+                    if(i == 0){
+
+                        entities += " and the ";
+
+                    } else {
+
+                        entities += ", the ";
+
+                    }
+
+                }
+
+                if(this.getCurrentLocation().getEntityShadows().get(i).isCollection()){
+
+                    entities += (this.getCurrentLocation().getEntityShadows().get(i).getPluralName().startsWith("a ")) ?
+                                 this.getCurrentLocation().getEntityShadows().get(i).getPluralName().replaceFirst("a ", "") :
+                                 this.getCurrentLocation().getEntityShadows().get(i).getPluralName();
+
+                } else {
+
+                    entities += (this.getCurrentLocation().getEntityShadows().get(i).getSingleName().startsWith("a ")) ?
+                                 this.getCurrentLocation().getEntityShadows().get(i).getSingleName().replaceFirst("a ", "") :
+                                 this.getCurrentLocation().getEntityShadows().get(i).getSingleName();
+
+                }
+
+            }
+            
+            output.printSpaced(entities + ((this.getCurrentLocation().getEntityShadows().size() > 1) ? " have " : " has ") + " moved away.", WidthLimitedOutputStream.ABOVE);
+            
+            // And clear all shadows
+            this.getCurrentLocation().removeEntityShadows();
+            
+        }
+        
         // Display information on bosses
         if(this.getCurrentLocation().hasBoss()){
             
