@@ -225,6 +225,7 @@ public class MobileEntity extends Entity implements Serializable, EventHandler, 
             
             // And do the move
             this.getLocation().removeEntity(this);
+            this.getLocation().addEntityShadow(new EntityShadow(this));
             this.setLocation(newLocation);
             
             newLocation.addEntity(this);
