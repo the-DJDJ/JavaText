@@ -113,6 +113,22 @@ public class Entity implements Serializable {
     }
     
     /**
+     * A slightly random constructor, used so that EntityShadows can register
+     * themselves as entities
+     * 
+     * @param entity the entity to create
+     */
+    public Entity(Entity entity){
+        
+        this.name = entity.getName();
+        this.single = entity.getSingleName();
+        this.plural = entity.getPluralName();
+        this.health = entity.getHealth();
+        this.avoidable = entity.isAvoidable();
+        
+    }
+    
+    /**
      * Returns the name of the entity.
      * 
      * @return the name of the entity

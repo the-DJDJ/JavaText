@@ -8,9 +8,6 @@ package BeanPlant.the_DJDJ.JavaText.npc;
  */
 public class EntityCollection extends Entity {
     
-    /** The Entity of this collection. */
-    private Entity entity;
-    
     /** The amount of entities in this collection. */
     private int amount;
     
@@ -23,54 +20,8 @@ public class EntityCollection extends Entity {
      */
     public EntityCollection(Entity entity, int amount){
         
-        this.entity = entity;
+        super(entity);
         this.amount = amount;
-        
-    }
-    
-    @Override
-    public String getName(){
-        
-        return this.entity.getName();
-        
-    }
-    
-    @Override
-    public String getSingleName(){
-        
-        return this.entity.getSingleName();
-        
-    }
-    
-    @Override
-    public String getPluralName(){
-        
-        return this.entity.getPluralName();
-        
-    }
-    
-    /**
-     * Returns the entity that this collection contains.
-     * 
-     * @return the entity of this collection
-     */
-    public Entity getEntity(){
-        
-        return this.entity;
-        
-    }
-    
-    /**
-     * Sets the entity that this collection contains, and returns this
-     * collection object.
-     * 
-     * @param entity the new entity of this collection
-     * @return this EntityCollection object
-     */
-    public EntityCollection setEntity(Entity entity){
-        
-        this.entity = entity;
-        return this;
         
     }
     
@@ -110,7 +61,7 @@ public class EntityCollection extends Entity {
         if(this.amount - amount == 1){
             
             this.amount = 1;
-            return this.getEntity();
+            return this;
             
         } else if(this.amount - amount > 0){
             
