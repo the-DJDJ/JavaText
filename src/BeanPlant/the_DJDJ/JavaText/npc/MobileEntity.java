@@ -219,16 +219,21 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
                 }
 
             }
+            
+            // Check that we can actually go somewhere
+            if(possibleExits.size() > 0){
 
-            // Now choose a random location to move to
-            Location newLocation = possibleExits.get((int) (Math.random() * possibleExits.size())).getLeadsTo();
+                // Now choose a random location to move to
+                Location newLocation = possibleExits.get((int) (Math.random() * possibleExits.size())).getLeadsTo();
 
-            // And do the move
-            this.getLocation().removeEntity(this);
-            this.getLocation().addEntityShadow(new EntityShadow(this));
-            this.setLocation(newLocation);
+                // And do the move
+                this.getLocation().removeEntity(this);
+                this.getLocation().addEntityShadow(new EntityShadow(this));
+                this.setLocation(newLocation);
 
-            newLocation.addEntity(this);
+                newLocation.addEntity(this);
+            
+            }
 
         }
         
