@@ -119,7 +119,7 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
         this.location = location;
         
         // Register this MobileEntity with the CommandParser
-        CommandParser.addEventHandler(this);
+        if(location != null) CommandParser.addEventHandler(this);
         
     }
     
@@ -199,37 +199,37 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
         
         // First check if our animal will move
         if(Math.random() <= this.movingChance){
-            
+
             // A list of places where we can go
             List<Exit> possibleExits = new ArrayList<>();
-            
+
             for (int i = 0; i < this.location.getExits().size(); i++) {
-                
+
                 switch(this.location.getExits().get(i).getDirectionName()){
-                    
+
                     case "UP":
                     case "DOWN":
                         if(canClimb) possibleExits.add(this.location.getExits().get(i));
                         break;
-                        
+
                     default:
                         possibleExits.add(this.location.getExits().get(i));
                         break;
-                    
+
                 }
-                
+
             }
-            
+
             // Now choose a random location to move to
             Location newLocation = possibleExits.get((int) (Math.random() * possibleExits.size())).getLeadsTo();
-            
+
             // And do the move
             this.getLocation().removeEntity(this);
             this.getLocation().addEntityShadow(new EntityShadow(this));
             this.setLocation(newLocation);
-            
+
             newLocation.addEntity(this);
-            
+
         }
         
     }
