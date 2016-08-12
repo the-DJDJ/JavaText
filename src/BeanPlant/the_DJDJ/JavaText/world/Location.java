@@ -79,7 +79,7 @@ public class Location implements Serializable {
         this.m_visited = false;
 
         this.m_items = new ArrayList<>();
-        this.m_exits = new ArrayList();
+        this.m_exits = new ArrayList<>();
         
         this.entities = new ArrayList<>();
         this.entityShadows = new ArrayList<>();
