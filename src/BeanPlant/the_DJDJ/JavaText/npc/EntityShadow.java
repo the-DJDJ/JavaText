@@ -8,15 +8,32 @@ package BeanPlant.the_DJDJ.JavaText.npc;
  */
 public class EntityShadow extends MobileEntity {
     
+    /** Whether or not this shadow represents a collection of MobileEntities. */
     private final boolean collection;
+    
+    /** If this is a collection, how many MobileEntities are there? */
     private final int size;
     
+    /**
+     * The default constructor. This creates a standard EntityShadow for one
+     * MobileEntity
+     * 
+     * @param entity the entity that has moved away
+     */
     public EntityShadow(MobileEntity entity){
         
         this(entity, false, 0);
         
     }
     
+    /**
+     * The second constructor. This creates an EntityShadow for a collection of
+     * MobileEntities.
+     * 
+     * @param entity the entity that has moved away
+     * @param collection whether or not there was more than one
+     * @param size the number of entities that there were
+     */
     public EntityShadow(MobileEntity entity, boolean collection, int size){
         
         super(entity);
@@ -33,6 +50,11 @@ public class EntityShadow extends MobileEntity {
         
     }
     
+    /**
+     * Returns the total number of entities that have moved away.
+     * 
+     * @return how many entities this shadow represents
+     */
     public int getCollectionLength(){
         
         return this.size;
