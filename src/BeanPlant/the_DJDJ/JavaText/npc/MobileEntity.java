@@ -8,8 +8,6 @@ import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * A mobile entity object. This is exactly the same as an Entity, with the
