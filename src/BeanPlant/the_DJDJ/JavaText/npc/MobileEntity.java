@@ -29,6 +29,9 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
     /** The current location of this MobileEntity. */
     private Location location;
     
+    /** Whether or not this MobileEntity moved on the last turn. */
+    private boolean hasMovedRecently = false;
+    
     /**
      * The default constructor. This assigns the name, the amount of health, and
      * the change of moving that the entity has.
@@ -230,6 +233,9 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
                 this.setLocation(newLocation);
 
                 newLocation.addEntity(this);
+                
+                // Make sure this MobileEntity won't move immediately
+                this.hasMovedRecently = true;
             
             }
 
@@ -260,7 +266,9 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
         switch(event){
             
             case "GO":
-                this.move();
+                if(hasMovedRecently){
+                    hasMovedRecently = false;
+                } else this.move();
                 break;
             
         }
