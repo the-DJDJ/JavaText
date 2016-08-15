@@ -6,6 +6,7 @@ import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 import BeanPlant.the_DJDJ.JavaText.world.World;
 import BeanPlant.the_DJDJ.JavaText.user.Item;
 import BeanPlant.the_DJDJ.JavaText.user.ItemStack;
+import BeanPlant.the_DJDJ.JavaText.util.StringTools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -533,13 +534,10 @@ public class CommandParser {
      */
     private void hit(String arguments){
         
-        // The damage to deal to the entity
-        int damage = 1;
-        
-        // The entity to hit
-        Entity entity = null;
-        
         if(!arguments.trim().isEmpty()){
+            
+            // The entity to hit
+            Entity entity = null;
             
             // The name of the entity to search for
             String name = ((arguments.contains(" WITH ")) ?arguments.substring(0, arguments.indexOf(" WITH ")) : arguments).trim();
@@ -570,6 +568,30 @@ public class CommandParser {
                 world.getOutputStream().printSpaced("Hmm, there doesn't seem to be a " + name.toLowerCase() + " here...", WidthLimitedOutputStream.BOTH);
                     
             } else {
+                
+                // Set the default damage that your fist deals
+                int damage = 1;
+                
+                // Check if the user can hit with something more powerful
+                if(arguments.contains(" WITH ")){
+                    
+                    String itemName = arguments.substring(arguments.indexOf(" WITH ")).trim();
+                    
+                    if(new Item().isValidItem(itemName)){
+                    
+                        if(world.getInventory().contains(new Item().getItem(itemName))){
+
+                            damage = new Item().getItem(itemName).getDamage();
+
+                        }
+                    
+                    } else {
+                        
+                        world.getOutputStream().printSpaced("I don't know what a" + (StringTools.startsWithVowel(itemName) ? "n " : " ") + "is.", WidthLimitedOutputStream.BOTH);
+                        
+                    }
+                    
+                }
                 
                 // Hurt the entity
                 entity.setHealth(entity.getHealth() - damage);

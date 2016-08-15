@@ -24,11 +24,14 @@ public class Item implements Serializable {
     /** The description of the location. */
     private String m_description;
     
-    public final static Item crowbar = new Item("Crowbar", "a crowbar", "a pile of crowbars", "Ever played Half-Life? Yeah, you know exactly what this does!");
+    /** The amount of damage this item does per hit. */
+    private int m_damage;
+    
+    public final static Item crowbar = new Item("Crowbar", "a crowbar", "a pile of crowbars", "Ever played Half-Life? Yeah, you know exactly what this does!", 3);
     public final static Item key = new Item("Key", "a key", "some keys", "Maybe this unlocks something...");
-    public final static Item rock = new Item("Rock", "a rock", "some rocks", "A rock! Make fire! Re-invent the wheel! Do whatever you like! It's just a rock...");
+    public final static Item rock = new Item("Rock", "a rock", "some rocks", "A rock! Make fire! Re-invent the wheel! Do whatever you like! It's just a rock...", 2);
     public final static Item rope = new Item("Rope", "a rope", "some rope", "Ever needed to climb out of a sticky situation? Our rope is always there for you!");
-    public final static Item stick = new Item("Stick", "a stick", "some sticks", "This is a stick. Poke things with it, and stuff.");
+    public final static Item stick = new Item("Stick", "a stick", "some sticks", "This is a stick. Poke things with it, and stuff.", 2);
     public final static Item newspaper = new Item("Newspaper", "an old newspaper", "some old newspapers", "An old newspaper! From, like, 2000 years ago... I think something is growing on it");
     
     /** A list of all items so that they can be searched. */
@@ -49,6 +52,7 @@ public class Item implements Serializable {
         this.m_single = new String();
         this.m_plural = new String();
         this.m_description = new String();
+        this.m_damage = 1;
         
     }
     
@@ -63,11 +67,12 @@ public class Item implements Serializable {
         this.m_single = new String();
         this.m_plural = new String();
         this.m_description = new String();
+        this.m_damage = 1;
         
     }
     
     /**
-     * The full constructor. Creates a new Item object with the specified name and
+     * The next constructor. Creates a new Item object with the specified name and
      * description
      * 
      * @param name The name of the Item.
@@ -81,6 +86,27 @@ public class Item implements Serializable {
         this.m_single = single;
         this.m_plural = plural;
         this.m_description = description;
+        this.m_damage = 1;
+        
+    }
+    
+    /**
+     * The full constructor. Creates a new Item object with the specified name,
+     * description and damage
+     * 
+     * @param name The name of the Item.
+     * @param single The name of a single unit of the item
+     * @param plural The name of many units of the item
+     * @param description The description of the Item.
+     * @param damage The amount of damage that this Item does per hit
+     */
+    public Item(String name, String single, String plural, String description, int damage){
+        
+        this.m_name = name;
+        this.m_single = single;
+        this.m_plural = plural;
+        this.m_description = description;
+        this.m_damage = damage;
         
     }
     
@@ -182,6 +208,28 @@ public class Item implements Serializable {
             
         this.m_description = description;
     
+    }
+    
+    /**
+     * Returns the amount of damage that this item does per hit
+     * 
+     * @return the amount of damage that this item does per hit
+     */
+    public int getDamage(){
+        
+        return this.m_damage;
+        
+    }
+    
+    /**
+     * Updates or sets the amount of damage that this item does per hit/
+     * 
+     * @param damage The amount of damage this item does per hit
+     */
+    public void setDamage(int damage){
+        
+        this.m_damage = damage;
+        
     }
     
     /**
