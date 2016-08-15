@@ -1,6 +1,7 @@
 package BeanPlant.the_DJDJ.JavaText.io;
 
 import BeanPlant.the_DJDJ.JavaText.handlers.EventHandler;
+import BeanPlant.the_DJDJ.JavaText.npc.Entity;
 import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 import BeanPlant.the_DJDJ.JavaText.world.World;
 import BeanPlant.the_DJDJ.JavaText.user.Item;
@@ -115,6 +116,11 @@ public class CommandParser {
                     
                 case "HEALTH":
                     this.health();
+                    break;
+                    
+                case "HIT":
+                case "KILL":
+                    this.hit(arguments);
                     break;
 
                 case "SAVE":
@@ -516,6 +522,78 @@ public class CommandParser {
     private void health(){
         
         world.getOutputStream().printSpaced("You currently have " + world.getPlayerHealth() + "HP.", WidthLimitedOutputStream.BOTH);
+        
+    }
+    
+    /**
+     * The hit command. This deals damage to a specific entity, either by
+     * hitting it with the player's fist, or a weapon
+     * 
+     * @param arguments the entity to hit, and, if applicable, the weapon to use
+     */
+    private void hit(String arguments){
+        
+        // The damage to deal to the entity
+        int damage = 1;
+        
+        // The entity to hit
+        Entity entity = null;
+        
+        if(!arguments.trim().isEmpty()){
+            
+            // The name of the entity to search for
+            String name = ((arguments.contains(" WITH ")) ?arguments.substring(0, arguments.indexOf(" WITH ")) : arguments).trim();
+            
+            // First find which entity to hit
+            if(world.getCurrentLocation().hasBoss() && world.getCurrentLocation().getBoss().getName().equalsIgnoreCase(name)){
+                
+                entity = world.getCurrentLocation().getBoss();
+                
+            } else {
+            
+                for (int i = 0; i < world.getCurrentLocation().getEntities().size(); i++) {
+
+                    if(world.getCurrentLocation().getEntities().get(i).getName()
+                            .equalsIgnoreCase(name)){
+
+                        entity = world.getCurrentLocation().getEntities().get(i);
+
+                    }
+
+                }
+                            
+            }
+            
+            // Check that it has been found
+            if(entity == null){
+                    
+                world.getOutputStream().printSpaced("Hmm, there doesn't seem to be a " + name.toLowerCase() + " here...", WidthLimitedOutputStream.BOTH);
+                    
+            } else {
+                
+                // Hurt the entity
+                entity.setHealth(entity.getHealth() - damage);
+                
+                // Check if the entity is still alive
+                if(entity.getHealth() > 0){
+                    
+                    world.getOutputStream().printSpaced("You dealt " + damage + "HP to the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
+                    
+                } else {
+                    
+                    world.getOutputStream().printSpaced("You killed the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
+                    world.getCurrentLocation().getEntities().remove(entity);
+                    
+                }
+                
+            }
+                    
+            
+        } else {
+            
+            world.getOutputStream().printSpaced("Hit what?", WidthLimitedOutputStream.BOTH);
+            
+        }
         
     }
     
