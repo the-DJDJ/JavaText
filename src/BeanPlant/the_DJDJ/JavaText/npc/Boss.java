@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class Boss extends Entity implements Serializable {
     
-    public static final Boss wombat = new Boss("Verocious Wombat", 250, 5, true);
+    public static final Boss wombat = new Boss("wombat", "Verocious Wombat", 250, 5, true);
     
     /** How much damage the boss does everytime they hurt you. */
     private int damage;
@@ -39,13 +39,14 @@ public class Boss extends Entity implements Serializable {
      * damage that the boss has, and whether or not the boss is avoidable.
      * 
      * @param name The name of the boss
+     * @param single The name given to a single unit of this boss
      * @param health The amount of health the boss has
      * @param damage The amount of damage the boss does per hit
      * @param avoidable Whether or not the player can run away from the boss
      */
-    public Boss(String name, int health, int damage, boolean avoidable){
+    public Boss(String name, String single, int health, int damage, boolean avoidable){
         
-        super(name, health, avoidable);
+        super(name, single, health, avoidable);
         
         this.damage = damage;
         

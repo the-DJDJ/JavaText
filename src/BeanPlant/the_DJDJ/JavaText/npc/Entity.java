@@ -42,6 +42,24 @@ public class Entity implements Serializable {
     }
     
     /**
+     * A second detailed constructor. This assigns a generic name as well as the
+     * name of one unit of this entity, and the amount of health that it has.
+     * 
+     * @param name The name of the entity
+     * @param single The name given to a single unit of this entity
+     * @param health The amount of health the entity has.
+     */
+    public Entity(String name, String single, int health, boolean avoidable){
+        
+        this.name = name;
+        this.single = single;
+        this.health = health;
+        
+        this.avoidable = avoidable;
+        
+    }
+    
+    /**
      * A slightly more detailed constructor. This assigns all of the names, as
      * well as the amount of health to the entity.
      * 
@@ -60,6 +78,7 @@ public class Entity implements Serializable {
         this.avoidable = true;
         
     }
+    
     
     /**
      * The second constructor. This assigns the name, the amount of health, and
