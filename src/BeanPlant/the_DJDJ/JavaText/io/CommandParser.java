@@ -74,7 +74,7 @@ public class CommandParser {
 
                 try {
 
-                    arguments = input.substring(input.lastIndexOf(" "), input.length()).trim();
+                    arguments = input.substring(input.indexOf(" "), input.length()).trim();
 
                 } catch (StringIndexOutOfBoundsException ex){}
 
@@ -540,7 +540,7 @@ public class CommandParser {
             Entity entity = null;
             
             // The name of the entity to search for
-            String name = ((arguments.contains(" WITH ")) ?arguments.substring(0, arguments.indexOf(" WITH ")) : arguments).trim();
+            String name = ((arguments.contains(" WITH ")) ? arguments.substring(0, arguments.indexOf(" WITH ")) : arguments).trim();
             
             // First find which entity to hit
             if(world.getCurrentLocation().hasBoss() && world.getCurrentLocation().getBoss().getName().equalsIgnoreCase(name)){
@@ -575,39 +575,44 @@ public class CommandParser {
                 // Check if the user can hit with something more powerful
                 if(arguments.contains(" WITH ")){
                     
-                    String itemName = arguments.substring(arguments.indexOf(" WITH ")).trim();
+                    String itemName = arguments.substring(arguments.indexOf(" WITH ") + 6).toLowerCase().trim();
                     
                     if(new Item().isValidItem(itemName)){
                     
                         if(world.getInventory().contains(new Item().getItem(itemName))){
 
+                            // Work out the damage
                             damage = new Item().getItem(itemName).getDamage();
+                            
+                            // Hurt the entity
+                            entity.setHealth(entity.getHealth() - damage);
 
+                            // Check if the entity is still alive
+                            if(entity.getHealth() > 0){
+
+                                world.getOutputStream().printSpaced("You dealt " + damage + "HP to the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
+
+                            } else {
+
+                                world.getOutputStream().printSpaced("You killed the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
+                                world.getCurrentLocation().getEntities().remove(entity);
+
+                            }
+
+                        } else {
+                            
+                            world.getOutputStream().printSpaced("You don't have a " + (StringTools.startsWithVowel(itemName) ? "n " : " ") + itemName + ".", WidthLimitedOutputStream.BOTH);
+                            
                         }
                     
                     } else {
                         
-                        world.getOutputStream().printSpaced("I don't know what a" + (StringTools.startsWithVowel(itemName) ? "n " : " ") + "is.", WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced("I don't know what a" + (StringTools.startsWithVowel(itemName) ? "n " : " ") + itemName + " is.", WidthLimitedOutputStream.BOTH);
                         
                     }
                     
                 }
-                
-                // Hurt the entity
-                entity.setHealth(entity.getHealth() - damage);
-                
-                // Check if the entity is still alive
-                if(entity.getHealth() > 0){
-                    
-                    world.getOutputStream().printSpaced("You dealt " + damage + "HP to the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
-                    
-                } else {
-                    
-                    world.getOutputStream().printSpaced("You killed the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
-                    world.getCurrentLocation().getEntities().remove(entity);
-                    
-                }
-                
+                                
             }
                     
             
