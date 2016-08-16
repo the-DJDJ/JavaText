@@ -611,6 +611,23 @@ public class CommandParser {
                         
                     }
                     
+                } else {
+                    
+                    // Hurt the entity
+                    entity.setHealth(entity.getHealth() - damage);
+
+                    // Check if the entity is still alive
+                    if(entity.getHealth() > 0){
+
+                        world.getOutputStream().printSpaced("You dealt " + damage + "HP to the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
+
+                    } else {
+
+                        world.getOutputStream().printSpaced("You killed the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
+                        world.getCurrentLocation().getEntities().remove(entity);
+
+                    }
+                    
                 }
                                 
             }
