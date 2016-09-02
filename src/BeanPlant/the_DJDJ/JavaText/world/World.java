@@ -230,9 +230,24 @@ public class World implements Serializable {
      */
     public World setOutputStream(OutputStream out, int width){
         
-        output = new WidthLimitedOutputStream(out, width);
+        this.output = new WidthLimitedOutputStream(out, width);
         return this;
     
+    }
+    
+    /**
+     * Sets the output stream for the gaming system to a specific
+     * WidthLimitedOutputStream
+     * 
+     * @param output The WidthLimitedOutputStream to use
+     * 
+     * @return  The updated instance of the World
+     */
+    public World setOutputStream(WidthLimitedOutputStream output){
+        
+        this.output = output;
+        return this;
+        
     }
     
     /**

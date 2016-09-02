@@ -116,7 +116,7 @@ public class GameData implements CommandLockHandler{
             inputObject = new ObjectInputStream(inputFile);
             
             // Read an object in from object store, and cast it to a World
-            return ((World) inputObject.readObject()).setOutputStream(System.out, 64);
+            return ((World) inputObject.readObject()).setOutputStream(world.getOutputStream());
         
         } catch (InvalidClassException ex) {
             
