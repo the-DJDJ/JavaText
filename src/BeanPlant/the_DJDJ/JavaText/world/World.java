@@ -1,6 +1,5 @@
 package BeanPlant.the_DJDJ.JavaText.world;
 
-import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;
 import BeanPlant.the_DJDJ.JavaText.io.WidthLimitedOutputStream;
 import BeanPlant.the_DJDJ.JavaText.user.Inventory;
 
