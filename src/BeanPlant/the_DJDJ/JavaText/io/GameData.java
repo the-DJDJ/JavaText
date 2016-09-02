@@ -6,6 +6,7 @@ import BeanPlant.the_DJDJ.JavaText.world.World;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InvalidClassException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -117,6 +118,12 @@ public class GameData implements CommandLockHandler{
             // Read an object in from object store, and cast it to a World
             return ((World) inputObject.readObject()).setOutputStream(System.out, 64);
         
+        } catch (InvalidClassException ex) {
+            
+            world.getOutputStream().printSpaced("Your saved game appears to be from an older version of JavaText...", WidthLimitedOutputStream.BOTH);
+            
+            return null;
+            
         } catch (IOException | ClassNotFoundException ex) {
             
             world.getOutputStream().printSpaced("Could not load your game", WidthLimitedOutputStream.BOTH);
