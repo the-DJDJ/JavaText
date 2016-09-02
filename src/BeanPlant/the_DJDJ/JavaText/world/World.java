@@ -28,9 +28,6 @@ public class World implements Serializable {
     /** List of Location objects. */
     private final List<Location> locations;
 
-    /** List of Exit objects. */
-    private final List<Exit> exits;
-
     /** The current location of the player. */
     private Location currentLocation;
     
@@ -75,9 +72,8 @@ public class World implements Serializable {
         this.m_title = title;
         this.m_description = description;
             
-        // Instantiate lists for location/exits
+        // Instantiate lists for location
         this.locations = new ArrayList();
-        this.exits = new ArrayList();
         
         // Create the inventory
         this.inventory = new Inventory();
@@ -176,27 +172,6 @@ public class World implements Serializable {
         
         this.currentLocation = newLocation;
     
-    }
-
-    /** 
-     * Adds new exit(s) to the gaming system.
-     * 
-     * @param exit The exit(s) to add
-     */
-    public void addExit(Exit... exit){
-        
-        for (int i = 0; i < exit.length; i++) {
-            
-            // Check if exit list already contains exit 
-            if (!exits.contains(exit[i])){
-            
-                // Exit doesn't exist, and must be added
-                exits.add(exit[i]);
-            
-            }
-            
-        }
-                    
     }
 
     /**

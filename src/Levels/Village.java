@@ -59,12 +59,6 @@ public class Village extends World {
         addLocation (l02);
         addLocation (l03);
         addLocation (l04);
-
-        // Add exits to our game lists
-        addExit (e01);
-        addExit (e02);
-        addExit (e03);
-        addExit (e04);
         
         // Set current location
         setCurrentLocation (l01);

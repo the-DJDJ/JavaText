@@ -72,14 +72,6 @@ public class Demo extends World {
         addLocation (l3);
         addLocation (l4);
 
-        // Add exits to our game lists
-        addExit( e1 );
-        addExit( e2 );
-        addExit( e3 );
-        addExit( e4 );
-        addExit( e5 );
-        addExit( e6 );
-
         // Set current location
         setCurrentLocation ( l2 );
         
