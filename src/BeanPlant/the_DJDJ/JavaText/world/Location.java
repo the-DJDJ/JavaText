@@ -39,7 +39,7 @@ public class Location implements Serializable {
     private List<Entity> entities;
     
     /** The EntityShadows in this location. */
-    private List<EntityShadow> entityShadows;
+    private transient List<EntityShadow> entityShadows;
     
     /** The boss in this location. */
     private Boss boss = null;
