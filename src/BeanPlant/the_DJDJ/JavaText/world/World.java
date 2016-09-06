@@ -416,6 +416,30 @@ public class World implements Serializable {
         
     }
     
+    /**
+     * A method used in finalising a loaded world. This fixes any potential
+     * NullPointerExceptions and errors that may occur as a result of loading
+     * transient objects from the disk.
+     * 
+     * At present, this method will remove entity shadows from each location so
+     * as to avoid a NullPointerException, as EntityShadows are not written to
+     * disk
+     * 
+     * @return This World object
+     */
+    public World load(){
+        
+        // Reset all entity shadows
+        for (int i = 0; i < this.locations.size(); i++) {
+            
+            this.locations.get(i).removeEntityShadows();
+            
+        }
+        
+        return this;
+        
+    }
+    
     
     /**
      * A simple method that sets the width of the output stream of the world,

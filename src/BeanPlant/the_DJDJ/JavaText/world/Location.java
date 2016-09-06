@@ -400,7 +400,15 @@ public class Location implements Serializable {
      */
     public void removeEntityShadows(){
         
-        this.entityShadows.clear();
+        if(this.entityShadows == null){
+            
+            this.entityShadows = new ArrayList<>();
+            
+        } else {
+        
+            this.entityShadows.clear();
+            
+        }
         
     }
 
@@ -446,7 +454,7 @@ public class Location implements Serializable {
      */
     public boolean hasEntityShadows(){
         
-        return !this.getEntityShadows().isEmpty();
+        return !this.entityShadows.isEmpty();
         
     }
     
