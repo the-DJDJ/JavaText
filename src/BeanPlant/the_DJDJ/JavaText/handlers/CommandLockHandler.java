@@ -1,4 +1,4 @@
-package BeanPlant.the_DJDJ.JavaText.io;
+package BeanPlant.the_DJDJ.JavaText.handlers;
 
 /**
  * A simple interface for calling a method when a locked command is entered.

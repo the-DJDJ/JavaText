@@ -1,5 +1,6 @@
 package BeanPlant.the_DJDJ.JavaText.io;
 
+import BeanPlant.the_DJDJ.JavaText.handlers.CommandLockHandler;
 import BeanPlant.the_DJDJ.JavaText.handlers.EventHandler;
 import BeanPlant.the_DJDJ.JavaText.npc.Entity;
 import BeanPlant.the_DJDJ.JavaText.world.exit.Exit;

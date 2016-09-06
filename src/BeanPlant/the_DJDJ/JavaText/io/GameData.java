@@ -1,5 +1,6 @@
 package BeanPlant.the_DJDJ.JavaText.io;
 
+import BeanPlant.the_DJDJ.JavaText.handlers.CommandLockHandler;
 import BeanPlant.the_DJDJ.JavaText.JavaText;
 import BeanPlant.the_DJDJ.JavaText.world.World;
 
