@@ -2,12 +2,14 @@ package BeanPlant.the_DJDJ.JavaText.user;
 
 import BeanPlant.the_DJDJ.JavaText.world.Location;
 
+import java.io.Serializable;
+
 /**
  * A player object. This stores all of the information about a specific player.
  *
  * @author the_DJDJ
  */
-public class Player {
+public class Player implements Serializable {
     
     /** The name of the player. */
     private String name;
