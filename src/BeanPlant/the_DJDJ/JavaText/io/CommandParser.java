@@ -223,16 +223,16 @@ public class CommandParser {
         boolean valid = false;
 
         // Check if the direction is valid
-        for (Exit exit : world.getCurrentLocation().getExits()) {
+        for (Exit exit : world.getPlayer().getLocation().getExits()) {
             
             if(arguments.equals(exit.getDirectionName()) || arguments.equals(exit.getShortDirectionName())){
                 
-                if((!world.getCurrentLocation().hasBoss()) || (world.getCurrentLocation().hasBoss() && world.getCurrentLocation().getBoss().isAvoidable())){
+                if((!world.getPlayer().getLocation().hasBoss()) || (world.getPlayer().getLocation().hasBoss() && world.getPlayer().getLocation().getBoss().isAvoidable())){
                 
                     if(!exit.isLocked()){
 
                         // Set location to the location pointed to by exit
-                        world.setCurrentLocation(exit.getLeadsTo());
+                        world.getPlayer().setLocation(exit.getLeadsTo());
 
                         // Show new location
                         world.showLocation(false);
@@ -245,18 +245,18 @@ public class CommandParser {
                 
                 } else {
                     
-                    if(world.getCurrentLocation().getBoss().getName().contains(" ")){
+                    if(world.getPlayer().getLocation().getBoss().getName().contains(" ")){
                         
-                        world.getOutputStream().printSpaced("The " + world.getCurrentLocation().getBoss().getName().toLowerCase().substring(world.getCurrentLocation().getBoss().getName().lastIndexOf(" ")) + " attacks you! You lose " + world.getCurrentLocation().getBoss().getDamage() + "HP!", WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced("The " + world.getPlayer().getLocation().getBoss().getName().toLowerCase().substring(world.getPlayer().getLocation().getBoss().getName().lastIndexOf(" ")) + " attacks you! You lose " + world.getPlayer().getLocation().getBoss().getDamage() + "HP!", WidthLimitedOutputStream.BOTH);
                     
                         
                     } else {
                         
-                        world.getOutputStream().printSpaced("The " + world.getCurrentLocation().getBoss().getName().toLowerCase() + " attacks you! You lose " + world.getCurrentLocation().getBoss().getDamage() + "HP!", WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced("The " + world.getPlayer().getLocation().getBoss().getName().toLowerCase() + " attacks you! You lose " + world.getPlayer().getLocation().getBoss().getDamage() + "HP!", WidthLimitedOutputStream.BOTH);
                         
                     }
                     
-                    world.setPlayerHealth(world.getPlayerHealth() - world.getCurrentLocation().getBoss().getDamage());
+                    world.getPlayer().setHealth(world.getPlayer().getHealth() - world.getPlayer().getLocation().getBoss().getDamage());
                     
                 }
                 
@@ -288,11 +288,11 @@ public class CommandParser {
         boolean valid = false;
         int index = 0;
         
-        for (int i = 0; i < world.getCurrentLocation().getItems().size(); i++) {
+        for (int i = 0; i < world.getPlayer().getLocation().getItems().size(); i++) {
             
             try{
             
-                if(world.getCurrentLocation().getItems().get(i).getName().equals(item.getName())){
+                if(world.getPlayer().getLocation().getItems().get(i).getName().equals(item.getName())){
 
                     valid = true;
                     index = i;
@@ -305,15 +305,15 @@ public class CommandParser {
         
         if(valid){
             
-            if(world.getInventory().addItem(item)){
+            if(world.getPlayer().getInventory().addItem(item)){
                 
-                if(world.getCurrentLocation().getItems().get(index).isStack()){
+                if(world.getPlayer().getLocation().getItems().get(index).isStack()){
                     
-                    world.getCurrentLocation().getItems().set(index, ((ItemStack) world.getCurrentLocation().getItems().get(index)).remove(1));
+                    world.getPlayer().getLocation().getItems().set(index, ((ItemStack) world.getPlayer().getLocation().getItems().get(index)).remove(1));
                             
                 } else {
             
-                    world.getCurrentLocation().getItems().remove(item);
+                    world.getPlayer().getLocation().getItems().remove(item);
                     
                 }
             
@@ -344,16 +344,16 @@ public class CommandParser {
         
         Item item = new Item().getItem(arguments);
         
-        if(world.getInventory().contains(item)){
+        if(world.getPlayer().getInventory().contains(item)){
             
-            world.getInventory().removeItem(item);
+            world.getPlayer().getInventory().removeItem(item);
             
             boolean present = false;
             int index = 0;
             
-            for (int i = 0; i < world.getCurrentLocation().getItems().size(); i++) {
+            for (int i = 0; i < world.getPlayer().getLocation().getItems().size(); i++) {
                 
-                if(world.getCurrentLocation().getItems().get(i).getName().equals(item.getName())){
+                if(world.getPlayer().getLocation().getItems().get(i).getName().equals(item.getName())){
                     
                     present = true;
                     index = i;
@@ -364,19 +364,19 @@ public class CommandParser {
             
             if(present){
                 
-                if(world.getCurrentLocation().getItems().get(index).isStack()){
+                if(world.getPlayer().getLocation().getItems().get(index).isStack()){
                     
-                    world.getCurrentLocation().getItems().set(index, ((ItemStack) world.getCurrentLocation().getItems().get(index)).add(1));
+                    world.getPlayer().getLocation().getItems().set(index, ((ItemStack) world.getPlayer().getLocation().getItems().get(index)).add(1));
                     
                 } else {
                     
-                    world.getCurrentLocation().getItems().set(index, new ItemStack(item, 2));
+                    world.getPlayer().getLocation().getItems().set(index, new ItemStack(item, 2));
                     
                 }
                 
             } else {
             
-                world.getCurrentLocation().addItem(item);
+                world.getPlayer().getLocation().addItem(item);
                 
             }
             
@@ -400,7 +400,7 @@ public class CommandParser {
      */
     private void inventory(){
         
-        world.getOutputStream().printSpaced(world.getInventory().toString(), WidthLimitedOutputStream.BOTH);
+        world.getOutputStream().printSpaced(world.getPlayer().getInventory().toString(), WidthLimitedOutputStream.BOTH);
         
     }
     
@@ -417,7 +417,7 @@ public class CommandParser {
         
                 Item item = new Item().getItem(arguments);
 
-                if(world.getInventory().contains(item) || world.getCurrentLocation().getItems().contains(item)) {
+                if(world.getPlayer().getInventory().contains(item) || world.getPlayer().getLocation().getItems().contains(item)) {
 
                     world.getOutputStream().printSpaced(item.getDescription(), WidthLimitedOutputStream.BOTH);
 
@@ -425,9 +425,9 @@ public class CommandParser {
                     
                     boolean present = false;
                     
-                    for (int i = 0; i < world.getCurrentLocation().getItems().size(); i++) {
+                    for (int i = 0; i < world.getPlayer().getLocation().getItems().size(); i++) {
                         
-                        if(world.getCurrentLocation().getItems().get(i).getName().equals(item.getName())){
+                        if(world.getPlayer().getLocation().getItems().get(i).getName().equals(item.getName())){
                             
                             world.getOutputStream().printSpaced(item.getDescription(), WidthLimitedOutputStream.BOTH);
                             
@@ -478,34 +478,34 @@ public class CommandParser {
      */
     private void unlock(String arguments){
         
-        for (int i = 0; i < world.getCurrentLocation().getExits().size(); i++) {
+        for (int i = 0; i < world.getPlayer().getLocation().getExits().size(); i++) {
             
-            if(world.getCurrentLocation().getExits().get(i).getType().getName().equalsIgnoreCase(arguments)){
+            if(world.getPlayer().getLocation().getExits().get(i).getType().getName().equalsIgnoreCase(arguments)){
                 
-                if(world.getCurrentLocation().getExits().get(i).isLocked()){
+                if(world.getPlayer().getLocation().getExits().get(i).isLocked()){
                     
-                    if(world.getCurrentLocation().getExits().get(i).isLockable()){
+                    if(world.getPlayer().getLocation().getExits().get(i).isLockable()){
                     
-                        if(world.getInventory().contains(world.getCurrentLocation().getExits().get(i).getType().getKey())){
+                        if(world.getPlayer().getInventory().contains(world.getPlayer().getLocation().getExits().get(i).getType().getKey())){
 
-                            world.getCurrentLocation().getExits().get(i).setLocked(false);
-                            world.getOutputStream().printSpaced(world.getCurrentLocation().getExits().get(i).getType().getUnlockMessage(), WidthLimitedOutputStream.BOTH);
+                            world.getPlayer().getLocation().getExits().get(i).setLocked(false);
+                            world.getOutputStream().printSpaced(world.getPlayer().getLocation().getExits().get(i).getType().getUnlockMessage(), WidthLimitedOutputStream.BOTH);
 
                         } else {
 
-                            world.getOutputStream().printSpaced("You'll need " + world.getCurrentLocation().getExits().get(i).getType().getKey().get(0).getSingleName() + " to do that", WidthLimitedOutputStream.BOTH);
+                            world.getOutputStream().printSpaced("You'll need " + world.getPlayer().getLocation().getExits().get(i).getType().getKey().get(0).getSingleName() + " to do that", WidthLimitedOutputStream.BOTH);
 
                         }
                     
                     } else {
                         
-                        world.getOutputStream().printSpaced(world.getCurrentLocation().getExits().get(i).getType().getLockedMessage(), WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced(world.getPlayer().getLocation().getExits().get(i).getType().getLockedMessage(), WidthLimitedOutputStream.BOTH);
                         
                     }
                     
                 } else {
                     
-                    world.getOutputStream().printSpaced(world.getCurrentLocation().getExits().get(i).getType().getUnlockedMessage(), WidthLimitedOutputStream.BOTH);
+                    world.getOutputStream().printSpaced(world.getPlayer().getLocation().getExits().get(i).getType().getUnlockedMessage(), WidthLimitedOutputStream.BOTH);
                     
                 }
                 
@@ -523,7 +523,7 @@ public class CommandParser {
      */
     private void health(){
         
-        world.getOutputStream().printSpaced("You currently have " + world.getPlayerHealth() + "HP.", WidthLimitedOutputStream.BOTH);
+        world.getOutputStream().printSpaced("You currently have " + world.getPlayer().getHealth() + "HP.", WidthLimitedOutputStream.BOTH);
         
     }
     
@@ -544,18 +544,18 @@ public class CommandParser {
             String name = ((arguments.contains(" WITH ")) ? arguments.substring(0, arguments.indexOf(" WITH ")) : arguments).trim();
             
             // First find which entity to hit
-            if(world.getCurrentLocation().hasBoss() && world.getCurrentLocation().getBoss().getName().equalsIgnoreCase(name)){
+            if(world.getPlayer().getLocation().hasBoss() && world.getPlayer().getLocation().getBoss().getName().equalsIgnoreCase(name)){
                 
-                entity = world.getCurrentLocation().getBoss();
+                entity = world.getPlayer().getLocation().getBoss();
                 
             } else {
             
-                for (int i = 0; i < world.getCurrentLocation().getEntities().size(); i++) {
+                for (int i = 0; i < world.getPlayer().getLocation().getEntities().size(); i++) {
 
-                    if(world.getCurrentLocation().getEntities().get(i).getName()
+                    if(world.getPlayer().getLocation().getEntities().get(i).getName()
                             .equalsIgnoreCase(name)){
 
-                        entity = world.getCurrentLocation().getEntities().get(i);
+                        entity = world.getPlayer().getLocation().getEntities().get(i);
 
                     }
 
@@ -580,7 +580,7 @@ public class CommandParser {
                     
                     if(new Item().isValidItem(itemName)){
                     
-                        if(world.getInventory().contains(new Item().getItem(itemName))){
+                        if(world.getPlayer().getInventory().contains(new Item().getItem(itemName))){
 
                             // Work out the damage
                             damage = new Item().getItem(itemName).getDamage();
@@ -596,7 +596,7 @@ public class CommandParser {
                             } else {
 
                                 world.getOutputStream().printSpaced("You killed the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
-                                world.getCurrentLocation().getEntities().remove(entity);
+                                world.getPlayer().getLocation().getEntities().remove(entity);
 
                             }
 
@@ -625,7 +625,7 @@ public class CommandParser {
                     } else {
 
                         world.getOutputStream().printSpaced("You killed the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
-                        world.getCurrentLocation().getEntities().remove(entity);
+                        world.getPlayer().getLocation().getEntities().remove(entity);
 
                     }
                     

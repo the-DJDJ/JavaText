@@ -73,7 +73,7 @@ public class Demo extends World {
         addLocation (l4);
 
         // Set current location
-        setCurrentLocation ( l2 );
+        getPlayer().setLocation(l2 );
         
     }
     

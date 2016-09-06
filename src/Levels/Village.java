@@ -34,7 +34,7 @@ public class Village extends World {
         // Set the title and description of the level
         setTitle("The Village");
         setDescription("You received a call a couple of weeks ago about something strange going on in a little village about fifty miles south of you. Something eerie. Newspaper reports haven't shown anything new, but even they cannot be depended on anymore. It's obvious that nobody has entered or left the village in a while, and the roads surrounding it are unnaturally quiet. Your taxi dropped you off here, on the outskirts, as you realise your mistake. Maybe you should've thought this one through a little more...");
-        setPlayerHealth(100);
+        getPlayer().setHealth(100);
         
         // Add items
         l01.addItem(Item.newspaper, 2);
@@ -61,7 +61,7 @@ public class Village extends World {
         addLocation (l04);
         
         // Set current location
-        setCurrentLocation (l01);
+        getPlayer().setLocation(l01);
         
     }
     

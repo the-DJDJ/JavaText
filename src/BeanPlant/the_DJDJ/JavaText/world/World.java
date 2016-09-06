@@ -1,7 +1,7 @@
 package BeanPlant.the_DJDJ.JavaText.world;
 
 import BeanPlant.the_DJDJ.JavaText.io.WidthLimitedOutputStream;
-import BeanPlant.the_DJDJ.JavaText.user.Inventory;
+import BeanPlant.the_DJDJ.JavaText.user.Player;
 
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -21,17 +21,11 @@ public class World implements Serializable {
     /** The description of the location. */
     private String m_description;
     
-    /** The amount of health that the player has. */
-    private int m_playerHealth = 100;
+    /** The player in the world. */
+    private Player player;
 	
     /** List of Location objects. */
     private final List<Location> locations;
-
-    /** The current location of the player. */
-    private Location currentLocation;
-    
-    /** The player's inventory. */
-    private final Inventory inventory;
 
     /** Output stream for gaming system. */
     transient private WidthLimitedOutputStream output;
@@ -74,11 +68,8 @@ public class World implements Serializable {
         // Instantiate lists for location
         this.locations = new ArrayList();
         
-        // Create the inventory
-        this.inventory = new Inventory();
-
-        // The default location of a player isn't known
-        this.currentLocation = null;
+        // Create a new player object
+        this.player = new Player(null, 100, null);
 
         // By default, use standard output
         this.setOutputStream(System.out, 72);
@@ -130,47 +121,14 @@ public class World implements Serializable {
     }
     
     /**
-     * Returns the current health of the player.
+     * Returns the player object.
      * 
-     * @return the current health of the player
+     * @return the current player.
      */
-    public int getPlayerHealth(){
+    public Player getPlayer() {
         
-        return this.m_playerHealth;
+        return this.player;
         
-    }
-    
-    /**
-     * Updates or sets the health of the player.
-     * 
-     * @param health The new health of the player
-     */
-    public void setPlayerHealth(int health){
-        
-        this.m_playerHealth = health;
-        
-    }
-
-    /**
-     * Returns the current location of the player.
-     * 
-     * @return The player's current location
-     */
-    public Location getCurrentLocation(){
-        
-        return this.currentLocation;
-    
-    }
-
-    /**
-     * Assigns a new location to the current location of the player.
-     * 
-     * @param newLocation The new location that the player is at.
-     */
-    public void setCurrentLocation(Location newLocation){
-        
-        this.currentLocation = newLocation;
-    
     }
 
     /**
@@ -236,17 +194,6 @@ public class World implements Serializable {
     }
     
     /**
-     * Returns the user's inventory
-     * 
-     * @return The user's inventory
-     */
-    public Inventory getInventory(){
-        
-        return this.inventory;
-        
-    }
-    
-    /**
      * Shows the game's current information.
      */
     public void showInformation(){
@@ -280,24 +227,24 @@ public class World implements Serializable {
     public void showLocation(boolean fullVisibility){
         
         // Show room title
-	output.printSpaced(this.getCurrentLocation().getTitle(), WidthLimitedOutputStream.ABOVE);
+	output.printSpaced(this.getPlayer().getLocation().getTitle(), WidthLimitedOutputStream.ABOVE);
 		
 	// Show room description 
-        if(!this.getCurrentLocation().hasBeenVisited() || fullVisibility){
+        if(!this.getPlayer().getLocation().hasBeenVisited() || fullVisibility){
 	
-            output.printSpaced(this.getCurrentLocation().getDescription(), WidthLimitedOutputStream.ABOVE);
-            this.getCurrentLocation().visit();
+            output.printSpaced(this.getPlayer().getLocation().getDescription(), WidthLimitedOutputStream.ABOVE);
+            this.getPlayer().getLocation().visit();
             
         }
         
         // Show any information on entities
-        if(this.getCurrentLocation().hasEntities()){
+        if(this.getPlayer().getLocation().hasEntities()){
             
             String entities = "There is ";
             
-            for (int i = this.getCurrentLocation().getEntities().size() - 1; i >= 0; i--) {
+            for (int i = this.getPlayer().getLocation().getEntities().size() - 1; i >= 0; i--) {
                         
-                if(i != this.getCurrentLocation().getEntities().size() - 1){
+                if(i != this.getPlayer().getLocation().getEntities().size() - 1){
 
                     if(i == 0){
 
@@ -311,13 +258,13 @@ public class World implements Serializable {
 
                 }
 
-                if(this.getCurrentLocation().getEntities().get(i).isCollection()){
+                if(this.getPlayer().getLocation().getEntities().get(i).isCollection()){
 
-                    entities += this.getCurrentLocation().getEntities().get(i).getPluralName();
+                    entities += this.getPlayer().getLocation().getEntities().get(i).getPluralName();
 
                 } else {
 
-                    entities += this.getCurrentLocation().getEntities().get(i).getSingleName();
+                    entities += this.getPlayer().getLocation().getEntities().get(i).getSingleName();
 
                 }
 
@@ -328,13 +275,13 @@ public class World implements Serializable {
         }
         
         // Show information on entities that have moved away
-        if(this.getCurrentLocation().hasEntityShadows()){
+        if(this.getPlayer().getLocation().hasEntityShadows()){
             
             String entities = "The ";
             
-            for (int i = this.getCurrentLocation().getEntityShadows().size() - 1; i >= 0; i--) {
+            for (int i = this.getPlayer().getLocation().getEntityShadows().size() - 1; i >= 0; i--) {
                         
-                if(i != this.getCurrentLocation().getEntityShadows().size() - 1){
+                if(i != this.getPlayer().getLocation().getEntityShadows().size() - 1){
 
                     if(i == 0){
 
@@ -348,35 +295,35 @@ public class World implements Serializable {
 
                 }
 
-                if(this.getCurrentLocation().getEntityShadows().get(i).isCollection()){
+                if(this.getPlayer().getLocation().getEntityShadows().get(i).isCollection()){
 
-                    entities += (this.getCurrentLocation().getEntityShadows().get(i).getPluralName().startsWith("a ")) ?
-                                 this.getCurrentLocation().getEntityShadows().get(i).getPluralName().replaceFirst("a ", "") :
-                                 this.getCurrentLocation().getEntityShadows().get(i).getPluralName();
+                    entities += (this.getPlayer().getLocation().getEntityShadows().get(i).getPluralName().startsWith("a ")) ?
+                                 this.getPlayer().getLocation().getEntityShadows().get(i).getPluralName().replaceFirst("a ", "") :
+                                 this.getPlayer().getLocation().getEntityShadows().get(i).getPluralName();
 
                 } else {
 
-                    entities += (this.getCurrentLocation().getEntityShadows().get(i).getSingleName().startsWith("a ")) ?
-                                 this.getCurrentLocation().getEntityShadows().get(i).getSingleName().replaceFirst("a ", "") :
-                                 this.getCurrentLocation().getEntityShadows().get(i).getSingleName();
+                    entities += (this.getPlayer().getLocation().getEntityShadows().get(i).getSingleName().startsWith("a ")) ?
+                                 this.getPlayer().getLocation().getEntityShadows().get(i).getSingleName().replaceFirst("a ", "") :
+                                 this.getPlayer().getLocation().getEntityShadows().get(i).getSingleName();
 
                 }
 
             }
             
-            output.printSpaced(entities + ((this.getCurrentLocation().getEntityShadows().size() > 1) ? " have " : " has ") + " moved away.", WidthLimitedOutputStream.ABOVE);
+            output.printSpaced(entities + ((this.getPlayer().getLocation().getEntityShadows().size() > 1) ? " have " : " has ") + " moved away.", WidthLimitedOutputStream.ABOVE);
             
             // And clear all shadows
-            this.getCurrentLocation().removeEntityShadows();
+            this.getPlayer().getLocation().removeEntityShadows();
             
         }
         
         // Display information on bosses
-        if(this.getCurrentLocation().hasBoss()){
+        if(this.getPlayer().getLocation().hasBoss()){
             
             String prefix = "A";            
             
-            switch(this.getCurrentLocation().getBoss().getName().toUpperCase().charAt(0)){
+            switch(this.getPlayer().getLocation().getBoss().getName().toUpperCase().charAt(0)){
             
                 case 'A':
                 case 'E':
@@ -388,18 +335,18 @@ public class World implements Serializable {
             
             }
             
-            output.printSpaced(prefix + " " + this.getCurrentLocation().getBoss().getName().toLowerCase() + " (" + this.getCurrentLocation().getBoss().getHealth() + " HP) lurks menacingly...", WidthLimitedOutputStream.ABOVE);
+            output.printSpaced(prefix + " " + this.getPlayer().getLocation().getBoss().getName().toLowerCase() + " (" + this.getPlayer().getLocation().getBoss().getHealth() + " HP) lurks menacingly...", WidthLimitedOutputStream.ABOVE);
             
         }
         
         // Show items
-        if(!this.getCurrentLocation().getItems().isEmpty()){
+        if(!this.getPlayer().getLocation().getItems().isEmpty()){
             
             String items = "You can see ";
             
-            for (int i = this.getCurrentLocation().getItems().size() - 1; i >= 0; i--) {
+            for (int i = this.getPlayer().getLocation().getItems().size() - 1; i >= 0; i--) {
                         
-                if(i != this.getCurrentLocation().getItems().size() - 1){
+                if(i != this.getPlayer().getLocation().getItems().size() - 1){
 
                     if(i == 0){
 
@@ -413,13 +360,13 @@ public class World implements Serializable {
 
                 }
 
-                if(this.getCurrentLocation().getItems().get(i).isStack()){
+                if(this.getPlayer().getLocation().getItems().get(i).isStack()){
 
-                    items += this.getCurrentLocation().getItems().get(i).getPluralName();
+                    items += this.getPlayer().getLocation().getItems().get(i).getPluralName();
 
                 } else {
 
-                    items += this.getCurrentLocation().getItems().get(i).getSingleName();
+                    items += this.getPlayer().getLocation().getItems().get(i).getSingleName();
 
                 }
 
@@ -432,30 +379,30 @@ public class World implements Serializable {
         // Show available exits        
         String exits = "You can go ";
         
-	switch(this.getCurrentLocation().getExits().size()){
+	switch(this.getPlayer().getLocation().getExits().size()){
             
             case 0:
                 exits += "nowhere";
                 break;
                 
             case 1:
-                exits += String.valueOf(this.getCurrentLocation().getExits().get(0));
+                exits += String.valueOf(this.getPlayer().getLocation().getExits().get(0));
                 break;
                 
             case 2:
-                exits += this.getCurrentLocation().getExits().get(0) + " or " + this.getCurrentLocation().getExits().get(1);
+                exits += this.getPlayer().getLocation().getExits().get(0) + " or " + this.getPlayer().getLocation().getExits().get(1);
                 break;
                 
             default:
-                for (int i = 0; i < this.getCurrentLocation().getExits().size(); i++) {
+                for (int i = 0; i < this.getPlayer().getLocation().getExits().size(); i++) {
                     
-                    if(i != this.getCurrentLocation().getExits().size() - 2){
+                    if(i != this.getPlayer().getLocation().getExits().size() - 2){
                         
-                        exits += this.getCurrentLocation().getExits().get(i) + ", ";
+                        exits += this.getPlayer().getLocation().getExits().get(i) + ", ";
                         
                     } else {
                         
-                        exits += this.getCurrentLocation().getExits().get(this.getCurrentLocation().getExits().size() - 2) + " or " + this.getCurrentLocation().getExits().get(this.getCurrentLocation().getExits().size() - 1);
+                        exits += this.getPlayer().getLocation().getExits().get(this.getPlayer().getLocation().getExits().size() - 2) + " or " + this.getPlayer().getLocation().getExits().get(this.getPlayer().getLocation().getExits().size() - 1);
                         break;
                         
                     }
