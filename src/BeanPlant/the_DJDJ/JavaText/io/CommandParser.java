@@ -330,7 +330,19 @@ public class CommandParser {
             
         } else {
             
-            world.getOutputStream().printSpaced("I don't see a " + arguments.toLowerCase() + " here...", WidthLimitedOutputStream.BOTH);
+            if(arguments.isEmpty()){
+                
+                world.getOutputStream().printSpaced("Take what?", WidthLimitedOutputStream.BOTH);
+                
+            } else if (item == null) {
+                
+                world.getOutputStream().printSpaced("I don't know what a " + arguments.toLowerCase() + " is.", WidthLimitedOutputStream.BOTH);
+                
+            } else {
+            
+                world.getOutputStream().printSpaced("I don't see a " + arguments.toLowerCase() + " here...", WidthLimitedOutputStream.BOTH);
+            
+            }
             
         }
         
