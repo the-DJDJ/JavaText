@@ -336,11 +336,11 @@ public class CommandParser {
                 
             } else if (item == null) {
                 
-                world.getOutputStream().printSpaced("I don't know what a " + arguments.toLowerCase() + " is.", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced("I don't know what a" + (StringTools.startsWithVowel(arguments) ? "n " : " ") + arguments.toLowerCase() + " is.", WidthLimitedOutputStream.BOTH);
                 
             } else {
             
-                world.getOutputStream().printSpaced("I don't see a " + arguments.toLowerCase() + " here...", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced("I don't see " + item.getSingleName() + " here...", WidthLimitedOutputStream.BOTH);
             
             }
             
@@ -409,7 +409,7 @@ public class CommandParser {
             
             } else {
             
-                world.getOutputStream().printSpaced("I don't know what a " + arguments.toLowerCase() + " is.", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced("I don't know what a" + (StringTools.startsWithVowel(arguments) ? "n " : " ") + arguments.toLowerCase() + " is.", WidthLimitedOutputStream.BOTH);
             
             }   
         
