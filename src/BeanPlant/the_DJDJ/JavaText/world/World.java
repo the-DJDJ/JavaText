@@ -2,6 +2,7 @@ package BeanPlant.the_DJDJ.JavaText.world;
 
 import BeanPlant.the_DJDJ.JavaText.io.WidthLimitedOutputStream;
 import BeanPlant.the_DJDJ.JavaText.user.Player;
+import BeanPlant.the_DJDJ.JavaText.util.StringTools;
 
 import java.io.OutputStream;
 import java.io.Serializable;
@@ -321,23 +322,9 @@ public class World implements Serializable {
         }
         
         // Display information on bosses
-        if(this.getPlayer().getLocation().hasBoss()){
+        if(this.getPlayer().getLocation().hasBoss()){          
             
-            String prefix = "A";            
-            
-            switch(this.getPlayer().getLocation().getBoss().getName().toUpperCase().charAt(0)){
-            
-                case 'A':
-                case 'E':
-                case 'I':
-                case 'O':
-                case 'U':
-                    prefix += "n";
-                    break;
-            
-            }
-            
-            output.printSpaced(prefix + " " + this.getPlayer().getLocation().getBoss().getName().toLowerCase() + " (" + this.getPlayer().getLocation().getBoss().getHealth() + " HP) lurks menacingly...", WidthLimitedOutputStream.ABOVE);
+            output.printSpaced("A" + (StringTools.startsWithVowel(this.getPlayer().getLocation().getBoss().getName()) ? "n" : "") + " " + this.getPlayer().getLocation().getBoss().getName().toLowerCase() + " (" + this.getPlayer().getLocation().getBoss().getHealth() + " HP) lurks menacingly...", WidthLimitedOutputStream.ABOVE);
             
         }
         
