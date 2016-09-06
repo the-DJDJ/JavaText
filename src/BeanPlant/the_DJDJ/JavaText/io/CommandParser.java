@@ -56,6 +56,9 @@ public class CommandParser {
      */
     public void parse(String input){
         
+        // Clear our output screen
+        world.getOutputStream().initialisePrint();
+        
         if(input.length() <= 2 && !input.equals("NO")){
         
             go(input);

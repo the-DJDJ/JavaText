@@ -14,13 +14,19 @@ public class WidthLimitedOutputStream {
 	
     /** The output stream. */
     private final PrintStream m_out;
+    
     /** The width of the output stream. */
     private int width;
     
+    /** The length of the printed output. */
+    private int length;
+    
     /** The constant for spaced printing above the line. */
     public final static int ABOVE = 0;
+    
     /** The constant for spaced printing below the line. */
     public final static int BELOW = 1;
+    
     /** The constant for spaced printing above and below the line. */
     public final static int BOTH = -1;
 
@@ -34,7 +40,9 @@ public class WidthLimitedOutputStream {
     public WidthLimitedOutputStream (OutputStream out, int width){
 
         m_out = new PrintStream (out);
+        
         this.width = width;
+        this.length = 0;
 
     }
 
@@ -62,7 +70,7 @@ public class WidthLimitedOutputStream {
             if (currentWidth + token.length() >= width || token.trim().equals("<token:newline>")){
 
                 // Print a newline
-                m_out.println ();
+                println ();
                 currentWidth = 0;
 
             }
@@ -89,7 +97,7 @@ public class WidthLimitedOutputStream {
     public void println(String string){
 
         print(string);
-        m_out.println();
+        println();
 
     }
 
@@ -97,7 +105,8 @@ public class WidthLimitedOutputStream {
      * Prints a blank line.
      */
     public void println(){
-
+        
+        length++;
         m_out.println();
 
     }
@@ -134,6 +143,33 @@ public class WidthLimitedOutputStream {
         println(string);
         
         if((type == BELOW) || (type == BOTH)) println();
+        
+    }
+    
+    /**
+     * A method to reset the length of what has been printed for clearing
+     */
+    public void reset() {
+        
+        this.length = 1;
+        
+    }
+    
+    /**
+     * A method that clears what has already been printed to the console up to a
+     * certain point
+     */
+    public void initialisePrint() {
+        
+        for (int i = 0; i < this.length; i++) {
+            
+            this.m_out.print(String.format("\033[%dA", 1));
+            this.m_out.print("\033[2K");
+            
+        }
+        
+        this.m_out.flush();
+        this.reset();
         
     }
     

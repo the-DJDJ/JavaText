@@ -216,6 +216,8 @@ public class World implements Serializable {
             
         }
         
+        this.getOutputStream().reset();
+        
     }
 
     /**
