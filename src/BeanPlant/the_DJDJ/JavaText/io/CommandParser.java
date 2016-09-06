@@ -397,14 +397,22 @@ public class CommandParser {
             
             world.getOutputStream().printSpaced("You dropped the " + item.getName().toLowerCase(), WidthLimitedOutputStream.BOTH);
             
-        } else if (item != null) {
+        } else {  
             
-            world.getOutputStream().printSpaced("You don't own " + item.getSingleName(), WidthLimitedOutputStream.BOTH);
+            if(arguments.isEmpty()){
+                
+                world.getOutputStream().printSpaced("Drop what?", WidthLimitedOutputStream.BOTH);
+                
+            } else if (item != null) {
             
-        } else {
+                world.getOutputStream().printSpaced("You don't own " + item.getSingleName(), WidthLimitedOutputStream.BOTH);
             
-            world.getOutputStream().printSpaced("I don't know what a " + arguments.toLowerCase() + " is.", WidthLimitedOutputStream.BOTH);
+            } else {
             
+                world.getOutputStream().printSpaced("I don't know what a " + arguments.toLowerCase() + " is.", WidthLimitedOutputStream.BOTH);
+            
+            }   
+        
         }
         
     }
