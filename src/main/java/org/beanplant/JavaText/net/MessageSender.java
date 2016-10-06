@@ -57,9 +57,9 @@ public class MessageSender {
      * 
      * @throws java.io.IOException
      */
-    public void sendMessage(byte[] message) throws IOException {
+    public void sendMessage(Message message) throws IOException {
         
-        this.packet.setData(message);
+        this.packet.setData(message.getContents());
         this.packet.setLength(port);
                 
         this.socket.send(packet);
