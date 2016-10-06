@@ -844,6 +844,7 @@ public class CommandParser {
      */
     private void load(){
         
+        oldWorld = world;
         world = GameData.load(world);
         
         if(world != null){
