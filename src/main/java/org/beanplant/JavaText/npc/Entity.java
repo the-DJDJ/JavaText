@@ -205,7 +205,7 @@ public class Entity implements Serializable {
     /**
      * Sets the name of many units of this entity
      * 
-     * @param name the new name of many units of this entity
+     * @param plural the new name of many units of this entity
      */
     public void setPluralName(String plural){
         
