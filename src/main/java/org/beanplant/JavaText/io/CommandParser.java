@@ -1,16 +1,18 @@
 package org.beanplant.JavaText.io;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.beanplant.JavaText.handlers.CommandLockHandler;
 import org.beanplant.JavaText.handlers.EventHandler;
+import org.beanplant.JavaText.net.Message;
 import org.beanplant.JavaText.npc.Entity;
 import org.beanplant.JavaText.world.exit.Exit;
 import org.beanplant.JavaText.world.World;
 import org.beanplant.JavaText.user.Item;
 import org.beanplant.JavaText.user.ItemStack;
 import org.beanplant.JavaText.util.StringTools;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Parses the commands, and executes activities performed in the game.
@@ -706,6 +708,8 @@ public class CommandParser {
         try {
         
             if(world.getNetworkController().isActive()) {
+                
+                world.getNetworkController().getMessageSender().sendMessage(new Message(Message.STOP, new byte[0]));
 
                 world.getNetworkController().close();
                 world.getNetworkController().setActive(false);
@@ -721,6 +725,10 @@ public class CommandParser {
         } catch (NullPointerException ex){
             
             world.getOutputStream().printSpaced("Your game isn't shared...", WidthLimitedOutputStream.BOTH);
+            
+        } catch (IOException ex) {
+            
+            world.getOutputStream().printSpaced("There was a problem stopping your game... Oops...", WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -746,6 +754,8 @@ public class CommandParser {
         try {
         
             if(world.getNetworkController().isActive()) {
+                
+                world.getNetworkController().getMessageSender().sendMessage(new Message(Message.LOGOFF, new byte[0]));
 
                 world.getNetworkController().close();
                 world.getNetworkController().setActive(false);
@@ -759,9 +769,13 @@ public class CommandParser {
 
             }       
             
-        } catch (NullPointerException ex){
+        } catch (NullPointerException ex) {
             
             world.getOutputStream().printSpaced("You aren't playing a multiplayer game!", WidthLimitedOutputStream.BOTH);
+            
+        } catch (IOException ex) {
+            
+            world.getOutputStream().printSpaced("There was a problem disconnecting you from the game... Guess you're in limbo now!", WidthLimitedOutputStream.BOTH);
             
         }
         
