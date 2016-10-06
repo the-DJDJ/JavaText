@@ -139,16 +139,16 @@ public class World implements Serializable {
      */
     public void addLocation(Location... location){
         
-        for (int i = 0; i < location.length; i++) {
+        for (Location currentLocation : location) {
             
-            // Check if location list already contains location 
-            if (!locations.contains(location[i])){
-
+            // Check if location list already contains location
+            if (!locations.contains(currentLocation)) {
+                
                 // Location doesn't exist, and must be added
-                locations.add(location[i]);
-
-            }
+                locations.add(currentLocation);
             
+            }
+        
         }
     
     }
@@ -419,10 +419,10 @@ public class World implements Serializable {
     public World load(){
         
         // Reset all entity shadows
-        for (int i = 0; i < this.locations.size(); i++) {
+        for (Location location : this.locations) {
             
-            this.locations.get(i).removeEntityShadows();
-            
+            location.removeEntityShadows();
+        
         }
         
         return this;

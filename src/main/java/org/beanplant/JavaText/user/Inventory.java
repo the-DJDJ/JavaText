@@ -108,14 +108,14 @@ public class Inventory implements Serializable {
         
         int amount = 0;
         
-        for (int i = 0; i < this.inventory.size(); i++) {
+        for (Item currentItem : this.inventory) {
             
-            if(this.inventory.get(i).equals(item)){
+            if (currentItem.equals(item)) {
                 
                 amount++;
-                
-            }
             
+            }
+        
         }
         
         return amount;
@@ -131,14 +131,14 @@ public class Inventory implements Serializable {
         
         int maximum = Integer.MIN_VALUE;
         
-        for (int i = 0; i < this.condensedInventory.size(); i++) {
+        for (Item item : this.condensedInventory) {
             
-            if(this.getAmount(this.condensedInventory.get(i)) > maximum){
+            if (this.getAmount(item) > maximum) {
                 
-                maximum = this.getAmount(this.condensedInventory.get(i));
-                
+                maximum = this.getAmount(item);
+            
             }
-            
+        
         }
         
         return maximum;
@@ -169,14 +169,14 @@ public class Inventory implements Serializable {
         
         if(items != null){
         
-            for (int i = 0; i < items.size(); i++) {
-
-                if(this.contains(items.get(i))){
-
+            for (Item item : items) {
+                
+                if (this.contains(item)) {
+                    
                     return true;
-
+                
                 }
-
+            
             }
 
             return false;

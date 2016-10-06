@@ -115,19 +115,19 @@ public class LevelSelector {
     public World getSpecificWorld(String world) throws InstantiationException, IllegalAccessException {
         
         // Loop through all the worlds and see if the specified one exists
-        for (int i = 0; i < this.classes.length; i++) {
+        for (Object object : this.classes) {
             
             // Keep searching even if a level is invalid
             try {
-            
-                if(((World) ((Class) this.classes[i]).newInstance()).getTitle().equalsIgnoreCase(world.replaceAll("\"", ""))) {
-
-                    return ((World) ((Class) this.classes[i]).newInstance()).setOutputStreamWidth(outputWidth);
-
+                
+                if (((World) ((Class) object).newInstance()).getTitle().equalsIgnoreCase(world.replaceAll("\"", ""))) {
+                    
+                    return ((World) ((Class) object).newInstance()).setOutputStreamWidth(outputWidth);
+                
                 }
             
             } catch (InstantiationException | IllegalAccessException ex) {}
-            
+        
         }
         
         // If it doesn't, load a random world

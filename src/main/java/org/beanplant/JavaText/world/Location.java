@@ -108,14 +108,14 @@ public class Location implements Serializable {
      */
     public void removeExit (Exit... exit) {
         
-        for (int i = 0; i < exit.length; i++) {
+        for (Exit currentExit : exit) {
             
-            if (this.m_exits.contains(exit[i])) {
-                    
-                this.m_exits.remove(exit[i]);
+            if (this.m_exits.contains(currentExit)) {
+                
+                this.m_exits.remove(currentExit);
             
             }
-            
+        
         }
     
     }
@@ -191,14 +191,14 @@ public class Location implements Serializable {
      */
     public void removeItem(Item... item) {
         
-        for (int i = 0; i < item.length; i++) {
+        for (Item currentItem : item) {
             
-            if (this.m_items.contains(item[i])) {
-                    
-                this.m_items.remove(item[i]);
+            if (this.m_items.contains(currentItem)) {
+                
+                this.m_items.remove(currentItem);
             
             }
-            
+        
         }
     
     }
@@ -356,14 +356,14 @@ public class Location implements Serializable {
      */
     public void removeEntity(Entity... entity) {
         
-        for (int i = 0; i < entity.length; i++) {
+        for (Entity currentEntity : entity) {
             
-            if (this.entities.contains(entity[i])) {
-                    
-                this.entities.remove(entity[i]);
+            if (this.entities.contains(currentEntity)) {
+                
+                this.entities.remove(currentEntity);
             
             }
-            
+        
         }
     
     }

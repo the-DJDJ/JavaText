@@ -178,10 +178,10 @@ public class CommandParser {
             
         } else {
             
-            for (int i = 0; i < this.commandHandlers.size(); i++) {
+            for (CommandLockHandler commandHandler : this.commandHandlers) {
                 
-                this.commandHandlers.get(i).handleCommand("YES");
-                
+                commandHandler.handleCommand("YES");
+            
             }
             
         }
@@ -202,10 +202,10 @@ public class CommandParser {
             
         } else {
             
-            for (int i = 0; i < this.commandHandlers.size(); i++) {
+            for (CommandLockHandler commandHandler : this.commandHandlers) {
                 
-                this.commandHandlers.get(i).handleCommand("NO");
-                
+                commandHandler.handleCommand("NO");
+            
             }
             
         }
@@ -748,10 +748,10 @@ public class CommandParser {
      */
     private void triggerEvent(String event){
         
-        for(int i = 0; i < eventHandlers.size(); i++){
+        for (EventHandler eventHandler : eventHandlers) {
             
-            eventHandlers.get(i).fireEvent(event);
-            
+            eventHandler.fireEvent(event);
+        
         }
         
     }

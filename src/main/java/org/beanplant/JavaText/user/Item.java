@@ -243,14 +243,14 @@ public class Item implements Serializable {
      */
     public Item getItem(String name){
         
-        for (int i = 0; i < items.size(); i++) {
+        for (Item item : items) {
             
-            if(items.get(i).getName().equalsIgnoreCase(name)){
+            if (item.getName().equalsIgnoreCase(name)) {
                 
-                return items.get(i);
-                
+                return item;
+            
             }
-            
+        
         }
         
         return null;
@@ -282,14 +282,14 @@ public class Item implements Serializable {
      */
     public boolean isValidItem(String name){
         
-        for (int i = 0; i < items.size(); i++) {
+        for (Item item : items) {
             
-            if(items.get(i).getName().equalsIgnoreCase(name)){
+            if (item.getName().equalsIgnoreCase(name)) {
                 
                 return true;
-                
-            }
             
+            }
+        
         }
         
         return false;
