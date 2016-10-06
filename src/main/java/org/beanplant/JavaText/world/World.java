@@ -1,13 +1,14 @@
 package org.beanplant.JavaText.world;
 
-import org.beanplant.JavaText.io.WidthLimitedOutputStream;
-import org.beanplant.JavaText.user.Player;
-import org.beanplant.JavaText.util.StringTools;
-
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.beanplant.JavaText.io.WidthLimitedOutputStream;
+import org.beanplant.JavaText.net.NetworkController;
+import org.beanplant.JavaText.user.Player;
+import org.beanplant.JavaText.util.StringTools;
 
 /**
  * The player world. This houses all locations and all exits and stuffs.
@@ -30,6 +31,9 @@ public class World implements Serializable {
 
     /** Output stream for gaming system. */
     transient private WidthLimitedOutputStream output;
+    
+    /** The network controller for multiplayer games. */
+    transient private NetworkController networkController;
 
     /**
      * The default constructor. Assigns default values to all of the
