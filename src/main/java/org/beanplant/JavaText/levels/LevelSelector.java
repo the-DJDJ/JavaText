@@ -25,9 +25,6 @@ public class LevelSelector {
     /** The random world to load for the user. */
     private final Random random;
     
-    /** The world to load for the user. */
-    private World world;
-    
     /** The list for the class loaders to load additional classes. */
     private final List<ClassLoader> classLoadersList;
     
