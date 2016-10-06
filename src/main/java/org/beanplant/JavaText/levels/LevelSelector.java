@@ -71,7 +71,8 @@ public class LevelSelector {
                 .setScanners(new SubTypesScanner(false /* don't exclude Object.class */), new ResourcesScanner())
                 .setUrls(ClasspathHelper.forClassLoader(classLoadersList.toArray(new ClassLoader[0])))
                 .setUrls(ClasspathHelper.forJavaClassPath())
-                .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("Levels"))));
+                .filterInputsBy(new FilterBuilder().include(FilterBuilder.prefix("Levels"))
+                                                   .include(FilterBuilder.prefix("levels"))));
         
         classes = reflections.getSubTypesOf(World.class).toArray();
         
