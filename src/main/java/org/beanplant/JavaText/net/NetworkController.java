@@ -56,6 +56,28 @@ public class NetworkController {
     }
     
     /**
+     * Returns the MessageSender used in local multiplayer
+     * 
+     * @return the message sender
+     */
+    public MessageSender getMessageSender() {
+        
+        return this.sender;
+        
+    }
+    
+    /**
+     * Returns the MessageReceiver used in local multiplayer
+     * 
+     * @return the message receiver
+     */
+    public MessageReceiver getMessageReceiver() {
+        
+        return this.receiver;
+        
+    }
+    
+    /**
      * Returns whether or not this network controller is active.
      * 
      * @return whether or not this network controller is active.
