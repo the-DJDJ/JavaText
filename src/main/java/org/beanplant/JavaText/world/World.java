@@ -433,6 +433,28 @@ public class World implements Serializable {
         
     }
     
+    /**
+     * Returns the current network controller of this world.
+     * 
+     * @return the network controller
+     */
+    public NetworkController getNetworkController() {
+        
+        return this.networkController;
+        
+    }
+    
+    /**
+     * Updates or sets the network controller of this world.
+     * 
+     * @param networkController the new network controller
+     */
+    public void setNetworkController(NetworkController networkController) {
+        
+        this.networkController = networkController;
+        
+    }
+    
     
     /**
      * A simple method that sets the width of the output stream of the world,
