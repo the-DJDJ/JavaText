@@ -709,7 +709,7 @@ public class CommandParser {
         
             if(world.getNetworkController().isActive()) {
                 
-                world.getNetworkController().getMessageSender().sendMessage(new Message(Message.STOP, new byte[0]));
+                world.getNetworkController().getMessageSender().sendMessage(new Message(Message.STOP, null));
 
                 world.getNetworkController().close();
                 world.getNetworkController().setActive(false);
@@ -755,7 +755,7 @@ public class CommandParser {
         
             if(world.getNetworkController().isActive()) {
                 
-                world.getNetworkController().getMessageSender().sendMessage(new Message(Message.LOGOFF, new byte[0]));
+                world.getNetworkController().getMessageSender().sendMessage(new Message(Message.LOGOFF, null));
 
                 world.getNetworkController().close();
                 world.getNetworkController().setActive(false);
