@@ -22,6 +22,9 @@ public class CommandParser {
     /** The world that all commands are executed on. */
     private World world;
     
+    /** The previous world, used for when the user switches worlds. */
+    private World oldWorld;
+    
     /** The String that stores the command the user entered. */
     private String command = new String();
     
@@ -721,7 +724,26 @@ public class CommandParser {
      */
     private void disconnect(){
         
+        try {
         
+            if(world.getNetworkController().isActive()) {
+
+                world.getNetworkController().close();
+                world = oldWorld;
+                
+                world.getOutputStream().printSpaced("You have been disconnected from the server.", WidthLimitedOutputStream.BOTH);
+
+            } else {
+
+                world.getOutputStream().printSpaced("You aren't playing a multiplayer game!", WidthLimitedOutputStream.BOTH);
+
+            }       
+            
+        } catch (NullPointerException ex){
+            
+            world.getOutputStream().printSpaced("You aren't playing a multiplayer game!", WidthLimitedOutputStream.BOTH);
+            
+        }
         
     }
     
