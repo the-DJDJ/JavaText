@@ -28,7 +28,7 @@ public class NetworkController {
     private final MessageReceiver receiver;
     
     /** Whether or not this NetworkController is active. */
-    private boolean active;
+    private boolean active = false;
     
     /**
      * The default constructor. This initialises variables and prepares the
