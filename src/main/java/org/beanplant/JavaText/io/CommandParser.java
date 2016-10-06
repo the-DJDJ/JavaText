@@ -127,6 +127,23 @@ public class CommandParser {
                 case "KILL":
                     this.hit(arguments);
                     break;
+                    
+                case "HOST":
+                case "START":
+                    this.host(arguments);
+                    break;
+                    
+                case "STOP":
+                    this.stop();
+                    break;
+                    
+                case "CONNECT":
+                    this.connect(arguments);
+                    break;
+                    
+                case "DISCONNECT":
+                    this.disconnect();
+                    break;
 
                 case "SAVE":
                     this.save();
@@ -662,6 +679,49 @@ public class CommandParser {
             world.getOutputStream().printSpaced("Hit what?", WidthLimitedOutputStream.BOTH);
             
         }
+        
+    }
+    
+    /**
+     * The host command. This opens up a user's savegame to other people so that
+     * they can join the game later.
+     * 
+     * @param arguments The port on which to host the game
+     */
+    private void host(String arguments){
+        
+        
+        
+    }
+    
+    /**
+     * The stop command. This stops a hosted savegame and restores it to a
+     * standard singleplayer game
+     */
+    private void stop(){
+        
+        
+        
+    }
+    
+    /** 
+     * The connect command. This connects to a hosted game on a specific port
+     * 
+     * @param arguments The port to connect to
+     */
+    private void connect(String arguments){
+        
+        
+        
+    }
+    
+    /**
+     * The disconnect command. This disconnects from a save game and goes back
+     * to normal singleplayer
+     */
+    private void disconnect(){
+        
+        
         
     }
     
