@@ -28,7 +28,7 @@ public class NetworkController {
     private final MessageReceiver receiver;
     
     /** Whether or not this NetworkController is active. */
-    private boolean active = false;
+    private boolean active;
     
     /**
      * The default constructor. This initialises variables and prepares the
@@ -50,6 +50,8 @@ public class NetworkController {
         // Prepare the network
         this.sender = new MessageSender(PORT, HOST);
         this.receiver = new MessageReceiver(PORT, HOST);
+        
+        this.active = false;
         
     }
     
