@@ -27,6 +27,9 @@ public class NetworkController {
     /** The MessageReceiver for this network. */
     private final MessageReceiver receiver;
     
+    /** Whether or not this NetworkController is active. */
+    private boolean active;
+    
     /**
      * The default constructor. This initialises variables and prepares the
      * class for connecting to the network
@@ -47,6 +50,28 @@ public class NetworkController {
         // Prepare the network
         this.sender = new MessageSender(PORT, HOST);
         this.receiver = new MessageReceiver(PORT, HOST);
+        
+    }
+    
+    /**
+     * Returns whether or not this network controller is active.
+     * 
+     * @return whether or not this network controller is active.
+     */
+    public boolean isActive() {
+        
+        return this.active;
+        
+    }
+    
+    /**
+     * Sets whether or not this network controller is active.
+     * 
+     * @param active whether or not the controller is active
+     */
+    public void setActive(boolean active){
+        
+        this.active = active;
         
     }
     
