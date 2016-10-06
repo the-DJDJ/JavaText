@@ -29,10 +29,10 @@ public class CommandParser {
     private String arguments = new String();
     
     /** A list of all of the lock handlers currently active. */
-    private List<CommandLockHandler> commandHandlers = new ArrayList<>();
+    private final List<CommandLockHandler> commandHandlers = new ArrayList<>();
     
     /** A list of all the EventHandlers currently active. */
-    private static List<EventHandler> eventHandlers = new ArrayList<>();
+    private static final List<EventHandler> eventHandlers = new ArrayList<>();
     
     /**
      * The default constructor. This creates the environment in which to
