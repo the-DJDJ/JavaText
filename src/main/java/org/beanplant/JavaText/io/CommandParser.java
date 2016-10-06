@@ -703,7 +703,26 @@ public class CommandParser {
      */
     private void stop(){
         
+        try {
         
+            if(world.getNetworkController().isActive()) {
+
+                world.getNetworkController().close();
+                world.getNetworkController().setActive(false);
+                
+                world.getOutputStream().printSpaced("You are no longer sharing your world!", WidthLimitedOutputStream.BOTH);
+
+            } else {
+
+                world.getOutputStream().printSpaced("Your game isn't shared...", WidthLimitedOutputStream.BOTH);
+
+            }       
+            
+        } catch (NullPointerException ex){
+            
+            world.getOutputStream().printSpaced("Your game isn't shared...", WidthLimitedOutputStream.BOTH);
+            
+        }
         
     }
     
@@ -729,8 +748,9 @@ public class CommandParser {
             if(world.getNetworkController().isActive()) {
 
                 world.getNetworkController().close();
-                world = oldWorld;
+                world.getNetworkController().setActive(false);
                 
+                world = oldWorld;                
                 world.getOutputStream().printSpaced("You have been disconnected from the server.", WidthLimitedOutputStream.BOTH);
 
             } else {
