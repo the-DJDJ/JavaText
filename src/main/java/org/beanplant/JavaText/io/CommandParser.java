@@ -848,11 +848,7 @@ public class CommandParser {
      */
     public static void removeAllEventHandlers(){
         
-        for (int i = 0; i < eventHandlers.size(); i++) {
-            
-            eventHandlers.remove(0);
-            
-        }
+        eventHandlers.clear();
         
     }
     
