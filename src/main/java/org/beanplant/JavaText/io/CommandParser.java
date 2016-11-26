@@ -809,11 +809,7 @@ public class CommandParser {
      */
     public void removeAllLockHandlers(){
         
-        for (int i = 0; i < this.commandHandlers.size(); i++) {
-            
-            this.commandHandlers.remove(0);
-            
-        }
+        this.commandHandlers.clear();
         
     }
     
