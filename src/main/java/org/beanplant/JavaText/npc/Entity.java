@@ -48,6 +48,7 @@ public class Entity implements Serializable {
      * @param name The name of the entity
      * @param single The name given to a single unit of this entity
      * @param health The amount of health the entity has.
+     * @param avoidable Whether or not this entity is avoidable
      */
     public Entity(String name, String single, int health, boolean avoidable){
         
