@@ -1,11 +1,19 @@
 package org.beanplant.JavaText.util;
 
 /**
+ * The class that is responsible for building messages for users to read. This
+ * class can very easily be overridden if the developer wishes to add messages
+ * of their own, or if they want to add some translations.
  *
- * @author the_djdj
+ * @author the_DJDJ
  */
 public class MessageBuilder {
     
+    /**
+     * The message displayed for a 'Yes' interaction.
+     * 
+     * @return A feedback message.
+     */
     public static String getYesMessage() {
         
         String[] messages = {"Yes."};
@@ -14,6 +22,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed for a 'No' interaction.
+     * 
+     * @return A feedback message.
+     */
     public static String getNoMessage() {
         
         String[] messages = {"No."};
@@ -22,6 +35,14 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player moves but is attacked.
+     * 
+     * @param name The name parameter
+     * @param damage The damage parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getMovePlayerAttackedMessage(String name, int damage) {
         
         String[] messages = {"The " + name + " attacks you! You lose " + damage + " HP!",
@@ -31,6 +52,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player attempts an invalid move.
+     * 
+     * @return A feedback message.
+     */
     public static String getMoveInvalidMessage() {
         
         String[] messages = {"You cannot go that way.",
@@ -40,6 +66,13 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player's inventory is full.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getInventoryFullMessage(String name) {
         
         String[] messages = {"You don't have enough space left in your inventory to pick up the " + name.toLowerCase(),
@@ -49,6 +82,13 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player takes an item.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getTakeMessage(String name) {
         
         String[] messages = {"You picked up the " + name.toLowerCase(),
@@ -58,6 +98,13 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player attempts to take an unknown item.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getTakeUnknownMessage(String name) {
         
         String[] messages = {"I don't know what a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + " is.",
@@ -67,6 +114,14 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player attempts to take an item which is not
+     * present.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getTakeNotPresentMessage(String name) {
         
         String[] messages = {"I don't see " + name.toLowerCase() + " here...",
@@ -76,6 +131,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player leaves the item parameter null.
+     * 
+     * @return A feedback message.
+     */
     public static String getTakeNullMessage() {
         
         String[] messages = {"Take what?",
@@ -85,6 +145,13 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player drops an item.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getDropMessage(String name) {
         
         String[] messages = {"You dropped the " + name.toLowerCase() + "."};
@@ -93,6 +160,13 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player drops an item they do not have.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getDropUnownedMessage(String name) {
         
         String[] messages = {"You don't own " + name.toLowerCase(),
@@ -102,6 +176,13 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player drops an unknown item.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getDropUnknownMessage(String name) {
         
         String[] messages = {"I don't know what a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + " is.",
@@ -111,6 +192,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player leaves the item parameter null.
+     * 
+     * @return A feedback message.
+     */
     public static String getDropNullMessage() {
         
         String[] messages = {"Drop what?",
@@ -120,6 +206,13 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player inspects an item which is not there.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getInspectItemNotPresentMessage(String name) {
         
         String[] messages = {"I don't see " + name.toLowerCase() + " here.",
@@ -129,6 +222,13 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player inspects an unknown item.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getInspectUnknownMessage(String name) {
         
         String[] messages = {"What is a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + "?",
@@ -138,6 +238,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player leaves the item parameter null.
+     * 
+     * @return A feedback message.
+     */
     public static String getInspectNullMessage() {
         
         String[] messages = {"Inspect what?",
@@ -147,6 +252,13 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player checks their health.
+     * 
+     * @param health The player's health.
+     * 
+     * @return A feedback message.
+     */
     public static String getHealthMessage(int health) {
         
         String[] messages = {"You currently have " + health + "HP.",
@@ -156,6 +268,14 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player attacks an entity which is not
+     * present.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getEntityNotPresentMessage(String name) {
         
         String[] messages = {"Hmm, there doesn't seem to be a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + " here...",
@@ -166,6 +286,14 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player attacks with a weapon they do not
+     * have.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getWeaponUnownedMessage(String name) {
         
         String[] messages = {"You don't have a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + ".",
@@ -175,6 +303,13 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player attacks with an unknown message.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getWeaponUnknownMessage(String name) {
         
         String[] messages = {"I don't know what a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + " is.",
@@ -184,6 +319,14 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player attacks an entity successfully.
+     * 
+     * @param name The name parameter
+     * @param damage The damage parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getHitHurtMessage(String name, int damage) {
         
         String[] messages = {"You dealth " + damage + " HP to the " + name.toLowerCase() + ".",
@@ -193,6 +336,13 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player kills an entity.
+     * 
+     * @param name The name parameter
+     * 
+     * @return A feedback message.
+     */
     public static String getHitKillMessage(String name) {
         
         String[] messages = {"You killed the " + name.toLowerCase() + ".",
@@ -203,6 +353,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player leaves the item parameter nu;;.
+     * 
+     * @return A feedback message.
+     */
     public static String getHitNullMessage() {
         
         String[] messages = {"Hit what?",
@@ -212,6 +367,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when the host disconnects from a server.
+     * 
+     * @return A feedback message.
+     */
     public static String getHostDisconnectSuccessMessage() {
         
         String[] messages = {"You are no longer sharing your world!",
@@ -221,6 +381,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a game is not hosted.
+     * 
+     * @return A feedback message.
+     */
     public static String getHostNotSharingErrorMessage() {
         
         String[] messages = {"Your game isn't shared...",
@@ -231,6 +396,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when the host disconnects from a game.
+     * 
+     * @return A feedback message.
+     */
     public static String getHostDisconnectErrorMessage() {
         
         String[] messages = {"There was a problem stopping your game... Oops...",
@@ -240,6 +410,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player disconnects from a game.
+     * 
+     * @return A feedback message.
+     */
     public static String getMultiplayerDisconnectSuccessMessage() {
         
         String[] messages = {"You have been disconnected from the server.",
@@ -250,6 +425,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player is not in a multiplayer game.
+     * 
+     * @return A feedback message.
+     */
     public static String getMultiplayerNotInGameErrorMessage() {
         
         String[] messages = {"You aren't playing a multiplayer game!",
@@ -259,6 +439,12 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when something goes wrong disconnecting from a
+     * game.
+     * 
+     * @return A feedback message.
+     */
     public static String getMultiplayerDisconnectErrorMessage() {
         
         String[] messages = {"There was a problem disconnecting you from the game... Guess you're in limbo now!",
@@ -268,6 +454,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a game is loaded.
+     * 
+     * @return A feedback message.
+     */
     public static String getGameLoadMessage() {
         
         String[] messages = {"Your game has been loaded!",
@@ -277,6 +468,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player wants help.
+     * 
+     * @return A feedback message.
+     */
     public static String getHelpMessage() {
         
         String[] messages = {"Ummm, no.",
@@ -286,6 +482,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player quits.
+     * 
+     * @return A feedback message.
+     */
     public static String getQuitMessage() {
         
         String[] messages = {"Hmmmph, good riddance.",
@@ -296,6 +497,11 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * The message displayed when a player enters an unknown command.
+     * 
+     * @return A feedback message.
+     */
     public static String getUnknownCommandMessage() {
         
         String[] messages = {"Hmm, I expect to see a verb as the first word...",
@@ -305,6 +511,14 @@ public class MessageBuilder {
         
     }
     
+    /**
+     * A simple method for generating a random index between two integers, one
+     * of which is specified.
+     * 
+     * @param maximum The maximum number to generate
+     * 
+     * @return a random number
+     */
     private static int getRandomIndex(int maximum) {
         
         return (int) (Math.random() * maximum);
