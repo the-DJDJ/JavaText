@@ -12,7 +12,7 @@ import org.beanplant.JavaText.world.exit.Exit;
 import org.beanplant.JavaText.world.World;
 import org.beanplant.JavaText.user.Item;
 import org.beanplant.JavaText.user.ItemStack;
-import org.beanplant.JavaText.util.StringTools;
+import org.beanplant.JavaText.util.MessageBuilder;
 
 /**
  * Parses the commands, and executes activities performed in the game.
@@ -196,7 +196,7 @@ public class CommandParser {
         
         if(this.commandHandlers.isEmpty()) {
             
-            world.getOutputStream().printSpaced("No.", WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(MessageBuilder.getNoMessage(), WidthLimitedOutputStream.BOTH);
             
         } else {
             
@@ -220,7 +220,7 @@ public class CommandParser {
         
         if(this.commandHandlers.isEmpty()) {
             
-            world.getOutputStream().printSpaced("Yes.", WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(MessageBuilder.getYesMessage(), WidthLimitedOutputStream.BOTH);
             
         } else {
             
@@ -272,12 +272,12 @@ public class CommandParser {
                     
                     if(world.getPlayer().getLocation().getBoss().getName().contains(" ")){
                         
-                        world.getOutputStream().printSpaced("The " + world.getPlayer().getLocation().getBoss().getName().toLowerCase().substring(world.getPlayer().getLocation().getBoss().getName().lastIndexOf(" ")) + " attacks you! You lose " + world.getPlayer().getLocation().getBoss().getDamage() + "HP!", WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced(MessageBuilder.getMovePlayerAttackedMessage(world.getPlayer().getLocation().getBoss().getName().toLowerCase().substring(world.getPlayer().getLocation().getBoss().getName().lastIndexOf(" ")), world.getPlayer().getLocation().getBoss().getDamage()), WidthLimitedOutputStream.BOTH);
                     
                         
                     } else {
                         
-                        world.getOutputStream().printSpaced("The " + world.getPlayer().getLocation().getBoss().getName().toLowerCase() + " attacks you! You lose " + world.getPlayer().getLocation().getBoss().getDamage() + "HP!", WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced(MessageBuilder.getMovePlayerAttackedMessage(world.getPlayer().getLocation().getBoss().getName().toLowerCase(), world.getPlayer().getLocation().getBoss().getDamage()), WidthLimitedOutputStream.BOTH);
                         
                     }
                     
@@ -293,7 +293,7 @@ public class CommandParser {
         
         if(!valid){
             
-            world.getOutputStream().printSpaced("You cannot go that way.", WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(MessageBuilder.getMoveInvalidMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -342,11 +342,11 @@ public class CommandParser {
                     
                 }
             
-                world.getOutputStream().printSpaced("You picked up the " + item.getName().toLowerCase(), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getTakeMessage(item.getName()), WidthLimitedOutputStream.BOTH);
                 
             } else {
                 
-                world.getOutputStream().printSpaced("You don't have enough space left in your inventory to pick up the " + item.getName().toLowerCase(), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getInventoryFullMessage(item.getName()), WidthLimitedOutputStream.BOTH);
                 
             }
             
@@ -354,15 +354,15 @@ public class CommandParser {
             
             if(arguments.isEmpty()){
                 
-                world.getOutputStream().printSpaced("Take what?", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getTakeNullMessage(), WidthLimitedOutputStream.BOTH);
                 
             } else if (item == null) {
                 
-                world.getOutputStream().printSpaced("I don't know what a" + (StringTools.startsWithVowel(arguments) ? "n " : " ") + arguments.toLowerCase() + " is.", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getTakeUnknownMessage(arguments), WidthLimitedOutputStream.BOTH);
                 
             } else {
             
-                world.getOutputStream().printSpaced("I don't see " + item.getSingleName() + " here...", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getTakeNotPresentMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
             
             }
             
@@ -417,21 +417,21 @@ public class CommandParser {
                 
             }
             
-            world.getOutputStream().printSpaced("You dropped the " + item.getName().toLowerCase(), WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(MessageBuilder.getDropMessage(item.getName()), WidthLimitedOutputStream.BOTH);
             
         } else {  
             
             if(arguments.isEmpty()){
                 
-                world.getOutputStream().printSpaced("Drop what?", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getDropNullMessage(), WidthLimitedOutputStream.BOTH);
                 
             } else if (item != null) {
             
-                world.getOutputStream().printSpaced("You don't own " + item.getSingleName(), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getDropUnownedMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
             
             } else {
             
-                world.getOutputStream().printSpaced("I don't know what a" + (StringTools.startsWithVowel(arguments) ? "n " : " ") + arguments.toLowerCase() + " is.", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getDropUnknownMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
             
             }   
         
@@ -484,7 +484,7 @@ public class CommandParser {
                     
                     if(!present){
 
-                        world.getOutputStream().printSpaced("I don't see " + item.getSingleName() + " here.", WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced(MessageBuilder.getInspectItemNotPresentMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
                     
                     }
 
@@ -492,13 +492,13 @@ public class CommandParser {
             
             } else {
                 
-                world.getOutputStream().printSpaced("What is a " + arguments.toLowerCase() + "?", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getInspectUnknownMessage(arguments), WidthLimitedOutputStream.BOTH);
                 
             }
             
         } else {
             
-            world.getOutputStream().printSpaced("Inspect what?", WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(MessageBuilder.getInspectNullMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -568,7 +568,7 @@ public class CommandParser {
      */
     private void health(){
         
-        world.getOutputStream().printSpaced("You currently have " + world.getPlayer().getHealth() + "HP.", WidthLimitedOutputStream.BOTH);
+        world.getOutputStream().printSpaced(MessageBuilder.getHealthMessage(world.getPlayer().getHealth()), WidthLimitedOutputStream.BOTH);
         
     }
     
@@ -611,7 +611,7 @@ public class CommandParser {
             // Check that it has been found
             if(entity == null){
                     
-                world.getOutputStream().printSpaced("Hmm, there doesn't seem to be a " + name.toLowerCase() + " here...", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getEntityNotPresentMessage(name), WidthLimitedOutputStream.BOTH);
                     
             } else {
                 
@@ -636,24 +636,24 @@ public class CommandParser {
                             // Check if the entity is still alive
                             if(entity.getHealth() > 0){
 
-                                world.getOutputStream().printSpaced("You dealt " + damage + "HP to the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
+                                world.getOutputStream().printSpaced(MessageBuilder.getHitHurtMessage(name, damage), WidthLimitedOutputStream.BOTH);
 
                             } else {
-
-                                world.getOutputStream().printSpaced("You killed the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
+                                
+                                world.getOutputStream().printSpaced(MessageBuilder.getHitKillMessage(name), WidthLimitedOutputStream.BOTH);
                                 world.getPlayer().getLocation().getEntities().remove(entity);
 
                             }
 
                         } else {
                             
-                            world.getOutputStream().printSpaced("You don't have a " + (StringTools.startsWithVowel(itemName) ? "n " : " ") + itemName + ".", WidthLimitedOutputStream.BOTH);
+                            world.getOutputStream().printSpaced(MessageBuilder.getWeaponUnownedMessage(itemName), WidthLimitedOutputStream.BOTH);
                             
                         }
                     
                     } else {
                         
-                        world.getOutputStream().printSpaced("I don't know what a" + (StringTools.startsWithVowel(itemName) ? "n " : " ") + itemName + " is.", WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced(MessageBuilder.getWeaponUnknownMessage(itemName), WidthLimitedOutputStream.BOTH);
                         
                     }
                     
@@ -664,12 +664,12 @@ public class CommandParser {
 
                     // Check if the entity is still alive
                     if(entity.getHealth() > 0){
-
-                        world.getOutputStream().printSpaced("You dealt " + damage + "HP to the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
+                        
+                        world.getOutputStream().printSpaced(MessageBuilder.getHitHurtMessage(name, damage), WidthLimitedOutputStream.BOTH);
 
                     } else {
-
-                        world.getOutputStream().printSpaced("You killed the " + name.toLowerCase() + ".", WidthLimitedOutputStream.BOTH);
+                        
+                        world.getOutputStream().printSpaced(MessageBuilder.getHitKillMessage(name.toLowerCase()), WidthLimitedOutputStream.BOTH);
                         world.getPlayer().getLocation().getEntities().remove(entity);
 
                     }
@@ -680,8 +680,8 @@ public class CommandParser {
                     
             
         } else {
-            
-            world.getOutputStream().printSpaced("Hit what?", WidthLimitedOutputStream.BOTH);
+                        
+            world.getOutputStream().printSpaced(MessageBuilder.getHitNullMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -714,21 +714,21 @@ public class CommandParser {
                 world.getNetworkController().close();
                 world.getNetworkController().setActive(false);
                 
-                world.getOutputStream().printSpaced("You are no longer sharing your world!", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getHostDisconnectSuccessMessage(), WidthLimitedOutputStream.BOTH);
 
             } else {
 
-                world.getOutputStream().printSpaced("Your game isn't shared...", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getHostNotSharingErrorMessage(), WidthLimitedOutputStream.BOTH);
 
             }       
             
         } catch (NullPointerException ex){
             
-            world.getOutputStream().printSpaced("Your game isn't shared...", WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(MessageBuilder.getHostNotSharingErrorMessage(), WidthLimitedOutputStream.BOTH);
             
         } catch (IOException ex) {
             
-            world.getOutputStream().printSpaced("There was a problem stopping your game... Oops...", WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(MessageBuilder.getHostDisconnectErrorMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -759,23 +759,23 @@ public class CommandParser {
 
                 world.getNetworkController().close();
                 world.getNetworkController().setActive(false);
-                
+                                
                 world = oldWorld;                
-                world.getOutputStream().printSpaced("You have been disconnected from the server.", WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(MessageBuilder.getMultiplayerDisconnectSuccessMessage(), WidthLimitedOutputStream.BOTH);
 
             } else {
-
-                world.getOutputStream().printSpaced("You aren't playing a multiplayer game!", WidthLimitedOutputStream.BOTH);
+                
+                world.getOutputStream().printSpaced(MessageBuilder.getMultiplayerNotInGameErrorMessage(), WidthLimitedOutputStream.BOTH);
 
             }       
             
         } catch (NullPointerException ex) {
             
-            world.getOutputStream().printSpaced("You aren't playing a multiplayer game!", WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(MessageBuilder.getMultiplayerNotInGameErrorMessage(), WidthLimitedOutputStream.BOTH);
             
         } catch (IOException ex) {
             
-            world.getOutputStream().printSpaced("There was a problem disconnecting you from the game... Guess you're in limbo now!", WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(MessageBuilder.getMultiplayerDisconnectErrorMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -872,10 +872,10 @@ public class CommandParser {
         
         oldWorld = world;
         world = GameData.load(world);
-        
+                
         if(world != null){
             
-            world.getOutputStream().printSpaced("Your game has been loaded!", WidthLimitedOutputStream.ABOVE);
+            world.getOutputStream().printSpaced(MessageBuilder.getGameLoadMessage(), WidthLimitedOutputStream.ABOVE);
             world.getOutputStream().printAcross("=");
             
             world.showLocation(false);
@@ -888,8 +888,8 @@ public class CommandParser {
      * The help command. Let's see what happens when users run me!
      */
     private void help(){
-        
-        world.getOutputStream().printSpaced("Ummm, no.", WidthLimitedOutputStream.BOTH);
+                
+        world.getOutputStream().printSpaced(MessageBuilder.getHelpMessage(), WidthLimitedOutputStream.BOTH);
         
     }
     
@@ -898,8 +898,8 @@ public class CommandParser {
      * application.
      */
     private void quit(){
-        
-        world.getOutputStream().printSpaced("Hmmmph, good riddance.", WidthLimitedOutputStream.BOTH);
+                
+        world.getOutputStream().printSpaced(MessageBuilder.getQuitMessage(), WidthLimitedOutputStream.BOTH);
         
         System.exit(0);
         
@@ -911,7 +911,7 @@ public class CommandParser {
      */
     private void unknown(){
         
-        world.getOutputStream().printSpaced("Hmm, I expect to see a verb as the first word...", WidthLimitedOutputStream.BOTH); 
+        world.getOutputStream().printSpaced(MessageBuilder.getUnknownCommandMessage(), WidthLimitedOutputStream.BOTH); 
     
     }
     
