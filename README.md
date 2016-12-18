@@ -9,7 +9,7 @@ Oh, and of course, don't forget to send us a copy of your awesome game!
 
 First of all, you're gonna need a copy of our engine:
 ```shell
-git clone https://github.com/the-DJDJ/JavaText.git
+$ git clone https://github.com/the-DJDJ/JavaText.git
 ```
 
 Now comes the tricky bit; you're gonna need to extend our level class to create your level. Create your new class in 
