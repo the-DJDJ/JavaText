@@ -53,7 +53,7 @@ To create your first location, you need to create a new instance of the `Locatio
 ```java
 Location place = new Location("Forest pathway", "A winding pathway that leads you through the woods");
 ```
-For a location to lead somewhere, it needs an `Exit`. An Exit is a sort of tunnel linking two locations. How it works is you add an exit to a location, and then give the exit someplace to go. One location can have many exits, so it's important that you specify which way the exit goes. Sound confusing? Here's how its done:
+For a location to lead somewhere, it needs an `Exit`. An Exit is sort of like a tunnel linking two locations. To get them working, you first add an exit to a location, and then give the exit someplace to go. One location can have many exits, so it's important that you specify which way the exit goes. Sound confusing? Here's how its done:
 ```java
 // Create your exit
 Exit exit = new Exit(Exit.SOUTHEAST, secondLocation);
