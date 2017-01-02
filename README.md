@@ -136,4 +136,4 @@ These are pretty self-explanatory. An entity collection is literally a collectio
 ```java
 location.addEntityShadow(entityShadow);
 ```
-An EntityShadow is a 'shadow' of a MobileEntity, that is, they are left behind when MobileEntities move and only persist for one turn. They are useful for tracking things.
+An EntityShadow is a 'shadow' of a MobileEntity, that is, they are left behind when MobileEntities move and only persist for one turn. They are useful for tracking things. You don't have to worry about adding these, unless you really want to, as they are automatically added whenever a MobileEntity moves
