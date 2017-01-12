@@ -34,7 +34,7 @@ public class MessageBuilder {
         return messages[getRandomIndex(messages.length)];
         
     }
-    
+        
     /**
      * The message displayed when a player moves but is attacked.
      * 
@@ -77,6 +77,21 @@ public class MessageBuilder {
         
         String[] messages = {"You don't have enough space left in your inventory to pick up the " + name.toLowerCase(),
                              "Your inventory looks a little bit full for that."};
+        
+        return messages[getRandomIndex(messages.length)];
+        
+    }
+    
+    /**
+     * The message displayed when the user's inventory is empty.
+     * 
+     * @return A feedback message.
+     */
+    public static String getEmptyInventoryMessage() {
+        
+        String[] messages = {"You don't have anything!",
+                             "You seem a little broke to me...",
+                             "You do actually have anything?"};
         
         return messages[getRandomIndex(messages.length)];
         

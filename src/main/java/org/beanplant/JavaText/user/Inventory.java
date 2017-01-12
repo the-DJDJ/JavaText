@@ -3,6 +3,7 @@ package org.beanplant.JavaText.user;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.beanplant.JavaText.util.MessageBuilder;
 
 /**
  * Stores the user inventory of items. Everything that the user holds or can use
@@ -212,7 +213,7 @@ public class Inventory implements Serializable {
         
         } else {
             
-            string += "You don't have anything!";
+            string += MessageBuilder.getEmptyInventoryMessage();
             
         }
         
