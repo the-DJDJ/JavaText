@@ -538,7 +538,7 @@ public class CommandParser {
 
                         } else {
 
-                            world.getOutputStream().printSpaced("You'll need " + world.getPlayer().getLocation().getExits().get(i).getType().getKey().get(0).getSingleName() + " to do that", WidthLimitedOutputStream.BOTH);
+                            world.getOutputStream().printSpaced(MessageBuilder.getUnlockKeyNotOwnedMessage(world.getPlayer().getLocation().getExits().get(i).getType().getKey().get(0).getSingleName()), WidthLimitedOutputStream.BOTH);
 
                         }
                     

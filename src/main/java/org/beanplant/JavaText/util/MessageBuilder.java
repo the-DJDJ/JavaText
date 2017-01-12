@@ -302,6 +302,23 @@ public class MessageBuilder {
     }
     
     /**
+     * The message displayed when the player attempts to unlock an exit without
+     * having the required tools.
+     * 
+     * @param name The name of the item the player requires.
+     * 
+     * @return A feedback message 
+     */
+    public static String getUnlockKeyNotOwnedMessage(String name) {
+        
+        String[] messages = {"You'll need " + name + " to do that.",
+                             "You can't do that without " + name};
+        
+        return messages[getRandomIndex(messages.length)];
+        
+    }
+    
+    /**
      * The message displayed when a player attacks with a weapon they do not
      * have.
      * 
