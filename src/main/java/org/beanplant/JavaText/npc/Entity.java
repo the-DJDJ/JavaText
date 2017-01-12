@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  * @author the_DJDJ
  */
-public class Entity implements Serializable {
+public class Entity implements Serializable, Cloneable {
     
     /** The name of the entity. */
     private String name;
@@ -267,6 +267,13 @@ public class Entity implements Serializable {
     public boolean isCollection(){
         
         return false;
+        
+    }
+    
+    @Override
+    public Entity clone() {
+        
+        return new Entity(this);
         
     }
     

@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  * @author the_DJDJ
  */
-public class Boss extends Entity implements Serializable {
+public class Boss extends Entity implements Serializable, Cloneable {
     
     public static final Boss wombat = new Boss("wombat", "Verocious Wombat", 250, 5, true);
     
@@ -53,6 +53,21 @@ public class Boss extends Entity implements Serializable {
     }
     
     /**
+     * A constructor used for cloning a Boss. This is useful for when you need a
+     * clone of a Boss, for some or other reason.
+     * 
+     * @param boss The boss to clone
+     */
+    public Boss(Boss boss) {
+        
+        super(boss.getName(), boss.getSingleName(), boss.getHealth(), boss.isAvoidable());
+                
+        this.aggressive = boss.aggressive;
+        this.damage = boss.damage;
+        
+    }
+    
+    /**
      * Returns the amount of damage that the boss does per hit
      * 
      * @return the amount of damage that the boss does per hit
@@ -93,6 +108,13 @@ public class Boss extends Entity implements Serializable {
     public void setAggressive(boolean aggressive){
         
         this.aggressive = aggressive;
+        
+    }
+    
+    @Override
+    public Boss clone() {
+        
+        return new Boss(this);
         
     }
     
