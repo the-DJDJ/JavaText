@@ -3,7 +3,6 @@ package org.beanplant.JavaText.user;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import org.beanplant.JavaText.util.MessageBuilder;
 
 /**
  * Stores the user inventory of items. Everything that the user holds or can use
@@ -206,26 +205,18 @@ public class Inventory implements Serializable {
         
         String string = new String();
         
-        if(!this.condensedInventory.isEmpty()){
-            
-            int length = String.valueOf(this.getMaximumAmount()).length();
+        int length = String.valueOf(this.getMaximumAmount()).length();
         
-            for (int i = 0; i < this.condensedInventory.size(); i++) {
+        for (int i = 0; i < this.condensedInventory.size(); i++) {
 
-                string += String.format("%-" + length + "dx %s", this.getAmount(this.condensedInventory.get(i)), this.condensedInventory.get(i).getName());
+            string += String.format("%-" + length + "dx %s", this.getAmount(this.condensedInventory.get(i)), this.condensedInventory.get(i).getName());
 
-                if(i != this.condensedInventory.size() - 1){
+            if(i != this.condensedInventory.size() - 1){
 
-                    string += " <token:newline> ";
-
-                }
+                string += " <token:newline> ";
 
             }
-        
-        } else {
-            
-            string += MessageBuilder.getEmptyInventoryMessage();
-            
+
         }
         
         return string;

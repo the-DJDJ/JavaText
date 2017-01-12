@@ -12,7 +12,6 @@ import org.beanplant.JavaText.world.exit.Exit;
 import org.beanplant.JavaText.world.World;
 import org.beanplant.JavaText.user.Item;
 import org.beanplant.JavaText.user.ItemStack;
-import org.beanplant.JavaText.util.MessageBuilder;
 
 /**
  * Parses the commands, and executes activities performed in the game.
@@ -196,7 +195,7 @@ public class CommandParser {
         
         if(this.commandHandlers.isEmpty()) {
             
-            world.getOutputStream().printSpaced(MessageBuilder.getNoMessage(), WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getNoMessage(), WidthLimitedOutputStream.BOTH);
             
         } else {
             
@@ -220,7 +219,7 @@ public class CommandParser {
         
         if(this.commandHandlers.isEmpty()) {
             
-            world.getOutputStream().printSpaced(MessageBuilder.getYesMessage(), WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getYesMessage(), WidthLimitedOutputStream.BOTH);
             
         } else {
             
@@ -272,12 +271,12 @@ public class CommandParser {
                     
                     if(world.getPlayer().getLocation().getBoss().getName().contains(" ")){
                         
-                        world.getOutputStream().printSpaced(MessageBuilder.getMovePlayerAttackedMessage(world.getPlayer().getLocation().getBoss().getName().toLowerCase().substring(world.getPlayer().getLocation().getBoss().getName().lastIndexOf(" ")), world.getPlayer().getLocation().getBoss().getDamage()), WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced(world.getMessageBuilder().getMovePlayerAttackedMessage(world.getPlayer().getLocation().getBoss().getName().toLowerCase().substring(world.getPlayer().getLocation().getBoss().getName().lastIndexOf(" ")), world.getPlayer().getLocation().getBoss().getDamage()), WidthLimitedOutputStream.BOTH);
                     
                         
                     } else {
                         
-                        world.getOutputStream().printSpaced(MessageBuilder.getMovePlayerAttackedMessage(world.getPlayer().getLocation().getBoss().getName().toLowerCase(), world.getPlayer().getLocation().getBoss().getDamage()), WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced(world.getMessageBuilder().getMovePlayerAttackedMessage(world.getPlayer().getLocation().getBoss().getName().toLowerCase(), world.getPlayer().getLocation().getBoss().getDamage()), WidthLimitedOutputStream.BOTH);
                         
                     }
                     
@@ -293,7 +292,7 @@ public class CommandParser {
         
         if(!valid){
             
-            world.getOutputStream().printSpaced(MessageBuilder.getMoveInvalidMessage(), WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getMoveInvalidMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -342,11 +341,11 @@ public class CommandParser {
                     
                 }
             
-                world.getOutputStream().printSpaced(MessageBuilder.getTakeMessage(item.getName()), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getTakeMessage(item.getName()), WidthLimitedOutputStream.BOTH);
                 
             } else {
                 
-                world.getOutputStream().printSpaced(MessageBuilder.getInventoryFullMessage(item.getName()), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getInventoryFullMessage(item.getName()), WidthLimitedOutputStream.BOTH);
                 
             }
             
@@ -354,15 +353,15 @@ public class CommandParser {
             
             if(arguments.isEmpty()){
                 
-                world.getOutputStream().printSpaced(MessageBuilder.getTakeNullMessage(), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getTakeNullMessage(), WidthLimitedOutputStream.BOTH);
                 
             } else if (item == null) {
                 
-                world.getOutputStream().printSpaced(MessageBuilder.getTakeUnknownMessage(arguments), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getTakeUnknownMessage(arguments), WidthLimitedOutputStream.BOTH);
                 
             } else {
             
-                world.getOutputStream().printSpaced(MessageBuilder.getTakeNotPresentMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getTakeNotPresentMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
             
             }
             
@@ -417,21 +416,21 @@ public class CommandParser {
                 
             }
             
-            world.getOutputStream().printSpaced(MessageBuilder.getDropMessage(item.getName()), WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getDropMessage(item.getName()), WidthLimitedOutputStream.BOTH);
             
         } else {  
             
             if(arguments.isEmpty()){
                 
-                world.getOutputStream().printSpaced(MessageBuilder.getDropNullMessage(), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getDropNullMessage(), WidthLimitedOutputStream.BOTH);
                 
             } else if (item != null) {
             
-                world.getOutputStream().printSpaced(MessageBuilder.getDropUnownedMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getDropUnownedMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
             
             } else {
             
-                world.getOutputStream().printSpaced(MessageBuilder.getDropUnknownMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getDropUnknownMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
             
             }   
         
@@ -445,7 +444,15 @@ public class CommandParser {
      */
     private void inventory(){
         
-        world.getOutputStream().printSpaced(world.getPlayer().getInventory().toString(), WidthLimitedOutputStream.BOTH);
+        if(world.getPlayer().getInventory().isEmpty()) {
+            
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getEmptyInventoryMessage(), WidthLimitedOutputStream.BOTH);
+            
+        } else {
+        
+            world.getOutputStream().printSpaced(world.getPlayer().getInventory().toString(), WidthLimitedOutputStream.BOTH);
+        
+        }
         
     }
     
@@ -484,7 +491,7 @@ public class CommandParser {
                     
                     if(!present){
 
-                        world.getOutputStream().printSpaced(MessageBuilder.getInspectItemNotPresentMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced(world.getMessageBuilder().getInspectItemNotPresentMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
                     
                     }
 
@@ -492,13 +499,13 @@ public class CommandParser {
             
             } else {
                 
-                world.getOutputStream().printSpaced(MessageBuilder.getInspectUnknownMessage(arguments), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getInspectUnknownMessage(arguments), WidthLimitedOutputStream.BOTH);
                 
             }
             
         } else {
             
-            world.getOutputStream().printSpaced(MessageBuilder.getInspectNullMessage(), WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getInspectNullMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -538,7 +545,7 @@ public class CommandParser {
 
                         } else {
 
-                            world.getOutputStream().printSpaced(MessageBuilder.getUnlockKeyNotOwnedMessage(world.getPlayer().getLocation().getExits().get(i).getType().getKey().get(0).getSingleName()), WidthLimitedOutputStream.BOTH);
+                            world.getOutputStream().printSpaced(world.getMessageBuilder().getUnlockKeyNotOwnedMessage(world.getPlayer().getLocation().getExits().get(i).getType().getKey().get(0).getSingleName()), WidthLimitedOutputStream.BOTH);
 
                         }
                     
@@ -568,7 +575,7 @@ public class CommandParser {
      */
     private void health(){
         
-        world.getOutputStream().printSpaced(MessageBuilder.getHealthMessage(world.getPlayer().getHealth()), WidthLimitedOutputStream.BOTH);
+        world.getOutputStream().printSpaced(world.getMessageBuilder().getHealthMessage(world.getPlayer().getHealth()), WidthLimitedOutputStream.BOTH);
         
     }
     
@@ -611,7 +618,7 @@ public class CommandParser {
             // Check that it has been found
             if(entity == null){
                     
-                world.getOutputStream().printSpaced(MessageBuilder.getEntityNotPresentMessage(name), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getEntityNotPresentMessage(name), WidthLimitedOutputStream.BOTH);
                     
             } else {
                 
@@ -636,24 +643,24 @@ public class CommandParser {
                             // Check if the entity is still alive
                             if(entity.getHealth() > 0){
 
-                                world.getOutputStream().printSpaced(MessageBuilder.getHitHurtMessage(name, damage), WidthLimitedOutputStream.BOTH);
+                                world.getOutputStream().printSpaced(world.getMessageBuilder().getHitHurtMessage(name, damage), WidthLimitedOutputStream.BOTH);
 
                             } else {
                                 
-                                world.getOutputStream().printSpaced(MessageBuilder.getHitKillMessage(name), WidthLimitedOutputStream.BOTH);
+                                world.getOutputStream().printSpaced(world.getMessageBuilder().getHitKillMessage(name), WidthLimitedOutputStream.BOTH);
                                 world.getPlayer().getLocation().getEntities().remove(entity);
 
                             }
 
                         } else {
                             
-                            world.getOutputStream().printSpaced(MessageBuilder.getWeaponUnownedMessage(itemName), WidthLimitedOutputStream.BOTH);
+                            world.getOutputStream().printSpaced(world.getMessageBuilder().getWeaponUnownedMessage(itemName), WidthLimitedOutputStream.BOTH);
                             
                         }
                     
                     } else {
                         
-                        world.getOutputStream().printSpaced(MessageBuilder.getWeaponUnknownMessage(itemName), WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced(world.getMessageBuilder().getWeaponUnknownMessage(itemName), WidthLimitedOutputStream.BOTH);
                         
                     }
                     
@@ -665,11 +672,11 @@ public class CommandParser {
                     // Check if the entity is still alive
                     if(entity.getHealth() > 0){
                         
-                        world.getOutputStream().printSpaced(MessageBuilder.getHitHurtMessage(name, damage), WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced(world.getMessageBuilder().getHitHurtMessage(name, damage), WidthLimitedOutputStream.BOTH);
 
                     } else {
                         
-                        world.getOutputStream().printSpaced(MessageBuilder.getHitKillMessage(name.toLowerCase()), WidthLimitedOutputStream.BOTH);
+                        world.getOutputStream().printSpaced(world.getMessageBuilder().getHitKillMessage(name.toLowerCase()), WidthLimitedOutputStream.BOTH);
                         world.getPlayer().getLocation().getEntities().remove(entity);
 
                     }
@@ -681,7 +688,7 @@ public class CommandParser {
             
         } else {
                         
-            world.getOutputStream().printSpaced(MessageBuilder.getHitNullMessage(), WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getHitNullMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -714,21 +721,21 @@ public class CommandParser {
                 world.getNetworkController().close();
                 world.getNetworkController().setActive(false);
                 
-                world.getOutputStream().printSpaced(MessageBuilder.getHostDisconnectSuccessMessage(), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getHostDisconnectSuccessMessage(), WidthLimitedOutputStream.BOTH);
 
             } else {
 
-                world.getOutputStream().printSpaced(MessageBuilder.getHostNotSharingErrorMessage(), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getHostNotSharingErrorMessage(), WidthLimitedOutputStream.BOTH);
 
             }       
             
         } catch (NullPointerException ex){
             
-            world.getOutputStream().printSpaced(MessageBuilder.getHostNotSharingErrorMessage(), WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getHostNotSharingErrorMessage(), WidthLimitedOutputStream.BOTH);
             
         } catch (IOException ex) {
             
-            world.getOutputStream().printSpaced(MessageBuilder.getHostDisconnectErrorMessage(), WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getHostDisconnectErrorMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -761,21 +768,21 @@ public class CommandParser {
                 world.getNetworkController().setActive(false);
                                 
                 world = oldWorld;                
-                world.getOutputStream().printSpaced(MessageBuilder.getMultiplayerDisconnectSuccessMessage(), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getMultiplayerDisconnectSuccessMessage(), WidthLimitedOutputStream.BOTH);
 
             } else {
                 
-                world.getOutputStream().printSpaced(MessageBuilder.getMultiplayerNotInGameErrorMessage(), WidthLimitedOutputStream.BOTH);
+                world.getOutputStream().printSpaced(world.getMessageBuilder().getMultiplayerNotInGameErrorMessage(), WidthLimitedOutputStream.BOTH);
 
             }       
             
         } catch (NullPointerException ex) {
             
-            world.getOutputStream().printSpaced(MessageBuilder.getMultiplayerNotInGameErrorMessage(), WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getMultiplayerNotInGameErrorMessage(), WidthLimitedOutputStream.BOTH);
             
         } catch (IOException ex) {
             
-            world.getOutputStream().printSpaced(MessageBuilder.getMultiplayerDisconnectErrorMessage(), WidthLimitedOutputStream.BOTH);
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getMultiplayerDisconnectErrorMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         
@@ -875,7 +882,7 @@ public class CommandParser {
                 
         if(world != null){
             
-            world.getOutputStream().printSpaced(MessageBuilder.getGameLoadMessage(), WidthLimitedOutputStream.ABOVE);
+            world.getOutputStream().printSpaced(world.getMessageBuilder().getGameLoadMessage(), WidthLimitedOutputStream.ABOVE);
             world.getOutputStream().printAcross("=");
             
             world.showLocation(false);
@@ -889,7 +896,7 @@ public class CommandParser {
      */
     private void help(){
                 
-        world.getOutputStream().printSpaced(MessageBuilder.getHelpMessage(), WidthLimitedOutputStream.BOTH);
+        world.getOutputStream().printSpaced(world.getMessageBuilder().getHelpMessage(), WidthLimitedOutputStream.BOTH);
         
     }
     
@@ -899,7 +906,7 @@ public class CommandParser {
      */
     private void quit(){
                 
-        world.getOutputStream().printSpaced(MessageBuilder.getQuitMessage(), WidthLimitedOutputStream.BOTH);
+        world.getOutputStream().printSpaced(world.getMessageBuilder().getQuitMessage(), WidthLimitedOutputStream.BOTH);
         
         System.exit(0);
         
@@ -911,7 +918,7 @@ public class CommandParser {
      */
     private void unknown(){
         
-        world.getOutputStream().printSpaced(MessageBuilder.getUnknownCommandMessage(), WidthLimitedOutputStream.BOTH); 
+        world.getOutputStream().printSpaced(world.getMessageBuilder().getUnknownCommandMessage(), WidthLimitedOutputStream.BOTH); 
     
     }
     

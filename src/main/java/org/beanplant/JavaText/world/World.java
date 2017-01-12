@@ -8,6 +8,7 @@ import java.util.List;
 import org.beanplant.JavaText.io.WidthLimitedOutputStream;
 import org.beanplant.JavaText.net.NetworkController;
 import org.beanplant.JavaText.user.Player;
+import org.beanplant.JavaText.util.MessageBuilder;
 import org.beanplant.JavaText.util.StringTools;
 
 /**
@@ -34,6 +35,9 @@ public class World implements Serializable {
     
     /** The network controller for multiplayer games. */
     transient private NetworkController networkController;
+    
+    /** The MessageBuilder that this World uses. */
+    private MessageBuilder messageBuilder;
 
     /**
      * The default constructor. Assigns default values to all of the
@@ -78,6 +82,7 @@ public class World implements Serializable {
 
         // By default, use standard output
         this.setOutputStream(System.out, 72);
+        this.setMessageBuilder(new MessageBuilder());
     
     }
     
@@ -471,6 +476,30 @@ public class World implements Serializable {
         
         // And return our World object
         return this;
+        
+    }
+    
+    /**
+     * Sets the MessageBuilder for use in this World. This allows the developer
+     * to add their own words, or even create a translation for their game.
+     * 
+     * @param messageBuilder The MessageBuilder for this game.
+     */
+    public void setMessageBuilder(MessageBuilder messageBuilder) {
+        
+        this.messageBuilder = messageBuilder;
+        
+    }
+    
+    /**
+     * Returns the current MessageBuilder being used in this World. This is used
+     * by JavaText for displaying messages to the user.
+     * 
+     * @return The MessageBuilder in use.
+     */
+    public MessageBuilder getMessageBuilder() {
+        
+        return this.messageBuilder;
         
     }
 

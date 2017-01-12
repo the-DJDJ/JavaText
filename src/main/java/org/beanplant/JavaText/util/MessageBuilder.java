@@ -14,7 +14,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getYesMessage() {
+    public String getYesMessage() {
         
         String[] messages = {"Yes."};
         
@@ -27,7 +27,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getNoMessage() {
+    public String getNoMessage() {
         
         String[] messages = {"No."};
         
@@ -43,7 +43,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getMovePlayerAttackedMessage(String name, int damage) {
+    public String getMovePlayerAttackedMessage(String name, int damage) {
         
         String[] messages = {"The " + name + " attacks you! You lose " + damage + " HP!",
                              "You're attacked by the " + name +"! You lose " + damage + " HP."};
@@ -57,7 +57,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getMoveInvalidMessage() {
+    public String getMoveInvalidMessage() {
         
         String[] messages = {"You cannot go that way.",
                              "I wouldn't go that way if I were you."};
@@ -73,7 +73,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getInventoryFullMessage(String name) {
+    public String getInventoryFullMessage(String name) {
         
         String[] messages = {"You don't have enough space left in your inventory to pick up the " + name.toLowerCase(),
                              "Your inventory looks a little bit full for that."};
@@ -87,7 +87,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getEmptyInventoryMessage() {
+    public String getEmptyInventoryMessage() {
         
         String[] messages = {"You don't have anything!",
                              "You seem a little broke to me...",
@@ -104,7 +104,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getTakeMessage(String name) {
+    public String getTakeMessage(String name) {
         
         String[] messages = {"You picked up the " + name.toLowerCase(),
                              "You have taken the " + name.toLowerCase()};
@@ -120,7 +120,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getTakeUnknownMessage(String name) {
+    public String getTakeUnknownMessage(String name) {
         
         String[] messages = {"I don't know what a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + " is.",
                              "What is a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + "?"};
@@ -137,7 +137,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getTakeNotPresentMessage(String name) {
+    public String getTakeNotPresentMessage(String name) {
         
         String[] messages = {"I don't see " + name.toLowerCase() + " here...",
                              "There isn't even " + name.toLowerCase() + " here."};
@@ -151,7 +151,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getTakeNullMessage() {
+    public String getTakeNullMessage() {
         
         String[] messages = {"Take what?",
                              "Um. What exactly are you taking?"};
@@ -167,7 +167,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getDropMessage(String name) {
+    public String getDropMessage(String name) {
         
         String[] messages = {"You dropped the " + name.toLowerCase() + "."};
         
@@ -182,7 +182,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getDropUnownedMessage(String name) {
+    public String getDropUnownedMessage(String name) {
         
         String[] messages = {"You don't own " + name.toLowerCase(),
                              "Sure, I see. Lets drop a whole load of items that you don't own. Great idea."};
@@ -198,7 +198,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getDropUnknownMessage(String name) {
+    public String getDropUnknownMessage(String name) {
         
         String[] messages = {"I don't know what a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + " is.",
                              "You can't drop imaginary items, you know."};
@@ -212,7 +212,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getDropNullMessage() {
+    public String getDropNullMessage() {
         
         String[] messages = {"Drop what?",
                              "Are you going to finish that sentence?"};
@@ -228,7 +228,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getInspectItemNotPresentMessage(String name) {
+    public String getInspectItemNotPresentMessage(String name) {
         
         String[] messages = {"I don't see " + name.toLowerCase() + " here.",
                              "There is no " + name.toLowerCase() + " here."};
@@ -244,7 +244,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getInspectUnknownMessage(String name) {
+    public String getInspectUnknownMessage(String name) {
         
         String[] messages = {"What is a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + "?",
                              "You you even know what a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + " is?"};
@@ -258,7 +258,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getInspectNullMessage() {
+    public String getInspectNullMessage() {
         
         String[] messages = {"Inspect what?",
                             "I'm sorry, what exactly are we looking at?"};
@@ -274,7 +274,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getHealthMessage(int health) {
+    public String getHealthMessage(int health) {
         
         String[] messages = {"You currently have " + health + "HP.",
                              "Your health is on " + health + "HP."};
@@ -291,7 +291,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getEntityNotPresentMessage(String name) {
+    public String getEntityNotPresentMessage(String name) {
         
         String[] messages = {"Hmm, there doesn't seem to be a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + " here...",
                              "Are you sure there's a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + " here?",
@@ -309,7 +309,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message 
      */
-    public static String getUnlockKeyNotOwnedMessage(String name) {
+    public String getUnlockKeyNotOwnedMessage(String name) {
         
         String[] messages = {"You'll need " + name + " to do that.",
                              "You can't do that without " + name};
@@ -326,7 +326,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getWeaponUnownedMessage(String name) {
+    public String getWeaponUnownedMessage(String name) {
         
         String[] messages = {"You don't have a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + ".",
                              "Great idea! If only you had a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + "."};
@@ -342,7 +342,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getWeaponUnknownMessage(String name) {
+    public String getWeaponUnknownMessage(String name) {
         
         String[] messages = {"I don't know what a" + (StringTools.startsWithVowel(name) ? "n " : " ") + name.toLowerCase() + " is.",
                              "I'm half convinced that isn't a real thing."};
@@ -359,7 +359,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getHitHurtMessage(String name, int damage) {
+    public String getHitHurtMessage(String name, int damage) {
         
         String[] messages = {"You dealth " + damage + " HP to the " + name.toLowerCase() + ".",
                              "Ouch, you managed to inflict " + damage + " HP on the " + name.toLowerCase() + "."};
@@ -375,7 +375,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getHitKillMessage(String name) {
+    public String getHitKillMessage(String name) {
         
         String[] messages = {"You killed the " + name.toLowerCase() + ".",
                              "You just slaughtered the " + name.toLowerCase() + ".",
@@ -390,7 +390,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getHitNullMessage() {
+    public String getHitNullMessage() {
         
         String[] messages = {"Hit what?",
                              "Yes! Lets punch the sky a bit!"};
@@ -404,7 +404,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getHostDisconnectSuccessMessage() {
+    public String getHostDisconnectSuccessMessage() {
         
         String[] messages = {"You are no longer sharing your world!",
                              "Your world is now yours again you greedy bugger!"};
@@ -418,7 +418,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getHostNotSharingErrorMessage() {
+    public String getHostNotSharingErrorMessage() {
         
         String[] messages = {"Your game isn't shared...",
                              "You know you're playing alone, right?"};
@@ -433,7 +433,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getHostDisconnectErrorMessage() {
+    public String getHostDisconnectErrorMessage() {
         
         String[] messages = {"There was a problem stopping your game... Oops...",
                              "Some games just aren't meant to be stopped."};
@@ -447,7 +447,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getMultiplayerDisconnectSuccessMessage() {
+    public String getMultiplayerDisconnectSuccessMessage() {
         
         String[] messages = {"You have been disconnected from the server.",
                              "Come back again soon!",
@@ -462,7 +462,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getMultiplayerNotInGameErrorMessage() {
+    public String getMultiplayerNotInGameErrorMessage() {
         
         String[] messages = {"You aren't playing a multiplayer game!",
                              "Maybe you should join a game before you try to leave one!"};
@@ -477,7 +477,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getMultiplayerDisconnectErrorMessage() {
+    public String getMultiplayerDisconnectErrorMessage() {
         
         String[] messages = {"There was a problem disconnecting you from the game... Guess you're in limbo now!",
                              "Oh dear, it looks like something went wrong there... "};
@@ -491,7 +491,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getGameLoadMessage() {
+    public String getGameLoadMessage() {
         
         String[] messages = {"Your game has been loaded!",
                              "We've loaded your game for you!"};
@@ -505,7 +505,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getHelpMessage() {
+    public String getHelpMessage() {
         
         String[] messages = {"Ummm, no.",
                              "Nice try."};
@@ -519,7 +519,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getQuitMessage() {
+    public String getQuitMessage() {
         
         String[] messages = {"Hmmmph, good riddance.",
                              "You are the weakest link, goodbye.",
@@ -534,7 +534,7 @@ public class MessageBuilder {
      * 
      * @return A feedback message.
      */
-    public static String getUnknownCommandMessage() {
+    public String getUnknownCommandMessage() {
         
         String[] messages = {"Hmm, I expect to see a verb as the first word...",
                              "I'm sorry, but you'll have to speak English"};
