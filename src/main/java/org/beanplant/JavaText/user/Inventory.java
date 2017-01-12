@@ -190,6 +190,17 @@ public class Inventory implements Serializable {
         
     }
     
+    /**
+     * Returns whether or not the player's inventory is currently empty.
+     * 
+     * @return Whether or not the player isn't holding anything
+     */
+    public boolean isEmpty() {
+        
+        return this.inventory.isEmpty();
+        
+    }
+    
     @Override
     public String toString(){
         
