@@ -102,13 +102,13 @@ First of all, you'll need to give the player somewhere to start:
 ```java
 getPlayer().setLocation(startingPlace);
 ```
-The `Player` object returned by `getPlayer()` has lost of interesting little tidbits you can play with, but for now we'll only be changing the spawnpoint and the health.
+The `Player` object returned by `getPlayer()` has lots of interesting little tidbits you can play with, but for now we'll only be changing the spawnpoint and the health.
 Maybe your player needs to be super-strong, or sometimes just the average Joe. Either way, you'll need to give them a certain amount of health to start with. A player will by default have 100 health points, but you can easily change this like so:
 ```java
 getPlayer().setHealth(100);
 ```
 ## Things the player can't control
-NPCs! No game would be complete without them! As you've probably realised, the `Location` object is pretty simple to the mechanics of the game engine, so it only makes sense that we will place our NPCs in a specific `Location`. Now, there are many different types of NPC, so we'll lay them out to you in this neat little tree:
+NPCs! No game would be complete without them! As you've probably realised, the `Location` object is pretty central to the mechanics of the game engine, so it only makes sense that we will place our NPCs in a specific `Location`. Now, there are many different types of NPC, so we'll lay them out to you in this neat little tree:
 * Entity
   * Boss
   * EntityCollection
