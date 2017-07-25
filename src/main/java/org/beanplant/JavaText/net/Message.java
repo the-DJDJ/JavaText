@@ -31,10 +31,10 @@ public class Message {
      */
     public Message(byte type, byte[] payload) {
         
-        this.contents = (payload == null) ? new byte[0] : new byte[payload.length + 1];
-        
+        this.contents = (payload == null) ? new byte[1] : new byte[payload.length + 1];
         this.contents[0] = type;
-        System.arraycopy(payload, 0, this.contents, 1, payload.length);
+        
+        if(payload != null) System.arraycopy(payload, 0, this.contents, 1, payload.length);
         
         System.out.println(Arrays.toString(this.contents));
         
