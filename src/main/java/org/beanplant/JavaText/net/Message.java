@@ -36,8 +36,6 @@ public class Message {
         
         if(payload != null) System.arraycopy(payload, 0, this.contents, 1, payload.length);
         
-        System.out.println(Arrays.toString(this.contents));
-        
     }
     
     /**
