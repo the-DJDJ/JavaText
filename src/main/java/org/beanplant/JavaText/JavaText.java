@@ -125,4 +125,15 @@ public class JavaText {
         
     }
     
+    /**
+     * A simple method to get the current World
+     * 
+     * @return the current World
+     */
+    public static World getWorld() {
+        
+        return world;
+        
+    }
+    
 }
