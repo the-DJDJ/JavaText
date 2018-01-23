@@ -19,16 +19,16 @@ public class CommandDrop implements Command {
     
         Item item = new Item().getItem(arguments);
         
-        if(world.getPlayer().getInventory().contains(item)){
+        if(commandParser.getWorld().getPlayer().getInventory().contains(item)){
             
-            world.getPlayer().getInventory().removeItem(item);
+            commandParser.getWorld().getPlayer().getInventory().removeItem(item);
             
             boolean present = false;
             int index = 0;
             
-            for (int i = 0; i < world.getPlayer().getLocation().getItems().size(); i++) {
+            for (int i = 0; i < commandParser.getWorld().getPlayer().getLocation().getItems().size(); i++) {
                 
-                if(world.getPlayer().getLocation().getItems().get(i).getName().equals(item.getName())){
+                if(commandParser.getWorld().getPlayer().getLocation().getItems().get(i).getName().equals(item.getName())){
                     
                     present = true;
                     index = i;
@@ -39,37 +39,37 @@ public class CommandDrop implements Command {
             
             if(present){
                 
-                if(world.getPlayer().getLocation().getItems().get(index).isStack()){
+                if(commandParser.getWorld().getPlayer().getLocation().getItems().get(index).isStack()){
                     
-                    world.getPlayer().getLocation().getItems().set(index, ((ItemStack) world.getPlayer().getLocation().getItems().get(index)).add(1));
+                    commandParser.getWorld().getPlayer().getLocation().getItems().set(index, ((ItemStack) commandParser.getWorld().getPlayer().getLocation().getItems().get(index)).add(1));
                     
                 } else {
                     
-                    world.getPlayer().getLocation().getItems().set(index, new ItemStack(item, 2));
+                    commandParser.getWorld().getPlayer().getLocation().getItems().set(index, new ItemStack(item, 2));
                     
                 }
                 
             } else {
             
-                world.getPlayer().getLocation().addItem(item);
+                commandParser.getWorld().getPlayer().getLocation().addItem(item);
                 
             }
             
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getDropMessage(item.getName()), WidthLimitedOutputStream.BOTH);
+            commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getDropMessage(item.getName()), WidthLimitedOutputStream.BOTH);
             
         } else {  
             
             if(arguments.isEmpty()){
                 
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getDropNullMessage(), WidthLimitedOutputStream.BOTH);
+                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getDropNullMessage(), WidthLimitedOutputStream.BOTH);
                 
             } else if (item != null) {
             
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getDropUnownedMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
+                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getDropUnownedMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
             
             } else {
             
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getDropUnknownMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
+                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getDropUnknownMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
             
             }   
         

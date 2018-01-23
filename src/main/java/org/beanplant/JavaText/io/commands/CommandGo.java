@@ -19,40 +19,40 @@ public class CommandGo implements Command {
         boolean valid = false;
 
         // Check if the direction is valid
-        for (Exit exit : world.getPlayer().getLocation().getExits()) {
+        for (Exit exit : commandParser.getWorld().getPlayer().getLocation().getExits()) {
             
             if(arguments.equals(exit.getDirectionName()) || arguments.equals(exit.getShortDirectionName())){
                 
-                if((!world.getPlayer().getLocation().hasBoss()) || (world.getPlayer().getLocation().hasBoss() && world.getPlayer().getLocation().getBoss().isAvoidable())){
+                if((!commandParser.getWorld().getPlayer().getLocation().hasBoss()) || (commandParser.getWorld().getPlayer().getLocation().hasBoss() && commandParser.getWorld().getPlayer().getLocation().getBoss().isAvoidable())){
                 
                     if(!exit.isLocked()){
 
                         // Set location to the location pointed to by exit
-                        world.getPlayer().setLocation(exit.getLeadsTo());
+                        commandParser.getWorld().getPlayer().setLocation(exit.getLeadsTo());
 
                         // Show new location
-                        world.showLocation(false);
+                        commandParser.getWorld().showLocation(false);
 
                     } else {
 
-                        world.getOutputStream().printSpaced(exit.getType().getLockedMessage(), WidthLimitedOutputStream.BOTH);
+                        commandParser.getWorld().getOutputStream().printSpaced(exit.getType().getLockedMessage(), WidthLimitedOutputStream.BOTH);
 
                     }
                 
                 } else {
                     
-                    if(world.getPlayer().getLocation().getBoss().getName().contains(" ")){
+                    if(commandParser.getWorld().getPlayer().getLocation().getBoss().getName().contains(" ")){
                         
-                        world.getOutputStream().printSpaced(world.getMessageBuilder().getMovePlayerAttackedMessage(world.getPlayer().getLocation().getBoss().getName().toLowerCase().substring(world.getPlayer().getLocation().getBoss().getName().lastIndexOf(" ")), world.getPlayer().getLocation().getBoss().getDamage()), WidthLimitedOutputStream.BOTH);
+                        commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getMovePlayerAttackedMessage(commandParser.getWorld().getPlayer().getLocation().getBoss().getName().toLowerCase().substring(commandParser.getWorld().getPlayer().getLocation().getBoss().getName().lastIndexOf(" ")), commandParser.getWorld().getPlayer().getLocation().getBoss().getDamage()), WidthLimitedOutputStream.BOTH);
                     
                         
                     } else {
                         
-                        world.getOutputStream().printSpaced(world.getMessageBuilder().getMovePlayerAttackedMessage(world.getPlayer().getLocation().getBoss().getName().toLowerCase(), world.getPlayer().getLocation().getBoss().getDamage()), WidthLimitedOutputStream.BOTH);
+                        commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getMovePlayerAttackedMessage(commandParser.getWorld().getPlayer().getLocation().getBoss().getName().toLowerCase(), commandParser.getWorld().getPlayer().getLocation().getBoss().getDamage()), WidthLimitedOutputStream.BOTH);
                         
                     }
                     
-                    world.getPlayer().setHealth(world.getPlayer().getHealth() - world.getPlayer().getLocation().getBoss().getDamage());
+                    commandParser.getWorld().getPlayer().setHealth(commandParser.getWorld().getPlayer().getHealth() - commandParser.getWorld().getPlayer().getLocation().getBoss().getDamage());
                     
                 }
                 
@@ -64,7 +64,7 @@ public class CommandGo implements Command {
         
         if(!valid){
             
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getMoveInvalidMessage(), WidthLimitedOutputStream.BOTH);
+            commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getMoveInvalidMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         

@@ -14,7 +14,7 @@ public class CommandHealth implements Command {
     @Override
     public void execute(String arguments) {
     
-        world.getOutputStream().printSpaced(world.getMessageBuilder().getHealthMessage(world.getPlayer().getHealth()), WidthLimitedOutputStream.BOTH);
+        commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getHealthMessage(commandParser.getWorld().getPlayer().getHealth()), WidthLimitedOutputStream.BOTH);
         
     }
     

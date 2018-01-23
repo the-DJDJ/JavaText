@@ -13,7 +13,7 @@ public class CommandLook implements Command {
     @Override
     public void execute(String arguments) {
     
-        world.showLocation(true);
+        commandParser.getWorld().showLocation(true);
         
     }
     

@@ -13,7 +13,7 @@ public class CommandHelp implements Command {
     @Override
     public void execute(String arguments) {
         
-        world.getOutputStream().printSpaced(world.getMessageBuilder().getHelpMessage(), WidthLimitedOutputStream.BOTH);
+        commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getHelpMessage(), WidthLimitedOutputStream.BOTH);
     
     }
     

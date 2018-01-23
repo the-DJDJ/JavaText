@@ -1,6 +1,5 @@
 package org.beanplant.JavaText.io;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -8,24 +7,27 @@ import java.util.List;
 import org.beanplant.JavaText.handlers.CommandLockHandler;
 import org.beanplant.JavaText.handlers.EventHandler;
 import org.beanplant.JavaText.io.commands.CommandConfirm;
+import org.beanplant.JavaText.io.commands.CommandConnect;
 import org.beanplant.JavaText.io.commands.CommandDeny;
+import org.beanplant.JavaText.io.commands.CommandDisconnect;
 import org.beanplant.JavaText.io.commands.CommandDrop;
 import org.beanplant.JavaText.io.commands.CommandGo;
 import org.beanplant.JavaText.io.commands.CommandHealth;
 import org.beanplant.JavaText.io.commands.CommandHelp;
 import org.beanplant.JavaText.io.commands.CommandHit;
+import org.beanplant.JavaText.io.commands.CommandHost;
 import org.beanplant.JavaText.io.commands.CommandInspect;
 import org.beanplant.JavaText.io.commands.CommandInventory;
+import org.beanplant.JavaText.io.commands.CommandLoad;
 import org.beanplant.JavaText.io.commands.CommandLock;
 import org.beanplant.JavaText.io.commands.CommandLook;
 import org.beanplant.JavaText.io.commands.CommandQuit;
+import org.beanplant.JavaText.io.commands.CommandSave;
+import org.beanplant.JavaText.io.commands.CommandStop;
 import org.beanplant.JavaText.io.commands.CommandTake;
 import org.beanplant.JavaText.io.commands.CommandUnknown;
 import org.beanplant.JavaText.io.commands.CommandUnlock;
-import org.beanplant.JavaText.net.Message;
-import org.beanplant.JavaText.npc.Entity;
 import org.beanplant.JavaText.world.World;
-import org.beanplant.JavaText.user.Item;
 
 /**
  * Parses the commands, and executes activities performed in the game.
@@ -46,6 +48,7 @@ public final class CommandParser {
     /** The String that stores the arguments for the user-entered command. */
     private String arguments = new String();
     
+    /** A hashmap containing all of the currently registered commands. */
     private HashMap<String, Command> commands = new HashMap<>();
     
     /** A list of all of the lock handlers currently active. */
@@ -64,24 +67,38 @@ public final class CommandParser {
         
         this.world = world;
         
-        this.registerCommand(new CommandGo(),        "GO", "MOVE");
-        this.registerCommand(new CommandTake(),      "TAKE");
-        this.registerCommand(new CommandDrop(),      "DROP");
-        this.registerCommand(new CommandInventory(), "LOOT", "INVENTORY");
-        this.registerCommand(new CommandHealth(),    "HEALTH");
-        this.registerCommand(new CommandLook(),      "LOOK");
-        this.registerCommand(new CommandInspect(),   "INSPECT");
-        this.registerCommand(new CommandHit(),       "HIT", "KILL");
-        this.registerCommand(new CommandLock(),      "LOCK");
-        this.registerCommand(new CommandUnlock(),    "LOCK", "CLEAR");
-        this.registerCommand(new CommandConfirm(),   "YES", "CONFIRM");
-        this.registerCommand(new CommandDeny(),      "NO", "DENY");
-        this.registerCommand(new CommandHelp(),      "HELP");
-        this.registerCommand(new CommandUnknown(),   "UNKNOWN");
-        this.registerCommand(new CommandQuit(),      "QUIT", "EXIT");
+        this.registerCommand(new CommandGo(),         "GO", "MOVE");
+        this.registerCommand(new CommandTake(),       "TAKE");
+        this.registerCommand(new CommandDrop(),       "DROP");
+        this.registerCommand(new CommandInventory(),  "LOOT", "INVENTORY");
+        this.registerCommand(new CommandHealth(),     "HEALTH");
+        this.registerCommand(new CommandLook(),       "LOOK");
+        this.registerCommand(new CommandInspect(),    "INSPECT");
+        this.registerCommand(new CommandHit(),        "HIT", "KILL");
+        this.registerCommand(new CommandLock(),       "LOCK");
+        this.registerCommand(new CommandUnlock(),     "LOCK", "CLEAR");
+        this.registerCommand(new CommandConfirm(),    "YES", "CONFIRM");
+        this.registerCommand(new CommandDeny(),       "NO", "DENY");
+        this.registerCommand(new CommandHelp(),       "HELP");
+        this.registerCommand(new CommandSave(),       "SAVE");
+        this.registerCommand(new CommandLoad(),       "LOAD", "RESTORE");
+        this.registerCommand(new CommandHost(),       "HOST", "START");
+        this.registerCommand(new CommandStop(),       "STOP");
+        this.registerCommand(new CommandConnect(),    "CONNECT");
+        this.registerCommand(new CommandDisconnect(), "DISCONNECT");
+        this.registerCommand(new CommandUnknown(),    "UNKNOWN");
+        this.registerCommand(new CommandQuit(),       "QUIT", "EXIT");
         
     }
     
+    /**
+     * The method to register a command. This takes the command, as well as all
+     * of it's aliases, as arguments, and then adds them to the appropriate
+     * hashmap.
+     * 
+     * @param command the command to add.
+     * @param names the aliases of this command
+     */
     public void registerCommand(Command command, String... names) {
         
         for (String name : names) {
@@ -146,142 +163,8 @@ public final class CommandParser {
             
             // Notify event listeners
             triggerEvent(command);
-
-            switch(command){
-                    
-                case "HOST":
-                case "START":
-                    this.host(arguments);
-                    break;
-                    
-                case "STOP":
-                    this.stop();
-                    break;
-                    
-                case "CONNECT":
-                    this.connect(arguments);
-                    break;
-                    
-                case "DISCONNECT":
-                    this.disconnect();
-                    break;
-
-                case "SAVE":
-                    this.save();
-                    break;
-
-                case "LOAD":
-                case "RESTORE":
-                    this.load();
-                    break;
-
-            }
         
         }
-        
-    }
-    
-    /**
-     * The host command. This opens up a user's savegame to other people so that
-     * they can join the game later.
-     * 
-     * @param arguments The port on which to host the game
-     */
-    private void host(String arguments){
-        
-        
-        
-    }
-    
-    /**
-     * The stop command. This stops a hosted savegame and restores it to a
-     * standard singleplayer game
-     */
-    private void stop(){
-        
-        try {
-        
-            if(world.getNetworkController().isActive()) {
-                
-                world.getNetworkController().getMessageSender().sendMessage(new Message(Message.STOP, null));
-
-                world.getNetworkController().close();
-                world.getNetworkController().setActive(false);
-                
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getHostDisconnectSuccessMessage(), WidthLimitedOutputStream.BOTH);
-
-            } else {
-
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getHostNotSharingErrorMessage(), WidthLimitedOutputStream.BOTH);
-
-            }       
-            
-        } catch (NullPointerException ex){
-            
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getHostNotSharingErrorMessage(), WidthLimitedOutputStream.BOTH);
-            
-        } catch (IOException ex) {
-            
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getHostDisconnectErrorMessage(), WidthLimitedOutputStream.BOTH);
-            
-        }
-        
-    }
-    
-    /** 
-     * The connect command. This connects to a hosted game on a specific port
-     * 
-     * @param arguments The port to connect to
-     */
-    private void connect(String arguments){
-        
-        
-        
-    }
-    
-    /**
-     * The disconnect command. This disconnects from a save game and goes back
-     * to normal singleplayer
-     */
-    private void disconnect(){
-        
-        try {
-        
-            if(world.getNetworkController().isActive()) {
-                
-                world.getNetworkController().getMessageSender().sendMessage(new Message(Message.LOGOFF, null));
-
-                world.getNetworkController().close();
-                world.getNetworkController().setActive(false);
-                                
-                world = oldWorld;                
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getMultiplayerDisconnectSuccessMessage(), WidthLimitedOutputStream.BOTH);
-
-            } else {
-                
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getMultiplayerNotInGameErrorMessage(), WidthLimitedOutputStream.BOTH);
-
-            }       
-            
-        } catch (NullPointerException ex) {
-            
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getMultiplayerNotInGameErrorMessage(), WidthLimitedOutputStream.BOTH);
-            
-        } catch (IOException ex) {
-            
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getMultiplayerDisconnectErrorMessage(), WidthLimitedOutputStream.BOTH);
-            
-        }
-        
-    }
-    
-    /**
-     * The save command. This saves the user's game to a file so that it can be
-     * loaded later.
-     */
-    private void save(){
-        
-        GameData.save(world);
         
     }
     
@@ -370,22 +253,26 @@ public final class CommandParser {
     }
     
     /**
-     * The load command. This restores the user's game state to what it was when
-     * they saved the game.
+     * A simple method to overwrite the current world. This is useful where a
+     * command must overwrite the world, for instance, when loading one from a
+     * file.
+     * 
+     * @param world the new world
      */
-    private void load(){
+    public void updateWorld(World world) {
         
-        oldWorld = world;
-        world = GameData.load(world);
-                
-        if(world != null){
-            
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getGameLoadMessage(), WidthLimitedOutputStream.ABOVE);
-            world.getOutputStream().printAcross("=");
-            
-            world.showLocation(false);
+        this.world = world;
         
-        }
+    }
+    
+    /**
+     * Returns the current world in use.
+     * 
+     * @return the world.
+     */
+    public World getWorld() {
+        
+        return this.world;
         
     }
     

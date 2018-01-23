@@ -25,18 +25,18 @@ public class CommandHit implements Command {
             String name = ((arguments.contains(" WITH ")) ? arguments.substring(0, arguments.indexOf(" WITH ")) : arguments).trim();
             
             // First find which entity to hit
-            if(world.getPlayer().getLocation().hasBoss() && world.getPlayer().getLocation().getBoss().getName().equalsIgnoreCase(name)){
+            if(commandParser.getWorld().getPlayer().getLocation().hasBoss() && commandParser.getWorld().getPlayer().getLocation().getBoss().getName().equalsIgnoreCase(name)){
                 
-                entity = world.getPlayer().getLocation().getBoss();
+                entity = commandParser.getWorld().getPlayer().getLocation().getBoss();
                 
             } else {
             
-                for (int i = 0; i < world.getPlayer().getLocation().getEntities().size(); i++) {
+                for (int i = 0; i < commandParser.getWorld().getPlayer().getLocation().getEntities().size(); i++) {
 
-                    if(world.getPlayer().getLocation().getEntities().get(i).getName()
+                    if(commandParser.getWorld().getPlayer().getLocation().getEntities().get(i).getName()
                             .equalsIgnoreCase(name)){
 
-                        entity = world.getPlayer().getLocation().getEntities().get(i);
+                        entity = commandParser.getWorld().getPlayer().getLocation().getEntities().get(i);
 
                     }
 
@@ -47,7 +47,7 @@ public class CommandHit implements Command {
             // Check that it has been found
             if(entity == null){
                     
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getEntityNotPresentMessage(name), WidthLimitedOutputStream.BOTH);
+                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getEntityNotPresentMessage(name), WidthLimitedOutputStream.BOTH);
                     
             } else {
                 
@@ -61,7 +61,7 @@ public class CommandHit implements Command {
                     
                     if(new Item().isValidItem(itemName)){
                     
-                        if(world.getPlayer().getInventory().contains(new Item().getItem(itemName))){
+                        if(commandParser.getWorld().getPlayer().getInventory().contains(new Item().getItem(itemName))){
 
                             // Work out the damage
                             damage = new Item().getItem(itemName).getDamage();
@@ -72,24 +72,24 @@ public class CommandHit implements Command {
                             // Check if the entity is still alive
                             if(entity.getHealth() > 0){
 
-                                world.getOutputStream().printSpaced(world.getMessageBuilder().getHitHurtMessage(name, damage), WidthLimitedOutputStream.BOTH);
+                                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getHitHurtMessage(name, damage), WidthLimitedOutputStream.BOTH);
 
                             } else {
                                 
-                                world.getOutputStream().printSpaced(world.getMessageBuilder().getHitKillMessage(name), WidthLimitedOutputStream.BOTH);
-                                world.getPlayer().getLocation().getEntities().remove(entity);
+                                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getHitKillMessage(name), WidthLimitedOutputStream.BOTH);
+                                commandParser.getWorld().getPlayer().getLocation().getEntities().remove(entity);
 
                             }
 
                         } else {
                             
-                            world.getOutputStream().printSpaced(world.getMessageBuilder().getWeaponUnownedMessage(itemName), WidthLimitedOutputStream.BOTH);
+                            commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getWeaponUnownedMessage(itemName), WidthLimitedOutputStream.BOTH);
                             
                         }
                     
                     } else {
                         
-                        world.getOutputStream().printSpaced(world.getMessageBuilder().getWeaponUnknownMessage(itemName), WidthLimitedOutputStream.BOTH);
+                        commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getWeaponUnknownMessage(itemName), WidthLimitedOutputStream.BOTH);
                         
                     }
                     
@@ -101,12 +101,12 @@ public class CommandHit implements Command {
                     // Check if the entity is still alive
                     if(entity.getHealth() > 0){
                         
-                        world.getOutputStream().printSpaced(world.getMessageBuilder().getHitHurtMessage(name, damage), WidthLimitedOutputStream.BOTH);
+                        commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getHitHurtMessage(name, damage), WidthLimitedOutputStream.BOTH);
 
                     } else {
                         
-                        world.getOutputStream().printSpaced(world.getMessageBuilder().getHitKillMessage(name.toLowerCase()), WidthLimitedOutputStream.BOTH);
-                        world.getPlayer().getLocation().getEntities().remove(entity);
+                        commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getHitKillMessage(name.toLowerCase()), WidthLimitedOutputStream.BOTH);
+                        commandParser.getWorld().getPlayer().getLocation().getEntities().remove(entity);
 
                     }
                     
@@ -117,7 +117,7 @@ public class CommandHit implements Command {
             
         } else {
                         
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getHitNullMessage(), WidthLimitedOutputStream.BOTH);
+            commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getHitNullMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         

@@ -17,7 +17,7 @@ public class CommandDeny implements Command {
     
         if(commandParser.getAllLockHandlers().isEmpty()) {
             
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getYesMessage(), WidthLimitedOutputStream.BOTH);
+            commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getYesMessage(), WidthLimitedOutputStream.BOTH);
             
         } else {
             

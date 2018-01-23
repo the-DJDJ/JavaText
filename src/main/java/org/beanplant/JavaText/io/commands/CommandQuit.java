@@ -14,7 +14,7 @@ public class CommandQuit implements Command {
     @Override
     public void execute(String arguments) {
     
-        world.getOutputStream().printSpaced(world.getMessageBuilder().getQuitMessage(), WidthLimitedOutputStream.BOTH);
+        commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getQuitMessage(), WidthLimitedOutputStream.BOTH);
         
         System.exit(0);
         

@@ -14,7 +14,7 @@ public class CommandUnknown implements Command {
     @Override
     public void execute(String arguments) {
     
-        world.getOutputStream().printSpaced(world.getMessageBuilder().getUnknownCommandMessage(), WidthLimitedOutputStream.BOTH); 
+        commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getUnknownCommandMessage(), WidthLimitedOutputStream.BOTH); 
         
     }
     

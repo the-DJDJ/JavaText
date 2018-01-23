@@ -14,13 +14,13 @@ public class CommandInventory implements Command {
     @Override
     public void execute(String arguments) {
     
-        if(world.getPlayer().getInventory().isEmpty()) {
+        if(commandParser.getWorld().getPlayer().getInventory().isEmpty()) {
             
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getEmptyInventoryMessage(), WidthLimitedOutputStream.BOTH);
+            commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getEmptyInventoryMessage(), WidthLimitedOutputStream.BOTH);
             
         } else {
         
-            world.getOutputStream().printSpaced(world.getPlayer().getInventory().toString(), WidthLimitedOutputStream.BOTH);
+            commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getPlayer().getInventory().toString(), WidthLimitedOutputStream.BOTH);
         
         }
         

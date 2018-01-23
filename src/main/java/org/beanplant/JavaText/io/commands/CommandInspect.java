@@ -20,19 +20,19 @@ public class CommandInspect implements Command {
         
                 Item item = new Item().getItem(arguments);
 
-                if(world.getPlayer().getInventory().contains(item) || world.getPlayer().getLocation().getItems().contains(item)) {
+                if(commandParser.getWorld().getPlayer().getInventory().contains(item) || commandParser.getWorld().getPlayer().getLocation().getItems().contains(item)) {
 
-                    world.getOutputStream().printSpaced(item.getDescription(), WidthLimitedOutputStream.BOTH);
+                    commandParser.getWorld().getOutputStream().printSpaced(item.getDescription(), WidthLimitedOutputStream.BOTH);
 
                 } else {
                     
                     boolean present = false;
                     
-                    for (int i = 0; i < world.getPlayer().getLocation().getItems().size(); i++) {
+                    for (int i = 0; i < commandParser.getWorld().getPlayer().getLocation().getItems().size(); i++) {
                         
-                        if(world.getPlayer().getLocation().getItems().get(i).getName().equals(item.getName())){
+                        if(commandParser.getWorld().getPlayer().getLocation().getItems().get(i).getName().equals(item.getName())){
                             
-                            world.getOutputStream().printSpaced(item.getDescription(), WidthLimitedOutputStream.BOTH);
+                            commandParser.getWorld().getOutputStream().printSpaced(item.getDescription(), WidthLimitedOutputStream.BOTH);
                             
                             present = true;
                             
@@ -42,7 +42,7 @@ public class CommandInspect implements Command {
                     
                     if(!present){
 
-                        world.getOutputStream().printSpaced(world.getMessageBuilder().getInspectItemNotPresentMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
+                        commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getInspectItemNotPresentMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
                     
                     }
 
@@ -50,13 +50,13 @@ public class CommandInspect implements Command {
             
             } else {
                 
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getInspectUnknownMessage(arguments), WidthLimitedOutputStream.BOTH);
+                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getInspectUnknownMessage(arguments), WidthLimitedOutputStream.BOTH);
                 
             }
             
         } else {
             
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getInspectNullMessage(), WidthLimitedOutputStream.BOTH);
+            commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getInspectNullMessage(), WidthLimitedOutputStream.BOTH);
             
         }
         

@@ -17,7 +17,7 @@ public class CommandConfirm implements Command {
     
         if(commandParser.getAllLockHandlers().isEmpty()) {
             
-            world.getOutputStream().printSpaced(world.getMessageBuilder().getNoMessage(), WidthLimitedOutputStream.BOTH);
+            commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getNoMessage(), WidthLimitedOutputStream.BOTH);
             
         } else {
             

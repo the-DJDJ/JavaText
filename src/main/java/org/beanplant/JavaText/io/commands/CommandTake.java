@@ -22,11 +22,11 @@ public class CommandTake implements Command {
         boolean valid = false;
         int index = 0;
         
-        for (int i = 0; i < world.getPlayer().getLocation().getItems().size(); i++) {
+        for (int i = 0; i < commandParser.getWorld().getPlayer().getLocation().getItems().size(); i++) {
             
             try{
             
-                if(world.getPlayer().getLocation().getItems().get(i).getName().equals(item.getName())){
+                if(commandParser.getWorld().getPlayer().getLocation().getItems().get(i).getName().equals(item.getName())){
 
                     valid = true;
                     index = i;
@@ -39,23 +39,23 @@ public class CommandTake implements Command {
         
         if(valid){
             
-            if(world.getPlayer().getInventory().addItem(item)){
+            if(commandParser.getWorld().getPlayer().getInventory().addItem(item)){
                 
-                if(world.getPlayer().getLocation().getItems().get(index).isStack()){
+                if(commandParser.getWorld().getPlayer().getLocation().getItems().get(index).isStack()){
                     
-                    world.getPlayer().getLocation().getItems().set(index, ((ItemStack) world.getPlayer().getLocation().getItems().get(index)).remove(1));
+                    commandParser.getWorld().getPlayer().getLocation().getItems().set(index, ((ItemStack) commandParser.getWorld().getPlayer().getLocation().getItems().get(index)).remove(1));
                             
                 } else {
             
-                    world.getPlayer().getLocation().getItems().remove(item);
+                    commandParser.getWorld().getPlayer().getLocation().getItems().remove(item);
                     
                 }
             
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getTakeMessage(item.getName()), WidthLimitedOutputStream.BOTH);
+                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getTakeMessage(item.getName()), WidthLimitedOutputStream.BOTH);
                 
             } else {
                 
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getInventoryFullMessage(item.getName()), WidthLimitedOutputStream.BOTH);
+                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getInventoryFullMessage(item.getName()), WidthLimitedOutputStream.BOTH);
                 
             }
             
@@ -63,15 +63,15 @@ public class CommandTake implements Command {
             
             if(arguments.isEmpty()){
                 
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getTakeNullMessage(), WidthLimitedOutputStream.BOTH);
+                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getTakeNullMessage(), WidthLimitedOutputStream.BOTH);
                 
             } else if (item == null) {
                 
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getTakeUnknownMessage(arguments), WidthLimitedOutputStream.BOTH);
+                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getTakeUnknownMessage(arguments), WidthLimitedOutputStream.BOTH);
                 
             } else {
             
-                world.getOutputStream().printSpaced(world.getMessageBuilder().getTakeNotPresentMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
+                commandParser.getWorld().getOutputStream().printSpaced(commandParser.getWorld().getMessageBuilder().getTakeNotPresentMessage(item.getSingleName()), WidthLimitedOutputStream.BOTH);
             
             }
             
