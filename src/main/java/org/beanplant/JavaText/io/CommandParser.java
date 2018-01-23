@@ -109,7 +109,17 @@ public final class CommandParser {
         
     }
     
-    
+    /**
+     * The method to deregister a command. This removes the alias from the list
+     * of aliases check when a command is entered.
+     * 
+     * @param name the command to deregister
+     */
+    public void deregisterCommand(String name) {
+        
+        this.commands.remove(name);
+        
+    }
     
     /**
      * The method that actually executes the command. This method gets the
