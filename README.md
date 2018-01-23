@@ -163,7 +163,11 @@ public class CommandFancyPancy implements Command {
     
 }
 ```
-Now remember, this is your baby - you can do whatever you like here! For convenience, we've given you two variables to play around with, `world`, which, quite surprisingly, is the `World` your player is living in, and `commandParser`, which you usually don't have to worry about. Check out `CommandConfirm` and `CommandDeny` if you're interested though!
+Now remember, this is your baby - you can do whatever you like here! For convenience, we've given you a variable to play around with, `commandParser`. You usually don't have to worry about this, though it's important to note that you can access the world using 
+```java
+commandParser.getWorld()
+```
+Check out `CommandConfirm` and `CommandDeny` if you wanna learn more!
 
 Moving onto the fun bit, you've got an `execute` method to override. This method comes with an `arguments` parameter, which is basically whatever the user types in after your command. You can do whatever you want with this, or just ignore it if you don't need it. Check out some of the built in commands to get a feel for how commands work, you'll get it soon, and then write your own! The sky is the limit!
 
@@ -172,3 +176,8 @@ Once you've got your command sorted, you'll need to register it so that the game
 commandParser().registerCommand(new CommandFancyPancy(), "MYFANCYCOMMAND");
 ```
 This command is pretty straightforward. Your first argument, the `new CommandFancyPancy()`, is a reference to your `Command` object. We tend to put constructors here, but a reference will work just as well. The second argument is the alias for your command. This has to be in upper case, and is what the user must type in to activate your command. You can add more than one reference, simply add them as additional arguments! Easy peasy.
+
+If you ever do want to deregister a command, that is just as easy to do:
+```java
+commandParser().deregisterCommand("MYFANCYCOMMAND");
+```
