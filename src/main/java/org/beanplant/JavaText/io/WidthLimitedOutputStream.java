@@ -80,10 +80,14 @@ public class WidthLimitedOutputStream {
             if(token.trim().equals("<token:paragraph>")) {
                 
                 m_out.print("    ");
+                currentWidth += 4;
                 
-            } else if(!token.trim().equals("<token:newline>")) m_out.print(token);
-
-            currentWidth += token.length();
+            } else if(!token.trim().equals("<token:newline>")) {
+                
+                m_out.print(token);
+                currentWidth += token.length();
+            
+            }
 
         }
 
