@@ -1,13 +1,15 @@
 package levels;
 
+import org.beanplant.JavaText.handlers.EventHandler;
 import org.beanplant.JavaText.world.Location;
 import org.beanplant.JavaText.world.World;
+import org.beanplant.JavaText.world.exit.Exit;
 
 /**
  *
  * @author the_DJDJ
  */
-public class Murder extends World {
+public class Murder extends World implements EventHandler {
     
     // Create room objects
     private final Location l001 = new Location ("Prologue", "On a pleasant summer day in London, you decide to visit your mentor, Sherlock Holmes, and your cousin, Dr. John Watson. Perhaps today Mr. Holmes will hand you a case to solve yourself."
@@ -23,10 +25,15 @@ public class Murder extends World {
             + " <token:paragraph> \"Where shall I start?\" you ask, stalling for time."
             + " <token:paragraph> \"Why don't you try the telegram first?\" Holmes suggests. \"Just before you arrived, Watson received a telegram which he stuck in his pocket without reading. What does that suggest to you?\""
             + " <token:paragraph> \"That he was in a hurry,\" you reply, covering your mouth in dismay at speaking without thinking. \"No, how could he be in a hurry when he's sitting at his desk? It must be something else.\"", true);
-    private final Location l323 = new Location ("", "");
-    private final Location l638 = new Location ("", "");
+    private final Location l311 = new Location("", "");
+    private final Location l323 = new Location ("", "\"I am sorry, Mr. Holmes, but I cannot guess why he didn't read it. Even if I were preoccupied with something, I would read the telegram because it might bear on what was worrying me.\""
+            + " <token:paragraph> \"No, no!\" Holmes replies, \"Use your head! You had something when you said that Watson was preoccupied with his writing. When Watson takes up his pen, he keeps at his work for a good stretch.\"", true);
+    private final Location l638 = new Location ("", "\"Well,\" you say, trying to put your thoughts into words. \"Dr. Watson must have been very preoccupied with what he was writing. I would guess, with his bulldog nature, that once my cousin sits down to write, he stays until he has done a full day's work.\"CHECK CLUE Z");
     
     // Create exit objects
+    private final Exit e311 = new Exit(Exit.CONTINUE, l311);
+    private final Exit e323 = new Exit(Exit.CONTINUE, l323);
+    private final Exit e638 = new Exit(Exit.CONTINUE, l638);
 
     public Murder(){
         
@@ -35,9 +42,19 @@ public class Murder extends World {
         setDescription("by Gerald Lientz");
         getPlayer().setHealth(100);
         
+        // Configure player
+        getPlayer().setStatistic("Athletics", 1);
+        getPlayer().setStatistic("Artifice", 1);
+        getPlayer().setStatistic("Intuition", 1);
+        getPlayer().setStatistic("Communication", 1);
+        getPlayer().setStatistic("Observation", 1);
+        getPlayer().setStatistic("Scholarship", 1);
+        
         // Add items
         
         // Attach exits to locations
+        l001.addExit(e323, e638);
+        l323.addExit(e311);
         
         // Add bosses
         
@@ -52,6 +69,21 @@ public class Murder extends World {
         
         // Set current location
         getPlayer().setLocation(l001);
+        
+        // Register listeners
+        commandParser().addEventHandler(this);
+        
+    }
+
+    @Override
+    public void fireEvent(String event) {
+    
+        if(event.equals("CONTINUE")) {
+            
+            if      (getPlayer().getLocation().equals(l323)) getPlayer().increaseStatistic("Intuition", (int) (Math.random() * 6));
+            else if (getPlayer().getLocation().equals(l638)) getPlayer().increaseStatistic("Intuition", (int) (Math.random() * 6) + 6);
+            
+        }
         
     }
     
