@@ -112,6 +112,22 @@ public final class CommandParser {
     }
     
     /**
+     * A method which returns the object associated with the registered command.
+     * This is useful if you want to invoke a command without it being
+     * explicitly called, as you can find the object and parse arguments to it
+     * directly.
+     * 
+     * @param command the command to return
+     * 
+     * @return the relevant command object
+     */
+    public Command getRegisteredCommand(String command) {
+        
+        return this.commands.get(command);
+        
+    }
+    
+    /**
      * The method to deregister a command. This removes the alias from the list
      * of aliases check when a command is entered.
      * 
