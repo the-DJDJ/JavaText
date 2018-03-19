@@ -8,6 +8,7 @@ import org.beanplant.JavaText.handlers.CommandLockHandler;
 import org.beanplant.JavaText.handlers.EventHandler;
 import org.beanplant.JavaText.io.commands.CommandConfirm;
 import org.beanplant.JavaText.io.commands.CommandConnect;
+import org.beanplant.JavaText.io.commands.CommandContinue;
 import org.beanplant.JavaText.io.commands.CommandDeny;
 import org.beanplant.JavaText.io.commands.CommandDisconnect;
 import org.beanplant.JavaText.io.commands.CommandDrop;
@@ -78,6 +79,7 @@ public final class CommandParser {
         this.registerCommand(new CommandLock(),       "LOCK");
         this.registerCommand(new CommandUnlock(),     "LOCK", "CLEAR");
         this.registerCommand(new CommandConfirm(),    "YES", "CONFIRM");
+        this.registerCommand(new CommandContinue(),   "CONTINUE");
         this.registerCommand(new CommandDeny(),       "NO", "DENY");
         this.registerCommand(new CommandHelp(),       "HELP");
         this.registerCommand(new CommandSave(),       "SAVE");
