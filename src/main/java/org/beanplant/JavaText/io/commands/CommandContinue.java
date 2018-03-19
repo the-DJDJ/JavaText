@@ -13,6 +13,8 @@ public class CommandContinue implements Command {
     @Override
     public void execute(String arguments) {
         
+        commandParser.getRegisteredCommand("GO").execute("RANDOM");
+        
     }
     
 }
