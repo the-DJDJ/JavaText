@@ -24,6 +24,7 @@ import org.beanplant.JavaText.io.commands.CommandLock;
 import org.beanplant.JavaText.io.commands.CommandLook;
 import org.beanplant.JavaText.io.commands.CommandQuit;
 import org.beanplant.JavaText.io.commands.CommandSave;
+import org.beanplant.JavaText.io.commands.CommandStatistics;
 import org.beanplant.JavaText.io.commands.CommandStop;
 import org.beanplant.JavaText.io.commands.CommandTake;
 import org.beanplant.JavaText.io.commands.CommandUnknown;
@@ -72,6 +73,7 @@ public final class CommandParser {
         this.registerCommand(new CommandTake(),       "TAKE");
         this.registerCommand(new CommandDrop(),       "DROP");
         this.registerCommand(new CommandInventory(),  "LOOT", "INVENTORY");
+        this.registerCommand(new CommandStatistics(), "STAT", "STATS", "STATISTICS");
         this.registerCommand(new CommandHealth(),     "HEALTH");
         this.registerCommand(new CommandLook(),       "LOOK");
         this.registerCommand(new CommandInspect(),    "INSPECT");

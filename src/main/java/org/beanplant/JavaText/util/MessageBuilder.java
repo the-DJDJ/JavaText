@@ -100,6 +100,21 @@ public class MessageBuilder implements Serializable {
     }
     
     /**
+     * The message displayed when a user has no statistics to display.
+     * 
+     * @return A feedback message.
+     */
+    public String getEmptyStatisticsMessage() {
+        
+        String[] messages = {"Have you even done anything?",
+                             "There don't seem to be any statistics here.",
+                             "Well, we've been busy, haven't we?"};
+    
+        return messages[getRandomIndex(messages.length)];
+        
+    }
+    
+    /**
      * The message displayed when a player takes an item.
      * 
      * @param name The name parameter
