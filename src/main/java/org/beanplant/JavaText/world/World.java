@@ -376,43 +376,56 @@ public class World implements Serializable {
             
         }
         
-        // Show available exits        
-        String exits = "You can go ";
+        // Do the exits
+        String exits = "";
         
-	switch(this.getPlayer().getLocation().getExits().size()){
-            
-            case 0:
-                exits += "nowhere";
-                break;
-                
-            case 1:
-                exits += String.valueOf(this.getPlayer().getLocation().getExits().get(0));
-                break;
-                
-            case 2:
-                exits += this.getPlayer().getLocation().getExits().get(0) + " or " + this.getPlayer().getLocation().getExits().get(1);
-                break;
-                
-            default:
-                for (int i = 0; i < this.getPlayer().getLocation().getExits().size(); i++) {
-                    
-                    if(i != this.getPlayer().getLocation().getExits().size() - 2){
-                        
-                        exits += this.getPlayer().getLocation().getExits().get(i) + ", ";
-                        
-                    } else {
-                        
-                        exits += this.getPlayer().getLocation().getExits().get(this.getPlayer().getLocation().getExits().size() - 2) + " or " + this.getPlayer().getLocation().getExits().get(this.getPlayer().getLocation().getExits().size() - 1);
-                        break;
-                        
+        if(!this.getPlayer().getLocation().isIntermittent()) {
+        
+            // Show available exits        
+            exits = "You can go ";
+        
+            switch(this.getPlayer().getLocation().getExits().size()){
+
+                case 0:
+                    exits += "nowhere";
+                    break;
+
+                case 1:
+                    exits += String.valueOf(this.getPlayer().getLocation().getExits().get(0));
+                    break;
+
+                case 2:
+                    exits += this.getPlayer().getLocation().getExits().get(0) + " or " + this.getPlayer().getLocation().getExits().get(1);
+                    break;
+
+                default:
+                    for (int i = 0; i < this.getPlayer().getLocation().getExits().size(); i++) {
+
+                        if(i != this.getPlayer().getLocation().getExits().size() - 2){
+
+                            exits += this.getPlayer().getLocation().getExits().get(i) + ", ";
+
+                        } else {
+
+                            exits += this.getPlayer().getLocation().getExits().get(this.getPlayer().getLocation().getExits().size() - 2) + " or " + this.getPlayer().getLocation().getExits().get(this.getPlayer().getLocation().getExits().size() - 1);
+                            break;
+
+                        }
+
                     }
-                    
-                }
-            break;
+                break;
+
+            }
             
+            exits += " from here.";
+        
+        } else {
+        
+            exits = "CONTINUE?";
+        
         }
         
-        output.printSpaced(exits + " from here.", WidthLimitedOutputStream.BOTH);
+        output.printSpaced(exits, WidthLimitedOutputStream.BOTH);
         
     }
     
