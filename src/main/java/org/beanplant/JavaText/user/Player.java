@@ -16,7 +16,10 @@ public class Player implements Serializable {
     private String name;
     
     /** A hashmap of custom player properties. */
-    private HashMap<String, Object> properties;
+    private final HashMap<String, Object> properties;
+    
+    /** A hashmap of numerical player statistics. */
+    private final HashMap<String, Integer> statistics;
     
     /** The amount of health that the player has. */
     private int health;
@@ -42,6 +45,7 @@ public class Player implements Serializable {
         this.location = location;
         this.inventory = new Inventory();
         this.properties = new HashMap<>();
+        this.statistics = new HashMap<>();
         
     }
     
@@ -162,7 +166,7 @@ public class Player implements Serializable {
      */
     public <T extends Object> T getProperty(String property, Class<T> type) {
         
-        return type.cast(this.properties.containsKey(property));
+        return type.cast(this.properties.get(property));
         
     }
     
@@ -176,6 +180,70 @@ public class Player implements Serializable {
     public void setProperty(String property, Object value) {
         
         this.properties.put(property, value);
+        
+    }
+    
+    /**
+     * The method that returns the entire set of statistics for the player.
+     * 
+     * @return the player's stats
+     */
+    public HashMap<String, Integer> getStatistics() {
+        
+        return this.statistics;
+        
+    }
+    
+    /**
+     * A method that checks whether or not the specified statistic has been
+     * defined for the player.
+     * 
+     * @param statistic the statistic to check
+     * 
+     * @return whether or not this statistic has been defined
+     */
+    public boolean hasStatistic(String statistic) {
+        
+        return this.statistics.containsKey(statistic);
+        
+    }
+    
+    /**
+     * The method used to retrieve a specific statistic from the statistic set.
+     * 
+     * @param statistic the value to return
+     * 
+     * @return the value of the statistic, in the specified format
+     */
+    public int getStatistic(String statistic) {
+        
+        return this.statistics.get(statistic);
+        
+    }
+    
+    /**
+     * The method used to add, update, or overwrite a statistic in the player's
+     * stats list.
+     * 
+     * @param statistic the statistic to add
+     * @param value that statistic's value
+     */
+    public void setStatistic(String statistic, int value) {
+        
+        this.statistics.put(statistic, value);
+        
+    }
+    
+    /**
+     * A method which quickly updates a statistic without the need for too much
+     * boilerplate code
+     * 
+     * @param statistic the statistic to update
+     * @param value the value to update the statistic by
+     */
+    public void increaseStatistic(String statistic, int value) {
+                
+        this.setStatistic(statistic, this.getStatistic(statistic) + value);
         
     }
     
