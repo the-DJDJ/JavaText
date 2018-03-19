@@ -22,7 +22,7 @@ public class Murder extends World {
             + " <token:paragraph> Suddenly nervous, you marshall your thoughts, trying to remember every significant detail of the morning."
             + " <token:paragraph> \"Where shall I start?\" you ask, stalling for time."
             + " <token:paragraph> \"Why don't you try the telegram first?\" Holmes suggests. \"Just before you arrived, Watson received a telegram which he stuck in his pocket without reading. What does that suggest to you?\""
-            + " <token:paragraph> \"That he was in a hurry,\" you reply, covering your mouth in dismay at speaking without thinking. \"No, how could he be in a hurry when he's sitting at his desk? It must be something else.\"");
+            + " <token:paragraph> \"That he was in a hurry,\" you reply, covering your mouth in dismay at speaking without thinking. \"No, how could he be in a hurry when he's sitting at his desk? It must be something else.\"", true);
     private final Location l323 = new Location ("", "");
     private final Location l638 = new Location ("", "");
     
