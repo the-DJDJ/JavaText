@@ -39,6 +39,7 @@ public class CommandGo implements Command {
 
                             // Show new location
                             commandParser.getWorld().showLocation(false);
+                            return;
 
                         } else {
 
