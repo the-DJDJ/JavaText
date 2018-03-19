@@ -75,7 +75,7 @@ public class MobileEntity extends Entity implements Serializable, EventHandler {
      */
     public MobileEntity(MobileEntity entity){
         
-        this(entity.getName(), entity.getSingleName(), entity.getPluralName(), entity.getHealth(), entity.getMovingChance(), entity.getLocation(), entity.isAvoidable());
+        this(entity.getName(), entity.getSingleName(), entity.getPluralName(), entity.getHealth(), entity.getMovingChance(), entity.isAvoidable());
         
     }
     

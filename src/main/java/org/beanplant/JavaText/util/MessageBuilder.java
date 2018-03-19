@@ -1,5 +1,7 @@
 package org.beanplant.JavaText.util;
 
+import java.io.Serializable;
+
 /**
  * The class that is responsible for building messages for users to read. This
  * class can very easily be overridden if the developer wishes to add messages
@@ -7,7 +9,7 @@ package org.beanplant.JavaText.util;
  *
  * @author the_DJDJ
  */
-public class MessageBuilder {
+public class MessageBuilder implements Serializable {
     
     /**
      * The message displayed for a 'Yes' interaction.

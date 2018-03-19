@@ -4,6 +4,8 @@ import java.io.OutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import org.beanplant.JavaText.JavaText;
+import org.beanplant.JavaText.io.CommandParser;
 
 import org.beanplant.JavaText.io.WidthLimitedOutputStream;
 import org.beanplant.JavaText.net.NetworkController;
@@ -500,6 +502,18 @@ public class World implements Serializable {
     public MessageBuilder getMessageBuilder() {
         
         return this.messageBuilder;
+        
+    }
+    
+    /**
+     * Returns the CommandParser in use so that the user can create their own
+     * commands.
+     * 
+     * @return the CommandParser in use.
+     */
+    public CommandParser commandParser(){
+        
+        return JavaText.getCommandParser();
         
     }
 

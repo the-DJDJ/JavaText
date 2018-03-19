@@ -18,7 +18,8 @@ public enum Type {
     GATE("Gate", "The gate appears to be locked.", "The gate isn't locked. ", "You unlocked the gate", Arrays.asList(Item.key)),
     WINDOW("Window", "The window appears to be closed.", "The window isn't closed.", "You pried the window open.", Arrays.asList(Item.crowbar, Item.rock)),
     LADDER("Ladder", "The ladder's steps are broken.", "The ladder isn't broken", "You repaired the ladder's steps.", Arrays.asList(Item.stick)),
-    ROPE("Rope", "The rope is frayed, and won't support your weight.", "The rope doesn't need replacing", "You replaced the rope.", Arrays.asList(Item.rope));
+    ROPE("Rope", "The rope is frayed, and won't support your weight.", "The rope doesn't need replacing", "You replaced the rope.", Arrays.asList(Item.rope)),
+    OPTION("CONTINUATION", new String(), new String(), new String(), null);
     
     /** The name of this type of exit. */
     private String name;
