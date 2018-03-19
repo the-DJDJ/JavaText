@@ -241,7 +241,7 @@ public class World implements Serializable {
     public void showLocation(boolean fullVisibility){
         
         // Show room title
-	output.printSpaced(this.getPlayer().getLocation().getTitle(), WidthLimitedOutputStream.ABOVE);
+	if(!this.getPlayer().getLocation().getTitle().equals("")) output.printSpaced(this.getPlayer().getLocation().getTitle(), WidthLimitedOutputStream.ABOVE);
 		
 	// Show room description 
         if(!this.getPlayer().getLocation().hasBeenVisited() || fullVisibility){
