@@ -1,6 +1,7 @@
 package levels;
 
 import org.beanplant.JavaText.handlers.EventHandler;
+import org.beanplant.JavaText.user.Item;
 import org.beanplant.JavaText.world.Location;
 import org.beanplant.JavaText.world.World;
 import org.beanplant.JavaText.world.exit.Exit;
@@ -28,7 +29,8 @@ public class Murder extends World implements EventHandler {
     private final Location l311 = new Location("", "");
     private final Location l323 = new Location ("", "\"I am sorry, Mr. Holmes, but I cannot guess why he didn't read it. Even if I were preoccupied with something, I would read the telegram because it might bear on what was worrying me.\""
             + " <token:paragraph> \"No, no!\" Holmes replies, \"Use your head! You had something when you said that Watson was preoccupied with his writing. When Watson takes up his pen, he keeps at his work for a good stretch.\"", true);
-    private final Location l638 = new Location ("", "\"Well,\" you say, trying to put your thoughts into words. \"Dr. Watson must have been very preoccupied with what he was writing. I would guess, with his bulldog nature, that once my cousin sits down to write, he stays until he has done a full day's work.\"CHECK CLUE Z");
+    private final Location l638 = new Location ("", "\"Well,\" you say, trying to put your thoughts into words. \"Dr. Watson must have been very preoccupied with what he was writing. I would guess, with his bulldog nature, that once my cousin sits down to write, he stays until he has done a full day's work.\""
+            + " <token:paragraph> \"Very good,\" Homles replies. \"There is some hope for your ambition.\"", true);
     
     // Create exit objects
     private final Exit e311 = new Exit(Exit.CONTINUE, l311);
@@ -43,14 +45,21 @@ public class Murder extends World implements EventHandler {
         getPlayer().setHealth(100);
         
         // Configure player
-        getPlayer().setStatistic("Athletics", 1);
-        getPlayer().setStatistic("Artifice", 1);
-        getPlayer().setStatistic("Intuition", 1);
-        getPlayer().setStatistic("Communication", 1);
-        getPlayer().setStatistic("Observation", 1);
-        getPlayer().setStatistic("Scholarship", 1);
+        getPlayer().getStatistics().set("Athletics", 1);
+        getPlayer().getStatistics().set("Artifice", 1);
+        getPlayer().getStatistics().set("Intuition", 1);
+        getPlayer().getStatistics().set("Communication", 1);
+        getPlayer().getStatistics().set("Observation", 1);
+        getPlayer().getStatistics().set("Scholarship", 1);
         
-        // Add items
+        // Create items
+        Item clueZ = new Item("Memo", "a memo", "", "You recall a conversation with Mr. Holmes; something about Dr. Watson writing until he'd finished a full day's work...");
+        
+        // Register items
+        Item.addItem(clueZ);
+        
+        // Add them to the world
+        l638.addItem(clueZ);
         
         // Attach exits to locations
         l001.addExit(e323, e638);
@@ -80,8 +89,8 @@ public class Murder extends World implements EventHandler {
     
         if(event.equals("CONTINUE")) {
             
-            if      (getPlayer().getLocation().equals(l323)) getPlayer().increaseStatistic("Intuition", (int) (Math.random() * 6));
-            else if (getPlayer().getLocation().equals(l638)) getPlayer().increaseStatistic("Intuition", (int) (Math.random() * 6) + 6);
+            if      (getPlayer().getLocation().equals(l323)) getPlayer().getStatistics().increase("Intuition", (int) (Math.random() * 6));
+            else if (getPlayer().getLocation().equals(l638)) getPlayer().getStatistics().increase("Intuition", (int) (Math.random() * 6) + 6);
             
         }
         
