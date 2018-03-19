@@ -1,6 +1,7 @@
 package org.beanplant.JavaText.user;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,12 +36,7 @@ public class Item implements Serializable {
     public final static Item newspaper = new Item("Newspaper", "an old newspaper", "some old newspapers", "An old newspaper! From, like, 2000 years ago... I think something is growing on it");
     
     /** A list of all items so that they can be searched. */
-    public static List<Item> items = Arrays.asList(Item.crowbar, 
-                                            Item.key, 
-                                            Item.rock, 
-                                            Item.rope, 
-                                            Item.stick, 
-                                            Item.newspaper);
+    public static List<Item> items = new ArrayList<>();
     
     /**
      * The default constructor. Initialises all variables and sets them to the
@@ -53,6 +49,13 @@ public class Item implements Serializable {
         this.m_plural = new String();
         this.m_description = new String();
         this.m_damage = 1;
+        
+        this.items.addAll(Arrays.asList(Item.crowbar,
+                                        Item.key,
+                                        Item.rock,
+                                        Item.rope,
+                                        Item.stick,
+                                        Item.newspaper));        
         
     }
     
