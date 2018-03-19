@@ -254,10 +254,10 @@ public final class CommandParser {
      */
     private void triggerEvent(String event){
         
-        for (int i = 0; i < eventHandlers.size(); i++) {
+        for (EventHandler eventHandler : eventHandlers) {
             
-            eventHandlers.get(i).fireEvent(event);
-            
+            eventHandler.fireEvent(event);
+        
         }
         
     }
