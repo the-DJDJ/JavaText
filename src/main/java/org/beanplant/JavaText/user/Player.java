@@ -3,7 +3,6 @@ package org.beanplant.JavaText.user;
 import org.beanplant.JavaText.world.Location;
 
 import java.io.Serializable;
-import java.util.HashMap;
 
 /**
  * A player object. This stores all of the information about a specific player.
@@ -15,10 +14,10 @@ public class Player implements Serializable {
     /** The name of the player. */
     private String name;
     
-    /** A hashmap of custom player properties. */
-    private final HashMap<String, Object> properties;
+    /** The custom player properties. */
+    private final Properties properties;
     
-    /** A hashmap of numerical player statistics. */
+    /** The numerical player statistics. */
     private final Statistics statistics;
     
     /** The amount of health that the player has. */
@@ -44,7 +43,7 @@ public class Player implements Serializable {
         this.health = health;
         this.location = location;
         this.inventory = new Inventory();
-        this.properties = new HashMap<>();
+        this.properties = new Properties();
         this.statistics = new Statistics();
         
     }
@@ -128,61 +127,21 @@ public class Player implements Serializable {
     }
     
     /**
-     * The method that returns the entire set of properties unique to the
-     * player.
+     * Returns the player's properties
      * 
-     * @return the player properties
+     * @return the player's properties
      */
-    public HashMap<String, Object> getProperties() {
+    public Properties getProperties() {
         
         return this.properties;
         
     }
     
     /**
-     * A method that checks whether or not the specified property has been
-     * defined for the player.
+     * Returns the player's statistics
      * 
-     * @param property the property to check
-     * 
-     * @return whether or not this property has been defined
+     * @return the player's statistics
      */
-    public boolean hasProperty(String property) {
-        
-        return this.properties.containsKey(property);
-        
-    }
-    
-    /**
-     * The method used to retrieve a specific property from the property set.
-     * This is a generic method, so whatever type you've saved your property as,
-     * you can retrieve it simply using one method.
-     * 
-     * @param <T> the type for the returning value
-     * @param property the value to return
-     * @param type the type for the returning value
-     * 
-     * @return the value of the property, in the specified format
-     */
-    public <T extends Object> T getProperty(String property, Class<T> type) {
-        
-        return type.cast(this.properties.get(property));
-        
-    }
-    
-    /**
-     * The method used to add, update, or overwrite a property in the player's
-     * property list.
-     * 
-     * @param property the property to add
-     * @param value that property's value
-     */
-    public void setProperty(String property, Object value) {
-        
-        this.properties.put(property, value);
-        
-    }
-    
     public Statistics getStatistics() {
         
         return this.statistics;
