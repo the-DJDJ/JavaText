@@ -43,6 +43,9 @@ public class Location implements Serializable {
     
     /** The boss in this location. */
     private Boss boss = null;
+    
+    /** Whether or not this location is simply a placeholder. */
+    private boolean intermittent;
 
     /**
      * The default constructor. Initialises all variables and sets them to the
@@ -50,7 +53,7 @@ public class Location implements Serializable {
      */
     public Location() {
         
-        this(new String(), new String());
+        this(new String());
     
     }
 
@@ -64,19 +67,28 @@ public class Location implements Serializable {
         this(title, new String());
     
     }
+    
+    public Location(String title, String description) {
+        
+        this(title, description, false);
+        
+    }
 
     /**
      * The full constructor. This creates a new Location object with the
-     * specified title and description.
+     * specified title and description, and also specifies whether or not this
+     * location is intermittent.
      * 
      * @param title The title of the room.
      * @param description The description of the room.
+     * @param intermittent If this location is intermittent
      */
-    public Location(String title, String description) {
+    public Location(String title, String description, boolean intermittent) {
         
         this.m_title = title;
         this.m_description = description;
         this.m_visited = false;
+        this.intermittent = intermittent;
 
         this.m_items = new ArrayList<>();
         this.m_exits = new ArrayList<>();
@@ -489,6 +501,19 @@ public class Location implements Serializable {
     public boolean hasBoss(){
         
         return this.boss != null;
+        
+    }
+    
+    /**
+     * Returns whether or not this location is intermittent. If it is, it means
+     * that you can only CONTINUE from this location, you cannot specify where
+     * it is that you wish to go.
+     * 
+     * @return whether or not this location is intermittent.
+     */
+    public boolean isIntermittent() {
+        
+        return this.intermittent;
         
     }
     
